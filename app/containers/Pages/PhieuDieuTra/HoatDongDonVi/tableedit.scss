@@ -1,0 +1,16 @@
+
+@media screen and (max-width: 1200px) {
+  .table-edit-select{
+    width: 70px !important;
+  }
+}
+@media screen and (min-width: 1201px) and (max-width: 1366px) {
+  .table-edit-select{
+    width: 100px !important;
+  }
+}
+@media screen and (min-width: 1367px) {
+  .table-edit-select{
+    width: 150px !important;
+  }
+}
