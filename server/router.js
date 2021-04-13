@@ -50,10 +50,13 @@ import {trangthaicaddyRouter} from './api/resources/quanlycaddy/trangthaicaddy/t
 import {caddyRouter} from './api/resources/quanlycaddy/caddy/caddy.router';
 import {voucherRouter} from './api/resources/quanlyvoucher/voucher/voucher.router';
 import {trangthaivoucherRouter} from './api/resources/quanlyvoucher/trangthaivoucher/trangthaivoucher.router';
+import {fnbRouter} from './api/resources/fnb/fnb/fnb.router'
+import {trangthaifnbRouter} from './api/resources/fnb/trangthai/trangthaifnb.router'
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
-
+router.use('/fnb',fnbRouter);
+router.use('/trang-thai-fnb', trangthaifnbRouter)
 router.use('/trang-thai-caddy', trangthaicaddyRouter);
 router.use('/caddy', caddyRouter);
 router.use('/muc-thanh-vien', mucthanhvienRouter);

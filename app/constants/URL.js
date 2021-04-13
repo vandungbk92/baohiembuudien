@@ -87,6 +87,14 @@ export const URL = {
   CADDY_ID: '/caddy/{0}',
   CADDY_ADD: '/caddy/add',
 
+  TRANG_THAI_FNB: '/trang-thai-fnb',
+  TRANG_THAI_FNB_ID: '/trang-thai-fnb/{0}',
+  TRANG_THAI_FNB_ADD: '/trang-thai-fnb/add',
+
+  FNB: '/fnb',
+  FNB_ID: '/fnb/{0}',
+  FNB_ADD: '/fnb/add',
+
   CONG_NGHE_SAN_XUAT: '/cong-nghe-san-xuat',
   CONG_NGHE_SAN_XUAT_ID: '/cong-nghe-san-xuat/{0}',
   CONG_NGHE_SAN_XUAT_ADD: '/cong-nghe-san-xuat/add',

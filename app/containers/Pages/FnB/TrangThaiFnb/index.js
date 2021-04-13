@@ -6,7 +6,7 @@ import {
   PlusOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import { add, getById, getAll, delById, updateById } from '@services/QuanLyCaddy/trangthaicaddyService';
+import { add, getById, getAll, delById, updateById } from '@services/fnb/trangthaifnbService';
 import { PAGINATION_CONFIG } from '@constants';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
@@ -15,13 +15,13 @@ import Search from '@components/Search/Search';
 import { stringify } from 'qs';
 import queryString from 'query-string';
 // import { fetchSanPham } from '@reduxApp/HoatDongSanXuat/actions';
-import DonViTinhModal from '@containers/Pages/QuanLyCaddy/TrangThaiCaddy/TrangThaiModal';
+import DonViTinhModal from '@containers/Pages/FnB/TrangThaiFnB/TrangThaiModal';
 import { makeGetMyInfo } from '../../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
 
 
 
-class TrangThaiCaddy extends Component {
+class TrangThaiFnB extends Component {
 
   columns = [
     {
@@ -200,4 +200,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(TrangThaiCaddy);
+export default withConnect(TrangThaiFnB);

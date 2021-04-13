@@ -25,8 +25,10 @@ const fnbSchema = new Schema({
     type: Number,
   },
 
-  trangthai: {
-    type: String,
+  trangthai_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'TrangThaiFnB'
   },
 
   is_deleted: {type: Boolean, default: false}

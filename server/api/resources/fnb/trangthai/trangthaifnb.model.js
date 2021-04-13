@@ -3,7 +3,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
 
-const trangthaiSchema = new Schema({
+const trangthaifnbSchema = new Schema({
   tentrangthai: {
     type: String,
     required: true,
@@ -18,6 +18,6 @@ const trangthaiSchema = new Schema({
     updatedAt: 'updated_at',
   }
 });
-trangthaiSchema.plugin(mongoosePaginate);
+trangthaifnbSchema.plugin(mongoosePaginate);
 
-export default mongoose.model('TrangThai', trangthaiSchema);
+export default mongoose.model('TrangThaiFnB', trangthaifnbSchema);
