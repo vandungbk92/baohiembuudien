@@ -51,7 +51,18 @@ import NhienLieuTieuThu from '@containers/Pages/DanhMuc/NhienLieuTieuThu/Loadabl
 import LoaiHinhChanNuoi from '@containers/Pages/DanhMuc/QuyMoBenhVien/Loadable';
 import QuyMoBenhVien from '@containers/Pages/DanhMuc/LoaiHinhChanNuoi/Loadable';
 import LoaiHoatDong from '@containers/Pages/DanhMuc/LoaiHoatDong/Loadable';
-
+import DonViTinh from '@containers/Pages/cuahangdungcu/DonViTinh/Loadable';
+import ProShop from '@containers/Pages/cuahangdungcu/ProShop/Loadable';
+import TrangThai from '@containers/Pages/cuahangdungcu/TrangThai/Loadable';
+import ProShopChiTiet from '@containers/Pages/cuahangdungcu/ProShop/ChiTiet/Loadable';
+import MucThanhVien from '@containers/Pages/MucThanhVien/Loadable';
+import MucThanhVienChiTiet from '@containers/Pages/MucThanhVien/ChiTiet/Loadable';
+import Caddy from '@containers/Pages/QuanLyCaddy/Caddy/Loadable';
+import CaddyChiTiet from '@containers/Pages/QuanLyCaddy/Caddy/ChiTiet/Loadable';
+import TrangThaiCaddy from '@containers/Pages/QuanLyCaddy/TrangThaiCaddy/Loadable';
+import Voucher from '@containers/Pages/QuanLyVoucher/Voucher/Loadable';
+import VoucherChiTiet from '@containers/Pages/QuanLyVoucher/Voucher/ChiTiet/Loadable';
+import TrangThaiVoucher from '@containers/Pages/QuanLyVoucher/TrangThaiVoucher/Loadable';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -69,142 +80,168 @@ const constantsRoutes = [
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-
+  
   {
     path: URL.CATEGORY,
-    breadcrumbName: 'Phiếu điều tra',
-    menuName: 'Phiếu điều tra',
+    breadcrumbName: 'Quản lý Caddy',
+    menuName: 'Quản lý caddy',
     icon: <InsertRowLeftOutlined/>,
     children: [
-      { path: URL.TRONG_KKT_KCN, menuName: 'Trong KKT-KCN', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.NGOAI_KKT_KCN, menuName: 'Ngoài KKT-KCN', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.CHAN_NUOI_TAP_TRUNG, menuName: 'Chăn nuôi tập trung', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.KHAI_THAC_MO, menuName: 'Khai thác mỏ', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.CO_SO_Y_TE, menuName: 'Cơ sở y tế', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.XU_LY_CHAT_THAI, menuName: 'Xử lý chất thải', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.QUAN_LY_KCN_CCN, menuName: 'Ban quản lý KCN-CCN', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.LANG_NGHE, menuName: 'Làng nghề', exact: true, component: DanhSachPhieu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.CADDY, menuName: 'Caddy', exact: true, component: Caddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.TRANG_THAI_CADDY, menuName: 'Trạng thái Caddy', exact: true, component: TrangThaiCaddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-
-  { path: URL.TRONG_KKT_KCN_ADD, component: PhieuDieuTraChiTiet, exact: true, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.NGOAI_KKT_KCN_ADD, component: PhieuDieuTraChiTiet, exact: true, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.CHAN_NUOI_TAP_TRUNG_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.KHAI_THAC_MO_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.CO_SO_Y_TE_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.XU_LY_CHAT_THAI_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.QUAN_LY_KCN_CCN_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  { path: URL.LANG_NGHE_ADD, exact: true, component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-
-  { path: '/phieu-dieu-tra/:id', component: PhieuDieuTraChiTiet, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-
   {
-    path: URL.PROFILE,
-    breadcrumbName: 'Hồ sơ cá nhân',
-    component: Profile,
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
-  {
-    path: URL.NOT_FOUND,
-    component: NotFoundPage,
-    role: [],
-  },
-
-  //Loại phiếu
-  {
-    path: '/loai-phieu',
-    menuName: 'Loại phiếu',
-    component: DanhMucLoaiPhieu,
-    icon: <FileTextOutlined/>,
-    exact: true,
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
-  {
-    path: '/loai-phieu/add',
-    component: DanhMucLoaiPhieuChiTiet,
+    path: '/caddy/add',
+    component: CaddyChiTiet,
     icon: <WeiboCircleOutlined/>,
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+
   {
-    path: '/loai-phieu/:id',
-    component: DanhMucLoaiPhieuChiTiet,
+    path: '/caddy/:id',
+    component: CaddyChiTiet,
     // breadcrumbName: 'Thêm dữ liệu',
     icon: <WeiboCircleOutlined/>,
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-  // Đơn vị được điều tra
+  
 
   {
-    path: '/don-vi-duoc-dieu-tra',
-    menuName: 'Đơn vị được điều tra',
-    component: DonViDuocDieuTra,
+    path: URL.CATEGORY,
+    breadcrumbName: 'Quản lý Voucher',
+    menuName: 'Quản lý Voucher',
+    icon: <InsertRowLeftOutlined/>,
+    children: [
+      { path: URL.VOUCHER, menuName: 'Voucher', exact: true, component: Voucher, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.TRANG_THAI_VOUCHER, menuName: 'Trạng thái Voucher', exact: true, component: TrangThaiVoucher, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/voucher/add',
+    component: VoucherChiTiet,
     icon: <WeiboCircleOutlined/>,
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+
   {
-    path: '/don-vi-duoc-dieu-tra/add',
-    component: DonViDuocDieuTraChiTiet,
-    icon: <WeiboCircleOutlined/>,
-    exact: true,
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
-  {
-    path: '/don-vi-duoc-dieu-tra/:id',
-    component: DonViDuocDieuTraChiTiet,
+    path: '/voucher/:id',
+    component: VoucherChiTiet,
     // breadcrumbName: 'Thêm dữ liệu',
     icon: <WeiboCircleOutlined/>,
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
 
-  // Đơn vị được điều tra
-
-
   {
     path: URL.CATEGORY,
-    breadcrumbName: 'Danh mục chung',
-    menuName: 'Danh mục chung',
+    breadcrumbName: 'Cửa hàng dụng cụ',
+    menuName: 'Cửa hàng dụng cụ',
     icon: <InsertRowLeftOutlined/>,
     children: [
-      { path: URL.SAN_PHAM, menuName: 'Sản phẩm', component: SanPham, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      {
-        path: URL.CONG_NGHE_SAN_XUAT,
-        menuName: 'Công nghệ sản xuất',
-        component: CongNgheSanXuat,
-        role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-      },
-      {
-        path: URL.DM_NGUYEN_VAT_LIEU,
-        menuName: 'Nguyên, vật liệu',
-        component: DMNguyenVatLieu,
-        role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-      },
-      { path: URL.DON_VI, menuName: 'Đơn vị', component: DonVi, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.HOA_CHAT_SU_DUNG, menuName: 'Hóa chất sử dụng', component: HoaChatSuDung, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      // {
-      //   path: URL.LOAI_HINH_CHAN_NUOI,
-      //   menuName: 'Loại hình chăn nuôi',
-      //   component: LoaiHinhChanNuoi,
-      //   role: [CONSTANTS.ADMIN],
-      // },
-      { path: URL.LOAI_HOAT_DONG, menuName: 'Loại hoạt động', component: LoaiHoatDong, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      // { path: URL.QUY_MO_BENH_VIEN, menuName: 'Quy mô bệnh viện', component: QuyMoBenhVien, role: [CONSTANTS.ADMIN] },
-      {
-        path: URL.NHIEN_LIEU_TIEU_THU,
-        menuName: 'Nhiên liệu tiêu thụ',
-        component: NhienLieuTieuThu,
-        role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-      },
-      { path: URL.TINH_THANH, menuName: 'Tỉnh thành', component: TinhThanh, role: [CONSTANTS.ADMIN] },
-      { path: URL.QUAN_HUYEN, menuName: 'Quận huyện', component: QuanHuyen, role: [CONSTANTS.ADMIN] },
-      { path: URL.PHUONG_XA, menuName: 'Phường xã', component: PhuongXa, role: [CONSTANTS.ADMIN] },
+      { path: URL.DON_VI_TINH, menuName: 'Đơn vị tính', exact: true, component: DonViTinh, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.PROSHOP, menuName: 'ProShop', exact: true, component: ProShop, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.TRANG_THAI, menuName: 'Trạng thái', exact: true, component: TrangThai, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+  {
+    path: '/proshop/add',
+    component: ProShopChiTiet,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: '/proshop/:id',
+    component: ProShopChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  
+
+  {
+    path: '/muc-thanh-vien',
+    menuName: 'Chi tiết mức thành viên',
+    component: MucThanhVien,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/muc-thanh-vien/add',
+    component: MucThanhVienChiTiet,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/muc-thanh-vien/:id',
+    component: MucThanhVienChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  // Đơn vị được điều tra
+
+
+  // {
+  //   path: URL.CATEGORY,
+  //   breadcrumbName: 'Danh mục chung',
+  //   menuName: 'Danh mục chung',
+  //   icon: <InsertRowLeftOutlined/>,
+  //   children: [
+  //     { path: URL.SAN_PHAM, menuName: 'Sản phẩm', component: SanPham, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     {
+  //       path: URL.CONG_NGHE_SAN_XUAT,
+  //       menuName: 'Công nghệ sản xuất',
+  //       component: CongNgheSanXuat,
+  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  //     },
+  //     {
+  //       path: URL.DM_NGUYEN_VAT_LIEU,
+  //       menuName: 'Nguyên, vật liệu',
+  //       component: DMNguyenVatLieu,
+  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  //     },
+  //     { path: URL.DON_VI, menuName: 'Đơn vị', component: DonVi, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     { path: URL.HOA_CHAT_SU_DUNG, menuName: 'Hóa chất sử dụng', component: HoaChatSuDung, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     // {
+  //     //   path: URL.LOAI_HINH_CHAN_NUOI,
+  //     //   menuName: 'Loại hình chăn nuôi',
+  //     //   component: LoaiHinhChanNuoi,
+  //     //   role: [CONSTANTS.ADMIN],
+  //     // },
+  //     { path: URL.LOAI_HOAT_DONG, menuName: 'Loại hoạt động', component: LoaiHoatDong, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     // { path: URL.QUY_MO_BENH_VIEN, menuName: 'Quy mô bệnh viện', component: QuyMoBenhVien, role: [CONSTANTS.ADMIN] },
+  //     {
+  //       path: URL.NHIEN_LIEU_TIEU_THU,
+  //       menuName: 'Nhiên liệu tiêu thụ',
+  //       component: NhienLieuTieuThu,
+  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  //     },
+  //     { path: URL.TINH_THANH, menuName: 'Tỉnh thành', component: TinhThanh, role: [CONSTANTS.ADMIN] },
+  //     { path: URL.QUAN_HUYEN, menuName: 'Quận huyện', component: QuanHuyen, role: [CONSTANTS.ADMIN] },
+  //     { path: URL.PHUONG_XA, menuName: 'Phường xã', component: PhuongXa, role: [CONSTANTS.ADMIN] },
+  //   ],
+  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  // },
 
 
   // {

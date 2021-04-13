@@ -87,7 +87,7 @@ class SiderComponent extends Component {
           <div className="brand ">
             <div className="logo">
               <img src={LOGO} alt='' className='logo'/>
-              <h1>Quản lý nguồn thải</h1>
+              <h1>Quản lý sân Golf</h1>
             </div>
           </div>
           <div className='position-relative'>

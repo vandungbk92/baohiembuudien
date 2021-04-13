@@ -35,7 +35,7 @@ class Login extends Component {
         <div id='login' className='login-form'>
           <div className='logo'>
             <img alt="logo" src={LOGO}/>
-            <span>Quản lý nguồn thải</span>
+            <span>Quản lý sân Golf</span>
           </div>
           <Form onFinish={this.handleLogin.bind(this)}>
             <FormItem name="username" rules={[{ required: true, message: 'Không được để trống' }]} hasFeedback>

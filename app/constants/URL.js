@@ -34,6 +34,10 @@ export const URL = {
   DON_VI_DUOC_DIEU_TRA: '/don-vi-duoc-dieu-tra',
   DON_VI_DUOC_DIEU_TRA_ID: '/don-vi-duoc-dieu-tra/{0}',
   DON_VI_DUOC_DIEU_TRA_ADD: '/don-vi-duoc-dieu-tra/add',
+  
+  MUC_THANH_VIEN: '/muc-thanh-vien',
+  MUC_THANH_VIEN_ID: '/muc-thanh-vien/{0}',
+  MUC_THANH_VIEN_ADD: 'muc-thanh-vien/add',
 
   DM_DON_VI_DUOC_DIEU_TRA: '/dm-don-vi-duoc-dieu-tra',
   DM_DON_VI_DUOC_DIEU_TRA_ID: '/dm-don-vi-duoc-dieu-tra/{0}',
@@ -50,6 +54,38 @@ export const URL = {
   SAN_PHAM: '/san-pham',
   SAN_PHAM_ID: '/san-pham/{0}',
   SAN_PHAM_ADD: '/san-pham/add',
+
+  DON_VI_TINH: '/don-vi-tinh',
+  DON_VI_TINH_ID: '/don-vi-tinh/{0}',
+  DON_VI_TINH_ADD: '/don-vi-tinh/add',
+
+  PROSHOP: '/proshop',
+  PROSHOP_ID: '/proshop/{0}',
+  PROSHOP_ADD: '/proshop/add',
+
+  DM_PROSHOP: '/dm-proshop',
+  DM_PROSHOP_ID: '/dm-proshop/{0}',
+  DM_PROSHOP_ADD: '/dm-proshop/add',
+
+  TRANG_THAI: '/trang-thai',
+  TRANG_THAI_ID: '/trang-thai/{0}',
+  TRANG_THAI_ADD: '/trang-thai/add',
+
+  TRANG_THAI_VOUCHER: '/trang-thai-voucher',
+  TRANG_THAI_VOUCHER_ID: '/trang-thai-voucher/{0}',
+  TRANG_THAI_VOUCHER_ADD: '/trang-thai-voucher/add',
+
+  VOUCHER: '/voucher',
+  VOUCHER_ID: '/voucher/{0}',
+  VOUCHER_ADD: '/voucher/add',
+
+  TRANG_THAI_CADDY: '/trang-thai-caddy',
+  TRANG_THAI_CADDY_ID: '/trang-thai-caddy/{0}',
+  TRANG_THAI_CADDY_ADD: '/trang-thai-caddy/add',
+
+  CADDY: '/caddy',
+  CADDY_ID: '/caddy/{0}',
+  CADDY_ADD: '/caddy/add',
 
   CONG_NGHE_SAN_XUAT: '/cong-nghe-san-xuat',
   CONG_NGHE_SAN_XUAT_ID: '/cong-nghe-san-xuat/{0}',

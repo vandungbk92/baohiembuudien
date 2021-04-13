@@ -66,6 +66,42 @@ export const API = {
   SAN_PHAM_QUERY: '/api/san-pham?page={0}&limit={1}{2}',
   SAN_PHAM_ID: '/api/san-pham/{0}',
 
+  DON_VI_TINH: '/api/don-vi-tinh',
+  DON_VI_TINH_QUERY: '/api/don-vi-tinh?page={0}&limit={1}{2}',
+  DON_VI_TINH_ID: '/api/don-vi-tinh/{0}',
+
+  MUC_THANH_VIEN: '/api/muc-thanh-vien',
+  MUC_THANH_VIEN_QUERY: '/api/muc-thanh-vien?page={0}&limit={1}{2}',
+  MUC_THANH_VIEN_ID: '/api/muc-thanh-vien/{0}',
+  
+  VOUCHER: '/api/voucher',
+  VOUCHER_QUERY: '/api/voucher?page={0}&limit={1}{2}',
+  VOUCHER_ID: '/api/voucher/{0}',
+
+  TRANG_THAI_VOUCHER: '/api/trang-thai-voucher',
+  TRANG_THAI_VOUCHER_QUERY: '/api/trang-thai-voucher?page={0}&limit={1}{2}',
+  TRANG_THAI_VOUCHER_ID: '/api/trang-thai-voucher/{0}',
+
+  CADDY: '/api/caddy',
+  CADDY_QUERY: '/api/caddy?page={0}&limit={1}{2}',
+  CADDY_ID: '/api/caddy/{0}',
+
+  TRANG_THAI_CADDY: '/api/trang-thai-caddy',
+  TRANG_THAI_CADDY_QUERY: '/api/trang-thai-caddy?page={0}&limit={1}{2}',
+  TRANG_THAI_CADDY_ID: '/api/trang-thai-caddy/{0}',
+
+  PROSHOP: '/api/proshop',
+  PROSHOP_QUERY: '/api/proshop?page={0}&limit={1}{2}',
+  PROSHOP_ID: '/api/proshop/{0}',
+
+  DM_PROSHOP: '/api/dm_proshop',
+  DM_PROSHOP_QUERY: '/api/dm_proshop?page={0}&limit={1}{2}',
+  DM_PROSHOP_ID: '/api/dm_proshop/{0}',
+
+  TRANG_THAI: '/api/trang-thai',
+  TRANG_THAI_QUERY: '/api/trang-thai?page={0}&limit={1}{2}',
+  TRANG_THAI_ID: '/api/trang-thai/{0}',
+
   CONG_NGHE_SAN_XUAT: '/api/cong-nghe-san-xuat',
   CONG_NGHE_SAN_XUAT_QUERY: '/api/cong-nghe-san-xuat?page={0}&limit={1}{2}',
   CONG_NGHE_SAN_XUAT_ID: '/api/cong-nghe-san-xuat/{0}',

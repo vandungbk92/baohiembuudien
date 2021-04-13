@@ -41,13 +41,26 @@ import { quymobenhvienRouter } from './api/resources/thongtinhoatdong/quymobenhv
 import { thongtinduanRouter } from './api/resources/thongtinhoatdong/thongtinduan/thongtinduan.router';
 import { hosomoitruongRouter } from './api/resources/hosomoitruong/hosomoitruong.router';
 import { ketluanthanhtraRouter } from './api/resources/ketluanthanhtra/ketluanthanhtra.router';
-
+import {donvitinhRouter} from './api/resources/cuahangdungcu/donvitinh/donvitinh.router';
 import { thongtinhoatdongRouter } from './api/resources/thongtinhoatdong/thongtinhoatdong.router';
-
-
+import {proshopRouter} from './api/resources/cuahangdungcu/proshop/proshop.router';
+import {trangthaiRouter} from './api/resources/cuahangdungcu/trangthai/trangthai.router';
+import{mucthanhvienRouter} from './api/resources/mucthanhvien/mucthanhvien.router';
+import {trangthaicaddyRouter} from './api/resources/quanlycaddy/trangthaicaddy/trangthaicaddy.router';
+import {caddyRouter} from './api/resources/quanlycaddy/caddy/caddy.router';
+import {voucherRouter} from './api/resources/quanlyvoucher/voucher/voucher.router';
+import {trangthaivoucherRouter} from './api/resources/quanlyvoucher/trangthaivoucher/trangthaivoucher.router';
 const router = express.Router();
-router.use("/users", userRouter);
-router.use("/setting", settingRouter);
+router.use('/trang-thai-voucher', trangthaivoucherRouter);
+router.use('/voucher', voucherRouter);
+
+router.use('/trang-thai-caddy', trangthaicaddyRouter);
+router.use('/caddy', caddyRouter);
+router.use('/muc-thanh-vien', mucthanhvienRouter);
+router.use('/proshop', proshopRouter);
+router.use('/trang-thai', trangthaiRouter);
+router.use('/users', userRouter);
+router.use('/setting', settingRouter);
 router.use('/tinh-thanh', tinhthanhRouter);
 router.use('/quan-huyen', quanhuyenRouter);
 router.use('/phuong-xa', phuongxaRouter);
@@ -60,7 +73,7 @@ router.use('/don-vi-duoc-dieu-tra', donviduocdieutraRouter);
 router.use('/dm-don-vi-duoc-dieu-tra', dmdonviduocdieutraRouter);
 router.use('/hoat-dong-don-vi', hoatdongdonviRouter);
 router.use('/thong-tin-hoat-dong', thongtinhoatdongRouter);
-
+router.use('/don-vi-tinh', donvitinhRouter);
 // Phiếu điều tra.
 router.use('/phieu-dieu-tra', phieudieutraRouter);
 router.use('/quy-mo-hoat-dong', quymohoatdongRouter);
