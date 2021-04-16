@@ -35,7 +35,7 @@ class FnBChiTiet extends Component {
     this.state = {
         
         dsTrangThai: [],
-
+   
         _id: this.props.match.params.id,
 
     };
@@ -59,16 +59,19 @@ class FnBChiTiet extends Component {
      
           
       this.setState({ dsTrangThai});
+
+
       if(this.state._id){
        
         let dataRes = await getById(this.state._id)
-        console.log(dataRes);
+        console.log(dataRes, "dataRes");
+        
         this.formRef.current.setFieldsValue({
           id: dataRes.id, 
           tenmon: dataRes.tenmon, 
           mota: dataRes.mota, 
-     
-         
+          dongia: dataRes.dongia,
+          trangthai_id :dataRes.trangthai_id.tentrangthai,
         })
      
         // set form
@@ -108,9 +111,9 @@ class FnBChiTiet extends Component {
   render() {
     
     const { loading} = this.props;
-    const { _id,  dsTrangThai, } = this.state;
+    const { _id,  dsTrangThai, dataRes, tentrangthai} = this.state;
     console.log(dsTrangThai,"tt");
-    
+   
     
     return <Form ref={this.formRef} layout='vertical' size='small' autoComplete='off' onFinish={this.onFinish} onValuesChange={this.onFieldsChange}>
       <Box title='Chi tiết FnB'
@@ -122,27 +125,34 @@ class FnBChiTiet extends Component {
                        rules={[{ required: true, message: 'ID không được để trống' }]}>
               <Input placeholder='ID' disabled={loading}/>
             </Form.Item>
-         
+            </Col>
+            <Col sm={6}>
             <Form.Item label={<b>Tên món</b>} name="tenmon" validateTrigger={['onChange', 'onBlur']}
                        rules={[{ required: true, message: 'Tên món không được để trống' }]}>
               <Input placeholder='Tên món' disabled={loading}/>
             </Form.Item>
-           
-          
+            </Col>
+            <Col sm={4}>
             
-            <Form.Item label={<b>Đơn giá</b>} name="sdt" validateTrigger={['onChange', 'onBlur']}
+            <Form.Item label={<b>Đơn giá</b>} name="dongia" validateTrigger={['onChange', 'onBlur']}
                        >
               <Input placeholder='Đơn giá' disabled={loading} type = 'number'/>
             </Form.Item>
-           
+            </Col>
+            <Col sm={4}>
             <Form.Item label={<b>Mô tả</b>} name="mota" validateTrigger={['onChange', 'onBlur']}
                  >
               <Input placeholder='mota' disabled={loading}/>
             </Form.Item>
-           
-            <Form.Item label="Trạng thái" name="trangthai_id" validateTrigger={['onChange', 'onBlur']}
+      
+            </Col>
+            <Col sm={4}>
+                
+            <Form.Item 
+            label="Trạng thái" name="trangthai_id" validateTrigger={['onChange', 'onBlur']}
                            rules={[{ required: true, message: 'trạng thái không được để trống' }]}>
-                  <Select placeholder='Chọn trạng thái' disabled={loading} dropdownClassName='small' showSearch
+                  <Select  
+                            placeholder='Chọn trạng thái' disabled={loading} dropdownClassName='small' showSearch
                           filterOption={(input, option) => {
                             return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
                           }}>
@@ -153,8 +163,6 @@ class FnBChiTiet extends Component {
                     })}
                   </Select>
                 </Form.Item>
-               
-     
            
          
             </Col>
