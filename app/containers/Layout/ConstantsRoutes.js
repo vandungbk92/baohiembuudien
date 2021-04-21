@@ -63,6 +63,9 @@ import TrangThaiCaddy from '@containers/Pages/QuanLyCaddy/TrangThaiCaddy/Loadabl
 import Voucher from '@containers/Pages/QuanLyVoucher/Voucher/Loadable';
 import VoucherChiTiet from '@containers/Pages/QuanLyVoucher/Voucher/ChiTiet/Loadable';
 import TrangThaiVoucher from '@containers/Pages/QuanLyVoucher/TrangThaiVoucher/Loadable';
+import FnB from '@containers/Pages/FnB/FnB/Loadable';
+import FnBChiTiet from '@containers/Pages/FnB/FnB/ChiTiet/Loadable';
+import TrangThaiFnB from '@containers/Pages/FnB/TrangThaiFnB/Loadable';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -111,6 +114,35 @@ const constantsRoutes = [
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
   
+  {
+    path: URL.CATEGORY,
+    breadcrumbName: 'Quản lý FnB',
+    menuName: 'Quản lý FnB',
+    icon: <InsertRowLeftOutlined/>,
+    children: [
+      { path: URL.FNB, menuName: 'FnB', exact: true, component: FnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.TRANG_THAI_FNB, menuName: 'Trạng thái FnB', exact: true, component: TrangThaiFnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/fnb/add',
+    component: FnBChiTiet,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: '/fnb/:id',
+    component: FnBChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
 
   {
     path: URL.CATEGORY,

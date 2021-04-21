@@ -1,15 +1,15 @@
 import express from 'express';
 import passport from 'passport';
-import trangthaiController from './trangthai.controller';
+import trangthaifnbController from './trangthaifnb.controller';
 
-export const trangthaiRouter = express.Router();
-trangthaiRouter
+export const trangthaifnbRouter = express.Router();
+trangthaifnbRouter
   .route('/')
-  .get(trangthaiController.findAll)
-  .post(passport.authenticate('jwt', { session: false }), trangthaiController.create)
+  .get(trangthaifnbController.findAll)
+  .post(passport.authenticate('jwt', { session: false }), trangthaifnbController.create)
 
-trangthaiRouter
+trangthaifnbRouter
   .route('/:id')
-  .get(trangthaiController.findOne)
-  .put(passport.authenticate('jwt', { session: false }), trangthaiController.update)
-  .delete(passport.authenticate('jwt', { session: false }), trangthaiController.delete);
+  .get(trangthaifnbController.findOne)
+  .put(passport.authenticate('jwt', { session: false }), trangthaifnbController.update)
+  .delete(passport.authenticate('jwt', { session: false }), trangthaifnbController.delete);

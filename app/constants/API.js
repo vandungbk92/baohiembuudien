@@ -82,6 +82,14 @@ export const API = {
   TRANG_THAI_VOUCHER_QUERY: '/api/trang-thai-voucher?page={0}&limit={1}{2}',
   TRANG_THAI_VOUCHER_ID: '/api/trang-thai-voucher/{0}',
 
+  FNB: '/api/fnb',
+  FNB_QUERY: '/api/fnb?page={0}&limit={1}{2}',
+  FNB_ID: '/api/fnb/{0}',
+
+  TRANG_THAI_FNB: '/api/trang-thai-fnb',
+  TRANG_THAI_FNB_QUERY: '/api/trang-thai-fnb?page={0}&limit={1}{2}',
+  TRANG_THAI_FNB_ID: '/api/trang-thai-fnb/{0}',
+
   CADDY: '/api/caddy',
   CADDY_QUERY: '/api/caddy?page={0}&limit={1}{2}',
   CADDY_ID: '/api/caddy/{0}',
