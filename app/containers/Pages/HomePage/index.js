@@ -16,13 +16,26 @@ import { URL } from '@url';
 import { EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
+
 class HomePage extends Component {
 
   constructor(props) {
     super(props);
     let { loaiphieu } = props;
+    let dataPie = [
+      {
+        type: 'Loại 18 Lỗ',
+        value: 27,
+      },
+      {
+        type: 'Loaị 9 lỗ',
+        value: 25,
+      },
+
+    ];
     let datathongke = getDataSoure(loaiphieu);
     this.state = {
+      dataPie,
       datathongke,
       startDate: moment().startOf('month'),
       endDate: moment().endOf('month'),
@@ -31,9 +44,10 @@ class HomePage extends Component {
     this.dateFormat = 'DD/MM/YYYY';
   }
 
+
   componentDidMount() {
-    let { startDate, endDate } = this.state;
-    this.fetchDataThongKe(startDate, endDate);
+    // let { startDate, endDate } = this.state;
+    // this.fetchDataThongKe(startDate, endDate);
   }
 
   fetchDataThongKe = async (startDate, endDate) => {
@@ -66,11 +80,11 @@ class HomePage extends Component {
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    let { loaiphieu, match } = this.props;
-    if (loaiphieu !== prevProps.loaiphieu && !match.params.id) {
-      let datathongke = getDataSoure(loaiphieu);
-      this.setState({ datathongke });
-    }
+    // let { loaiphieu, match } = this.props;
+    // if (loaiphieu !== prevProps.loaiphieu && !match.params.id) {
+    //   let datathongke = getDataSoure(loaiphieu);
+    //   this.setState({ datathongke });
+    // }
   }
 
   onUnitTimeChange = event => {
@@ -104,9 +118,10 @@ class HomePage extends Component {
   }
 
 
+
   render() {
     let { loading } = this.props;
-    let { datathongke } = this.state;
+    let { datathongke , dataPie} = this.state;
     return <Box title="Bảng thông tin"
                 boxActions={
                   <Space align="baseline">
@@ -128,10 +143,10 @@ class HomePage extends Component {
                 }>
       <Row gutter={10}>
         <Col lg={24} xl={8}>
-          <Typography.Title level={5}>Thống kê phiếu điều tra (Tỷ lệ %)</Typography.Title>
+          <Typography.Title level={5}>Thống kê sân Golf</Typography.Title>
           <Spin spinning={loading}>
             <Pie
-              data={datathongke}
+              data={dataPie}
               legend={{ position: "top" }}
 
               label={{ type: "inner",
@@ -140,7 +155,6 @@ class HomePage extends Component {
                   let percent = item.percent;
                   if(percent) return ''.concat(Math.ceil(percent * 100), '%');
                   return ''
-
                 }
               }}
               events={{
@@ -148,18 +162,18 @@ class HomePage extends Component {
               }}
               radius={0.8}
 
-              angleField="sophieu"
-              colorField="tenphieu_viettat"
+              angleField="value"
+              colorField="type"
             />
           </Spin>
         </Col>
         <Col lg={24} xl={14}>
-          <Typography.Title level={5}>Thống kê phiếu điều tra (Số lượng)</Typography.Title>
+          <Typography.Title level={5}>Thống kê sân Golf ( Số lượng ) </Typography.Title>
           <Spin spinning={loading}>
             <Column
-              colorField="tenphieu_viettat"
+              colorField="type"
               autoFit={true}
-              data={datathongke}
+              data={dataPie}
               label={
                 { visible: true }
               }
@@ -182,8 +196,8 @@ class HomePage extends Component {
                 onColumnClick: ({ data }) => {this.redirectList(data)}
               }}
               legend={{ position: 'top', flipPage: false }}
-              xField="tenphieu_viettat"
-              yField="sophieu"
+              xField="type"
+              yField="value"
             />
           </Spin>
         </Col>

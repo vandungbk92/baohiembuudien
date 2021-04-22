@@ -47,21 +47,21 @@ class DonViDieuTra extends Component {
         this.formRef.current.resetFields();
         this.formRef.current.setFieldsValue(data);
       }
-    } 
+    }
   }
 
   render() {
     const { loading, tinhthanh } = this.props;
 
     return <div>
-    <Typography.Title level={4}>Thông tin đơn vị điều tra</Typography.Title>
+    <Typography.Title level={4}>Thông tin địa chỉ sân Golf</Typography.Title>
       <Form ref={this.formRef} size="small" layout="vertical" onFinish={this.handleSaveData} >
         <Row>
           <Col xl={16}>
             <Row gutter={[24, 0]}>
-              
+
               <Col xs={24} lg={24}>
-                <Form.Item name="tendonvi" label="Tên đơn vị điều tra" rules={[RULE.REQUIRED]} hasFeedback>
+                <Form.Item name="tendonvi" label="Tên sân golf" rules={[RULE.REQUIRED]} hasFeedback>
                   <Input placeholder="Tên đơn vị điều tra" disabled={loading} />
                 </Form.Item>
               </Col>
@@ -101,7 +101,7 @@ class DonViDieuTra extends Component {
               </Col>
             </Row>
           </Col>
-          <Col sm={24}><strong>Tỉnh điều tra</strong></Col>
+          <Col sm={24}><strong>Tỉnh </strong></Col>
           <Col xs={24} lg={6}>
           <Form.Item label= {<b> Chọn tỉnh</b>} name="tinhdieutra_id"
                            validateTrigger={['onChange', 'onBlur']}

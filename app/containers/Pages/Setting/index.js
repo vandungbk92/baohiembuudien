@@ -35,7 +35,7 @@ export default function Setting() {
         {/*<Tabs.TabPane key="security1" tab="DownloadFile" className="pr-4">
           <DownloadFile />
         </Tabs.TabPane>*/}
-        <Tabs.TabPane key="basic" tab=" Đơn vị và tỉnh điều tra" className="pr-4">
+        <Tabs.TabPane key="basic" tab=" Đại chỉ sân golf" className="pr-4">
           <DonViDieuTra />
         </Tabs.TabPane>
         <Tabs.TabPane key="security" tab="Cài đặt bảo mật" className="pr-4">
