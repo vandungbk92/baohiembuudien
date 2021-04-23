@@ -208,4 +208,8 @@ export const API = {
 
   THONG_TIN_HOAT_DONG: '/api/thong-tin-hoat-dong',
 
+  THONGBAOCHUNG: '/api/thong-bao-chung',
+  THONGBAOCHUNG_QUERY: '/api/thong-bao-chung?{0}',
+  THONGBAOCHUNG_ID: '/api/thong-bao-chung/{0}',
+
 };
