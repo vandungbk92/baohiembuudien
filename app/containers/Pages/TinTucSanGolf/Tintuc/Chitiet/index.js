@@ -90,6 +90,7 @@ class Tintuc extends React.Component {
   }
 
   onFinish = async values => {
+    values.noidung = " noi dung"
     if (this.state.avatarUpload[0]?.uid) {
       const fileUpload = this.state.avatarUpload.map(data => data.originFileObj);
       const files = await uploadImages(fileUpload);
@@ -114,7 +115,7 @@ class Tintuc extends React.Component {
   };
 
   render() {
-   
+
     const { loading } = this.props;
     const { id, dataRef } = this.state;
     const layoutCol = { 'xl': 8, 'md': 24, 'lg': 24, 'xs': 24, 'sm': 24 };
@@ -241,7 +242,7 @@ class Tintuc extends React.Component {
                 name="avatar"
                 labelCol={layoutCol}
                 label="Hình ảnh đại diện"
-                rules={[{ required: true, message: "Hình ảnh đại diện là bắt buộc" }]}
+                // rules={[{ required: true, message: "Hình ảnh đại diện là bắt buộc" }]}
               >
                 <div>
                   <Upload
@@ -273,7 +274,7 @@ class Tintuc extends React.Component {
               <FormItem
                 name="noidung"
                 label="Nội dung"
-                rules={[{ required: true, message: "Nội dung bắt buộc nhập" }]}
+                // rules={[{ required: true, message: "Nội dung bắt buộc nhập" }]}
                 validateTrigger={["onBlur", "onChange"]}
                 initialValue=""
               >
