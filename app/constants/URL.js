@@ -15,6 +15,16 @@ export const URL = {
 
   TAI_KHOAN: '/tai-khoan',
 
+  CAU_HOI: '/cau-hoi-thuong-gap',
+  CAU_HOI_ID: '/cau-hoi-thuong-gap/{0}',
+  CAU_HOI_ADD: '/cau-hoi-thuong-gap/add',
+
+  HUONGDAN: '/huongdan',
+  HUONGDAN_ADD: '/huongdan/add',
+  HUONGDAN_ID: '/huongdan/{0}',
+
+  DANHMUC_HUONGDANKCB: '/dm-huongdankhambenh',
+
   LOAI_PHIEU: '/loai-phieu',
   LOAI_PHIEU_ID: '/loai-phieu/{0}',
   LOAI_PHIEU_ADD: '/loai-phieu/add',

@@ -10,9 +10,9 @@ export default {
       if (error && error.details) {
         responseAction.error(res, 400, error.details[0])
       }
-      let fnbcheck = await FnB.findOne({tenmuc: value.tenmuc.trim(), is_deleted: false})
+      let fnbcheck = await FnB.findOne({tenmon: value.tenmon.trim(), is_deleted: false})
       if (fnbcheck) {
-            return res.status(400).json({success: false, message: 'Mức thành viên đã tồn tại'})
+            return res.status(400).json({success: false, message: 'Món ăn viên đã tồn tại'})
         }
       const data = await FnB.create(value);
       return res.json(data);
@@ -29,6 +29,11 @@ export default {
       }
 
       let options = optionsRequest(req.query)
+      options.populate =[
+
+        {path: 'trangthai_id',select:'tentrangthai'},
+     
+      ]
       const data = await FnB.paginate(query, options)
       return res.json(data);
     } catch (err) {
@@ -38,18 +43,19 @@ export default {
   },
 
 
-  async findOne(req, res) {
-    try {
-      const { id } = req.params;
-      const data = await FnB.findOne({is_deleted: false, _id: id})
-      if (!data) {
-          responseAction.error(res, 404, '')
-      }
-      return res.json(data);
-    } catch (err) {
-      console.error(err);
-      return res.status(500).send(err);
+  async findOne(req, res) {  try {
+    const {id} = req.params;
+    const data = await FnB.findById(id)
+   
+    .populate({path: 'trangthai_id',select:'tentrangthai'})
+    if (!data) {
+      return responseAction.error(res, 404, '')
     }
+    return res.json(data);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send(err);
+  }
   },
   async delete(req, res) {
     try {

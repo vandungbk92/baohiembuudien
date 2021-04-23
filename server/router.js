@@ -4,7 +4,7 @@ import userRouter from "./api/resources/user/user.router";
 import { phuongxaRouter } from './api/resources/danhmuc/phuongxa/phuongxa.router';
 import { quanhuyenRouter } from './api/resources/danhmuc/quanhuyen/quanhuyen.router';
 import { tinhthanhRouter } from './api/resources/danhmuc/tinhthanh/tinhthanh.router';
-import { imgUploadRouter } from './api/resources/imgUpload/imgUpload.router';
+import { imgUploadRouter } from './api/resources/imgUploadLocal/imgUpload.router';
 import { loaiphieuRouter } from './api/resources/danhmucloaiphieu/loaiphieu.router';
 import { settingRouter } from './api/resources/setting/setting.router';
 import { loaihinhkinhteRouter } from './api/resources/danhmucdulieu/loaihinhkinhtebenhvien/loaihinhkinhte.router';
@@ -50,15 +50,23 @@ import {trangthaicaddyRouter} from './api/resources/quanlycaddy/trangthaicaddy/t
 import {caddyRouter} from './api/resources/quanlycaddy/caddy/caddy.router';
 import {voucherRouter} from './api/resources/quanlyvoucher/voucher/voucher.router';
 import {trangthaivoucherRouter} from './api/resources/quanlyvoucher/trangthaivoucher/trangthaivoucher.router';
-import {fnbRouter} from './api/resources/fnb/fnb/fnb.router'
+import {fnbRouter} from './api/resources/fnb/fnb/fnb.router';
 import {trangthaifnbRouter} from './api/resources/fnb/trangthai/trangthaifnb.router';
 import {danhmuctintucRouter} from './api/resources/tintucsangolf/danhmuctintuc/danhmucsangolf.router';
 import {tintucRouter} from './api/resources/tintucsangolf/tintuc/sangolf.router';
+import {cauhoithuonggapRouter} from './api/resources/cauhoithuonggap/cauhoithuonggap.router';
+import {huongdanRouter} from './api/resources/huongdan/huongdan/huongdan.router';
+import {danhmuchuongdanRouter} from './api/resources/huongdan/danhmuchuongdan/danhmuchuongdan.router'
+
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
 router.use('/fnb',fnbRouter);
 router.use('/trang-thai-fnb', trangthaifnbRouter)
+router.use('/cau-hoi-thuong-gap', cauhoithuonggapRouter);
+router.use('/huong-dan', huongdanRouter);
+router.use('/danh-muc-huong-dan', danhmuchuongdanRouter);
+
 router.use('/trang-thai-caddy', trangthaicaddyRouter);
 router.use('/caddy', caddyRouter);
 router.use('/muc-thanh-vien', mucthanhvienRouter);

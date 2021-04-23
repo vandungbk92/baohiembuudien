@@ -183,6 +183,14 @@ class Caddy extends Component {
     }
   }
 
+  // showTrangThai(value){
+  //   return <React.Fragment>
+  //   {       
+  //     <div>{value.tentrangthai} </div>
+  //   }
+    
+  // </React.Fragment>
+  // }
 
   render() {
     const { loading } = this.props;

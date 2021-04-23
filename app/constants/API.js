@@ -2,11 +2,23 @@ export const API = {
   FILE: '/api/files',
 
   LOGIN: '/api/users/login',
-  
+
   USER_INFO: '/api/users/me',
   USER: '/api/users',
   USER_QUERY: '/api/users?page={0}&limit={1}{2}',
   USER_ID: '/api/users/{0}',
+
+  CAU_HOI: '/api/cau-hoi-thuong-gap',
+  CAU_HOI_QUERY: '/api/cau-hoi-thuong-gap?page={0}&limit={1}{2}',
+  CAU_HOI_ID: '/api/cau-hoi-thuong-gap/{0}',
+
+  HUONGDAN: '/api/huongdan',
+  HUONGDAN_QUERY: '/api/huongdan?page={0}&limit={1}{2}',
+  HUONGDAN_ID: '/api/huongdankhambenh/{0}',
+
+  DANHMUC_HUONGDAN: '/api/dm-huongdan',
+  DANHMUC_HUONGDAN_QUERY: '/api/dm-huongdan?page={0}&limit={1}{2}',
+  DANHMUC_HUONGDAN_ID: '/api/dm-huongdan/{0}',
 
   USER_RESET_PASSWORD: '/api/users/reset-password',
   USER_CHANGE_PASSWORD: '/api/users/change-password',
@@ -73,7 +85,7 @@ export const API = {
   MUC_THANH_VIEN: '/api/muc-thanh-vien',
   MUC_THANH_VIEN_QUERY: '/api/muc-thanh-vien?page={0}&limit={1}{2}',
   MUC_THANH_VIEN_ID: '/api/muc-thanh-vien/{0}',
-  
+
   VOUCHER: '/api/voucher',
   VOUCHER_QUERY: '/api/voucher?page={0}&limit={1}{2}',
   VOUCHER_ID: '/api/voucher/{0}',
@@ -207,6 +219,8 @@ export const API = {
   KET_LUAN_THANH_TRA_ID: '/api/ket-luan-thanh-tra/{0}',
 
   THONG_TIN_HOAT_DONG: '/api/thong-tin-hoat-dong',
+  FILES: '/api/files/{0}',
+  // FILE: '/api/files',
 
   THONGBAOCHUNG: '/api/thong-bao-chung',
   THONGBAOCHUNG_QUERY: '/api/thong-bao-chung?{0}',

@@ -90,7 +90,6 @@ class Tintuc extends React.Component {
   }
 
   onFinish = async values => {
-    values.noidung = " noi dung"
     if (this.state.avatarUpload[0]?.uid) {
       const fileUpload = this.state.avatarUpload.map(data => data.originFileObj);
       const files = await uploadImages(fileUpload);
@@ -274,7 +273,7 @@ class Tintuc extends React.Component {
               <FormItem
                 name="noidung"
                 label="Nội dung"
-                // rules={[{ required: true, message: "Nội dung bắt buộc nhập" }]}
+                rules={[{ required: true, message: "Nội dung bắt buộc nhập" }]}
                 validateTrigger={["onBlur", "onChange"]}
                 initialValue=""
               >
