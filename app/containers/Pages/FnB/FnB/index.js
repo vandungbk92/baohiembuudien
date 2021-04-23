@@ -45,6 +45,8 @@ class FnB extends Component {
       dataIndex: ["trangthai_id", "tentrangthai"],
       width: 150,
       align: 'center',
+   
+
     },
     {
       title: 'Hành động',
@@ -113,6 +115,7 @@ class FnB extends Component {
   }
 
 
+
   formatActionCell(value) {
     return <>
       <Link to={URL.FNB_ID.format(value._id)}>
@@ -134,7 +137,7 @@ class FnB extends Component {
   // showTrangThai(value){
   //   return <React.Fragment>
   //   {       
-  //     <div>{value.trangthai_id.tentrangthai} </div>
+  //     <div>{value.tentrangthai} </div>
   //   }
     
   // </React.Fragment>

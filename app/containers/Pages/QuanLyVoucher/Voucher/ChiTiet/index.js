@@ -76,7 +76,7 @@ class VoucherChiTiet extends Component {
           tgbatdau: dataRes.tgbatdau, 
           tgketthuc: dataRes.tgketthuc,
           soluongvoucher: dataRes.soluongvoucher, 
-          trangthai_id : dataRes.trangthai_id._id,
+          trangthai_id : dataRes.trangthai_id.tentrangthai,
         })
      
         // set form

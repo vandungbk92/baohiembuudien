@@ -8,16 +8,12 @@ export default {
           template: 'là bắt buộc nhập'
         };
       }),
-      tenmuc: Joi.string().required().label('Tên mức thành viên').error((errors) => {
+      tenmon: Joi.string().required().label('Tên món ăn').error((errors) => {
         return {
           template: 'là bắt buộc nhập'
         };
       }),
       mota: Joi.string().trim(),
-      
-      uudai: Joi.number().label('% ưu đãi'),
-      tgbatdau: Joi.date().label('Thời gian bắt đầu'),
-      tgkethuc: Joi.date().label('Thời gian kết thúc'),
       dongia: Joi.number().label('Đơn giá'),
       trangthai: Joi.string().trim(),
       

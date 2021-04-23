@@ -29,6 +29,11 @@ export default {
       }
 
       let options = optionsRequest(req.query)
+      options.populate =[
+
+        {path: 'trangthai_id',select:'tentrangthai'},
+     
+      ]
       const data = await Voucher.paginate(query, options)
       return res.json(data);
     } catch (err) {
@@ -41,7 +46,9 @@ export default {
   async findOne(req, res) {
     try {
       const { id } = req.params;
-      const data = await Voucher.findOne({is_deleted: false, _id: id})
+      const data = await Voucher.findById(id)
+   
+      .populate({path: 'trangthai_id',select:'tentrangthai'})
       if (!data) {
           responseAction.error(res, 404, '')
       }
