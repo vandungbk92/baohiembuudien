@@ -52,6 +52,8 @@ import {voucherRouter} from './api/resources/quanlyvoucher/voucher/voucher.route
 import {trangthaivoucherRouter} from './api/resources/quanlyvoucher/trangthaivoucher/trangthaivoucher.router';
 import {fnbRouter} from './api/resources/fnb/fnb/fnb.router';
 import {trangthaifnbRouter} from './api/resources/fnb/trangthai/trangthaifnb.router';
+import {danhmuctintucRouter} from './api/resources/tintucsangolf/danhmuctintuc/danhmucsangolf.router';
+import {tintucRouter} from './api/resources/tintucsangolf/tintuc/sangolf.router';
 import {cauhoithuonggapRouter} from './api/resources/cauhoithuonggap/cauhoithuonggap.router';
 import {huongdanRouter} from './api/resources/huongdan/huongdan/huongdan.router';
 import {danhmuchuongdanRouter} from './api/resources/huongdan/danhmuchuongdan/danhmuchuongdan.router'
@@ -94,7 +96,8 @@ router.use('/quy-mo-benh-vien', quymobenhvienRouter);
 router.use('/ho-so-moi-truong', hosomoitruongRouter);
 router.use('/ket-luan-thanh-tra', ketluanthanhtraRouter);
 router.use('/thong-tin-du-an', thongtinduanRouter);
-
+router.use('/tin-tuc',tintucRouter);
+router.use('/danhmuc-tin-tuc',danhmuctintucRouter);
 
 
 

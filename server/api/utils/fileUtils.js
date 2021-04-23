@@ -15,7 +15,7 @@ if (!fs.existsSync(tempDir)) {
 
 const config = getConfig(process.env.NODE_ENV);
 const multipartMiddleware = multipart({ uploadDir: tempDir });
-let conf = config.cos.credentials;
+let conf = "config.cos.credentials";
 let s3;
 let bucketName = config.cos.bucketName;
 
@@ -77,7 +77,7 @@ const deleteItemObject = (key) => {
     Key: key,
   }).promise();
 };
-
+AWS
 const create = (filePath) => {
   return new Promise((resolve, reject) => {
     let file = fs.createReadStream(filePath);

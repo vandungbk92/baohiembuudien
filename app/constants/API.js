@@ -166,6 +166,14 @@ export const API = {
   LOAI_HINH_CHAN_NUOI_QUERY: '/api/loai-hinh-chan-nuoi?page={0}&limit={1}{2}',
   LOAI_HINH_CHAN_NUOI_ID: '/api/loai-hinh-chan-nuoi/{0}',
 
+  DANHMUC_TINTUC: '/api/danhmuc-tin-tuc',
+  DANHMUC_TINTUC_QUERY: '/api/danhmuc-tin-tuc?page={0}&limit={1}{2}',
+  DANHMUC_TINTUC_ID: '/api/danhmuc-tin-tuc/{0}',
+
+  TINTUC: '/api/tin-tuc',
+  TINTUC_QUERY: '/api/tin-tuc?page={0}&limit={1}{2}',
+  TINTUC_ID: '/api/tin-tuc/{0}',
+
   QUY_MO_BENH_VIEN: '/api/quy-mo-benh-vien',
   QUY_MO_BENH_VIEN_ID: '/api/quy-mo-benh-vien/{0}',
 

@@ -68,6 +68,9 @@ import TrangThaiVoucher from '@containers/Pages/QuanLyVoucher/TrangThaiVoucher/L
 import FnB from '@containers/Pages/FnB/FnB/Loadable';
 import FnBChiTiet from '@containers/Pages/FnB/FnB/ChiTiet/Loadable';
 import TrangThaiFnB from '@containers/Pages/FnB/TrangThaiFnB/Loadable';
+import DanhmucTintuc from '@containers/Pages/TinTucSanGolf/Danhmuctintuc/Loadable';
+import Tintuc from '@containers/Pages/TinTucSanGolf/Tintuc/Loadable';
+import TintucChitiet from '@containers/Pages/TinTucSanGolf/Tintuc/Chitiet/Loadable';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -143,6 +146,35 @@ const constantsRoutes = [
     // breadcrumbName: 'Thêm dữ liệu',
     icon: <WeiboCircleOutlined/>,
     exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: `${URL.TINTUC}/add`,
+    exact: true,
+    component: TintucChitiet,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: `${URL.TINTUC}/:id`,
+    exact: true,
+    component: TintucChitiet,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: `${URL.TINTUC}`,
+    exact: true,
+    component: Tintuc,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    menuName: 'Tin tức sân golf',
+    icon: renderMenuIcon('fa-newspaper-o'),
+    children: [
+      { path: URL.TINTUC, menuName: 'Tin tức', component: Tintuc, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.DANHMUC_TINTUC, menuName: 'Danh mục tin tức', component: DanhmucTintuc, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+    ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
 

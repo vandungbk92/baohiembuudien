@@ -105,6 +105,12 @@ export const URL = {
   FNB_ID: '/fnb/{0}',
   FNB_ADD: '/fnb/add',
 
+  DANHMUC_TINTUC: '/danhmuc-tintuc',
+
+  TINTUC: '/tintuc',
+  TINTUC_ID: '/tintuc/{0}',
+  TINTUC_ADD: '/tintuc/add',
+
   CONG_NGHE_SAN_XUAT: '/cong-nghe-san-xuat',
   CONG_NGHE_SAN_XUAT_ID: '/cong-nghe-san-xuat/{0}',
   CONG_NGHE_SAN_XUAT_ADD: '/cong-nghe-san-xuat/add',
