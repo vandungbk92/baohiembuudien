@@ -2,7 +2,7 @@ import express from 'express';
 import imgUploadController from './imgUpload.controller';
 import multer from 'multer'
 import fs from 'fs'
-import {convertFileName} from '../../utils/fileUtilsLocal';
+import {convertFileName} from '../../utils/fileUtils';
 
 // config upload image
 let storage = multer.diskStorage({
