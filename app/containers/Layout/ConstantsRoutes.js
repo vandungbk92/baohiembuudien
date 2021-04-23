@@ -24,9 +24,11 @@ import { CONSTANTS } from '@constants';
 import HomePage from '../Pages/HomePage/Loadable';
 import Profile from '../Pages/Profile/Loadable';
 import Setting from '../Pages/Setting/Loadable';
-
+import DanhMucHuongDan from '@containers/Pages/HuongDan/DanhmucHuongDan/Loadable';
+import HuongDan from '@containers/Pages/HuongDan/HuongDan/Loadable';
+import ChiTietHuongDan from '@containers/Pages/HuongDan/HuongDan/Chitiet/Loadable';
 import NotFoundPage from '../Pages/NotFoundPage/Loadable';
-
+import CauHoiThuongGap from '@containers/Pages/CauHoiThuongGap/Loadable';
 import TinhThanh from '@containers/Pages/DanhMuc/TinhThanh/Loadable';
 import QuanHuyen from '@containers/Pages/DanhMuc/QuanHuyen/Loadable';
 import PhuongXa from '@containers/Pages/DanhMuc/PhuongXa/Loadable';
@@ -204,7 +206,45 @@ const constantsRoutes = [
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
 
-  
+  {
+    path: `${URL.HUONGDANKCB}/add`,
+    exact: true,
+    component: ChiTietHuongDan,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: `${URL.HUONGDANKCB}/:id`,
+    exact: true,
+    component: ChiTietHuongDan,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/cau-hoi-thuong-gap',
+    menuName: 'Câu hỏi thường gặp',
+    component: CauHoiThuongGap,
+    icon: renderMenuIcon('far fa-question-circle'),
+    role: [CONSTANTS.ADMIN],
+  },
+
+  {
+    menuName: 'Hướng dẫn',
+    icon: renderMenuIcon('fa-book'),
+    children: [
+      {
+        path: URL.HUONGDAN,
+        menuName: 'Hướng dẫn',
+        component: HuongDan,
+        role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+      },
+      {
+        path: URL.DANHMUC_HUONGDANKCB,
+        menuName: 'Danh mục hướng dẫn',
+        component: DanhMucHuongDan,
+        role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+      },
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
 
   {
     path: '/muc-thanh-vien',

@@ -8,6 +8,18 @@ export const API = {
   USER_QUERY: '/api/users?page={0}&limit={1}{2}',
   USER_ID: '/api/users/{0}',
 
+  CAU_HOI: '/api/cau-hoi-thuong-gap',
+  CAU_HOI_QUERY: '/api/cau-hoi-thuong-gap?page={0}&limit={1}{2}',
+  CAU_HOI_ID: '/api/cau-hoi-thuong-gap/{0}',
+
+  HUONGDAN: '/api/huongdan',
+  HUONGDAN_QUERY: '/api/huongdan?page={0}&limit={1}{2}',
+  HUONGDAN_ID: '/api/huongdankhambenh/{0}',
+
+  DANHMUC_HUONGDAN: '/api/dm-huongdan',
+  DANHMUC_HUONGDAN_QUERY: '/api/dm-huongdan?page={0}&limit={1}{2}',
+  DANHMUC_HUONGDAN_ID: '/api/dm-huongdan/{0}',
+
   USER_RESET_PASSWORD: '/api/users/reset-password',
   USER_CHANGE_PASSWORD: '/api/users/change-password',
   USER_FORGET_PASSWORD: '/api/users/forgot-password-mail',
