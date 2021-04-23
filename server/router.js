@@ -51,7 +51,9 @@ import {caddyRouter} from './api/resources/quanlycaddy/caddy/caddy.router';
 import {voucherRouter} from './api/resources/quanlyvoucher/voucher/voucher.router';
 import {trangthaivoucherRouter} from './api/resources/quanlyvoucher/trangthaivoucher/trangthaivoucher.router';
 import {fnbRouter} from './api/resources/fnb/fnb/fnb.router'
-import {trangthaifnbRouter} from './api/resources/fnb/trangthai/trangthaifnb.router'
+import {trangthaifnbRouter} from './api/resources/fnb/trangthai/trangthaifnb.router';
+import {danhmuctintucRouter} from './api/resources/tintucsangolf/danhmuctintuc/danhmucsangolf.router';
+import {tintucRouter} from './api/resources/tintucsangolf/tintuc/sangolf.router';
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
@@ -86,7 +88,8 @@ router.use('/quy-mo-benh-vien', quymobenhvienRouter);
 router.use('/ho-so-moi-truong', hosomoitruongRouter);
 router.use('/ket-luan-thanh-tra', ketluanthanhtraRouter);
 router.use('/thong-tin-du-an', thongtinduanRouter);
-
+router.use('/tin-tuc',tintucRouter);
+router.use('/danhmuc-tin-tuc',danhmuctintucRouter);
 
 
 
