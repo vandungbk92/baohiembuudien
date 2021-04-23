@@ -4,7 +4,7 @@ import userRouter from "./api/resources/user/user.router";
 import { phuongxaRouter } from './api/resources/danhmuc/phuongxa/phuongxa.router';
 import { quanhuyenRouter } from './api/resources/danhmuc/quanhuyen/quanhuyen.router';
 import { tinhthanhRouter } from './api/resources/danhmuc/tinhthanh/tinhthanh.router';
-import { imgUploadRouter } from './api/resources/imgUpload/imgUpload.router';
+import { imgUploadRouter } from './api/resources/imgUploadLocal/imgUpload.router';
 import { loaiphieuRouter } from './api/resources/danhmucloaiphieu/loaiphieu.router';
 import { settingRouter } from './api/resources/setting/setting.router';
 import { loaihinhkinhteRouter } from './api/resources/danhmucdulieu/loaihinhkinhtebenhvien/loaihinhkinhte.router';
