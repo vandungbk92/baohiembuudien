@@ -1,9 +1,9 @@
 import ThongBaoChung from './thongbaochung.model';
 import TinTuc from '../tintucsangolf/tintuc/sangolf.model';
-import HuongDan from '../huongdanbenhnhan/huongdan/huongdan.model';
+import HuongDan from '../huongdan/huongdan/huongdan.model';
 import * as responseAction from '../../utils/responseAction';
 import { filterRequest, optionsRequest } from '../../utils/filterRequest';
-// import {pushNotifyMobile} from "../../utils/pushNotifyMobile";
+import {pushNotifyMobile} from "../../utils/pushNotifyMobile";
 
 
 export default {

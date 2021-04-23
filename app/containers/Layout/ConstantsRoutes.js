@@ -239,13 +239,13 @@ const constantsRoutes = [
   },
 
   {
-    path: `${URL.HUONGDANKCB}/add`,
+    path: `${URL.HUONGDAN}/add`,
     exact: true,
     component: ChiTietHuongDan,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
   {
-    path: `${URL.HUONGDANKCB}/:id`,
+    path: `${URL.HUONGDAN}/:id`,
     exact: true,
     component: ChiTietHuongDan,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
@@ -269,7 +269,7 @@ const constantsRoutes = [
         role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
       },
       {
-        path: URL.DANHMUC_HUONGDANKCB,
+        path: URL.DANHMUC_HUONGDAN,
         menuName: 'Danh mục hướng dẫn',
         component: DanhMucHuongDan,
         role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],

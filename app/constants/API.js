@@ -14,11 +14,11 @@ export const API = {
 
   HUONGDAN: '/api/huongdan',
   HUONGDAN_QUERY: '/api/huongdan?page={0}&limit={1}{2}',
-  HUONGDAN_ID: '/api/huongdankhambenh/{0}',
+  HUONGDAN_ID: '/api/huongdan/{0}',
 
-  DANHMUC_HUONGDAN: '/api/dm-huongdan',
-  DANHMUC_HUONGDAN_QUERY: '/api/dm-huongdan?page={0}&limit={1}{2}',
-  DANHMUC_HUONGDAN_ID: '/api/dm-huongdan/{0}',
+  DANHMUC_HUONGDAN: '/api/danh-muc-huong-dan',
+  DANHMUC_HUONGDAN_QUERY: '/api/danh-muc-huong-dan?page={0}&limit={1}{2}',
+  DANHMUC_HUONGDAN_ID: '/api/danh-muc-huong-dan/{0}',
 
   USER_RESET_PASSWORD: '/api/users/reset-password',
   USER_CHANGE_PASSWORD: '/api/users/change-password',

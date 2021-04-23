@@ -57,14 +57,14 @@ import {tintucRouter} from './api/resources/tintucsangolf/tintuc/sangolf.router'
 import {cauhoithuonggapRouter} from './api/resources/cauhoithuonggap/cauhoithuonggap.router';
 import {huongdanRouter} from './api/resources/huongdan/huongdan/huongdan.router';
 import {danhmuchuongdanRouter} from './api/resources/huongdan/danhmuchuongdan/danhmuchuongdan.router'
-
+import {thongbaochungRouter} from './api/resources/thongbaochung/thongbaochung.router';
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
 router.use('/fnb',fnbRouter);
 router.use('/trang-thai-fnb', trangthaifnbRouter)
 router.use('/cau-hoi-thuong-gap', cauhoithuonggapRouter);
-router.use('/huong-dan', huongdanRouter);
+router.use('/huongdan', huongdanRouter);
 router.use('/danh-muc-huong-dan', danhmuchuongdanRouter);
 
 router.use('/trang-thai-caddy', trangthaicaddyRouter);
@@ -123,7 +123,7 @@ router.use('/hoa-chat', hoachatRouter);
 router.use('/nhien-lieu', nhienlieuRouter);
 
 
-
+router.use('/thong-bao-chung',thongbaochungRouter)
 
 
 

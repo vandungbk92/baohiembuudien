@@ -23,7 +23,7 @@ export const URL = {
   HUONGDAN_ADD: '/huongdan/add',
   HUONGDAN_ID: '/huongdan/{0}',
 
-  DANHMUC_HUONGDANKCB: '/dm-huongdankhambenh',
+  DANHMUC_HUONGDAN: '/dm-huongdan',
 
   LOAI_PHIEU: '/loai-phieu',
   LOAI_PHIEU_ID: '/loai-phieu/{0}',

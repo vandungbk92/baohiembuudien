@@ -4,7 +4,7 @@ import { API } from "@api";
 export function getAll(page, limit, query) {
   query = query ? query : "";
   return axios
-    .get(`${API.HUONGDANKCB_QUERY.format(page, limit, query)}`)
+    .get(`${API.HUONGDAN_QUERY.format(page, limit, query)}`)
     .then(res => {
       if (res.data) {
         return res.data;
@@ -19,7 +19,7 @@ export function getAll(page, limit, query) {
 
 export function getById(id) {
   return axios
-    .get(`${API.HUONGDANKCB_ID.format(id)}`)
+    .get(`${API.HUONGDAN_ID.format(id)}`)
     .then(res => {
       if (res.data) {
         return res.data;
@@ -33,8 +33,9 @@ export function getById(id) {
 }
 
 export function add(data) {
+  console.log(data,'datadata')
   return axios
-    .post(`${API.HUONGDANKCB}`, data)
+    .post(`${API.HUONGDAN}`, data)
     .then(res => {
       if (res.data) {
         return res.data;
@@ -49,7 +50,7 @@ export function add(data) {
 
 export function updateById(id, data) {
   return axios
-    .put(`${API.HUONGDANKCB_ID.format(id)}`, data)
+    .put(`${API.HUONGDAN_ID.format(id)}`, data)
     .then(res => {
       if (res.data) {
         return res.data;
@@ -64,7 +65,7 @@ export function updateById(id, data) {
 
 export function delById(id) {
   return axios
-    .delete(`${API.HUONGDANKCB_ID.format(id)}`)
+    .delete(`${API.HUONGDAN_ID.format(id)}`)
     .then(res => {
       if (res.data) {
         return res.data;
