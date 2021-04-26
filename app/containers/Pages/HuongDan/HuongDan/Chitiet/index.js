@@ -66,7 +66,7 @@ class HuongDan extends React.Component {
   }
 
   onFinish = async values => {
-    if (this.state.avatarUpload[0]?.uid) {
+    if (this.state.avatarUpload[0]?.originFileObj) {
       const fileUpload = this.state.avatarUpload.map(data => data.originFileObj);
       const files = await uploadImages(fileUpload);
       if (files?.length) {
@@ -76,7 +76,7 @@ class HuongDan extends React.Component {
     if (this.state._id) {
       const huongdanRes = await updateById(this.state._id, values);
       if (huongdanRes) {
-        message.success("Cập nhật dữ liệu thành công");
+        message.success("Cập nhật dữ liệu thành công")
         if (huongdanRes.avatar) this.setState({ avatarUpload: [{ url: API.FILES.format(huongdanRes.avatar) }] });
       }
     } else {
