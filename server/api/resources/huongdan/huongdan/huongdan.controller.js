@@ -70,11 +70,13 @@ export default {
       }
 
       const data = await HuongDan.findOneAndUpdate({ _id: id }, value, { new: true })
+     
         .populate({ path: 'danhmuc_id', select: 'ten' })
         .populate({ path: 'nguoitao_id', select: 'full_name' });
       if (!data) {
         return responseAction.error(res, 404, '');
       }
+     
       return res.json(data);
     } catch (err) {
       console.error(err);

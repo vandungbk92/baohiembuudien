@@ -9,7 +9,7 @@ import Box from "@containers/Box";
 import { uploadImages } from "@services/uploadServices";
 import { makeGetLoading } from "@containers/App/AppProvider/selectors";
 import { add, getById, updateById } from "@services/huongdan/huongdanService";
-
+import { add as addThongBao, getAll as getAllThongBao } from '@services/thongbaochung/thongbaochungService';
 import { dateFormatter } from '@commons/dateFormat';
 import { API } from '@api';
 import { compose } from 'redux';
@@ -42,22 +42,22 @@ class HuongDan extends React.Component {
     }
   }
 
-  // toggleModal = async (value) => {
-  //   const { showModal } = this.state;
-  //   if (showModal) {
-  //     this.setState({
-  //       showModal: !showModal
-  //     });
-  //   } else {
-  //     const apiResponse = await getAllThongBao(`link_push_id=${value}`);
-  //     if (apiResponse) {
-  //       this.setState({
-  //         showModal: !showModal,
-  //         dataRef: apiResponse.docs,
-  //       });
-  //     }
-  //   }
-  // };
+  toggleModal = async (value) => {
+    const { showModal } = this.state;
+    if (showModal) {
+      this.setState({
+        showModal: !showModal
+      });
+    } else {
+      const apiResponse = await getAllThongBao(`link_push_id=${value}`);
+      if (apiResponse) {
+        this.setState({
+          showModal: !showModal,
+          dataRef: apiResponse.docs,
+        });
+      }
+    }
+  };
 
   
   convetTime(date) {
@@ -134,6 +134,14 @@ class HuongDan extends React.Component {
                 <Checkbox disabled={this.props.loading} />
               </Form.Item>
             </Col>
+            <Col xs={24} sm={12} md={12} lg={6} xl={6}>
+                  <Form.Item
+                    label=" ">
+                    <Button icon={<BellOutlined />} size="small" type="primary" onClick={() => this.toggleModal(id)}>
+                      Kiểm tra thông báo
+                  </Button>
+                  </Form.Item>
+                </Col>
 
      
 

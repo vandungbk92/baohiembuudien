@@ -10,6 +10,7 @@ function uploadFiles(files) {
     // Initial FormData
     const formData = new FormData();
     formData.append("file", file);
+    console.log(index, 'upload k thành công')
     // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
     return axios.post(path, formData, config).then(response => {
       const data = response.data;
@@ -33,18 +34,22 @@ function uploadImages(images) {
   }
   let path = '/api/files'
   let dataRes = []
+  
   const uploaders = images.map((file, index) => {
     // Initial FormData
     const formData = new FormData();
     formData.append("image", file);
     // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
     return axios.post(path, formData, config).then(response => {
+     console.log("dadtaa",response);
       const data = response.data;
+      console.log("đây",data);
       if(data){
         dataRes = [...dataRes, data.image_id]
       }
+      
     }).catch(error => {
-      console.log(error, 'upload k thành công')
+      console.log(error, 'upload ảnh không thành công')
     });
   });
 
