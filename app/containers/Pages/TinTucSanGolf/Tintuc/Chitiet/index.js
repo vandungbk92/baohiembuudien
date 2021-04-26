@@ -90,7 +90,9 @@ class Tintuc extends React.Component {
   }
 
   onFinish = async values => {
-    if (this.state.avatarUpload[0]?.uid) {
+    console.log(values,'values');
+    console.log(this.state.avatarUpload,'this.state.avatarUpload');
+    if (this.state.avatarUpload[0]?.originFileObj) {
       const fileUpload = this.state.avatarUpload.map(data => data.originFileObj);
       const files = await uploadImages(fileUpload);
       if (files?.length) {
@@ -102,7 +104,7 @@ class Tintuc extends React.Component {
       const tintucRes = await updateById(this.state._id, values);
       if (tintucRes) {
         message.success("Cập nhật dữ liệu thành công");
-        if (tintucRes.avatar) this.setState({ avatarUpload: [{ url: API.FILES.format(tintucRes.avatar) }] });
+        if (tintucRes.avatar) this.setState({ avatarUpload: [{ url: API.FILES.format(tintucRes.avatar)}]});
       }
     } else {
       const tintucRes = await add(values);
@@ -241,7 +243,7 @@ class Tintuc extends React.Component {
                 name="avatar"
                 labelCol={layoutCol}
                 label="Hình ảnh đại diện"
-                // rules={[{ required: true, message: "Hình ảnh đại diện là bắt buộc" }]}
+                rules={[{ required: true, message: "Hình ảnh đại diện là bắt buộc" }]}
               >
                 <div>
                   <Upload
