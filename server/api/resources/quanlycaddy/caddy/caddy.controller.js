@@ -79,11 +79,13 @@ export default {
       if (error && error.details) {
         return  responseAction.error(res, 400, error.details[0])
       }
+      
 
       const data = await Caddy.findOneAndUpdate({_id: id}, value, {new: true});
       if (!data) {
         return responseAction.error(res, 404, '');
       }
+     // console.log('value',value);
       return res.json(data);
     } catch (err) {
       console.error(err);

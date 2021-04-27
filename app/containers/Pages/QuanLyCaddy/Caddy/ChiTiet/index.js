@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import {RULE} from "@constants"
 import {Tabs, Calendar, Alert,
   Input,
   InputNumber,
@@ -62,8 +63,8 @@ class CaddyChiTiet extends Component {
       this.setState({ dsTrangThai});
       if(this.state._id){
        
-        let dataRes = await getById(this.state._id)
-        console.log(dataRes);
+        let dataRes = await getById(this.state._id);
+       //console.log("rress",dataRes);
         this.formRef.current.setFieldsValue({
           id: dataRes.id, 
           taikhoan: dataRes.taikhoan, 
@@ -74,7 +75,7 @@ class CaddyChiTiet extends Component {
           email: dataRes.email, 
           trinhdohocvan: dataRes.trinhdohocvan, 
           kinhnghiem: dataRes.kinhnghiem, 
-         trangthai_id : dataRes.trangthai_id.tentrangthai,
+          trangthai_id : dataRes.trangthai_id._id,
         })
      
         // set form
@@ -89,10 +90,10 @@ class CaddyChiTiet extends Component {
 
 
   onFinish = async (values) => {
-    console.log(values, "aaa");
+    
     if (this.state._id) {
       const caddyRes = await updateById(this.state._id, values);
-      
+     console.log("123",caddyRes);
       if (caddyRes) {
         message.success("Cập nhật dữ liệu thành công");
 
@@ -109,7 +110,7 @@ class CaddyChiTiet extends Component {
   };
 
   onFieldsChange = async (changedValues, allValues) => {
-    console.log(changedValues, "changedValues");
+    //console.log(changedValues, "changedValues");
   }
 
   onSelect = async (value) => {
@@ -164,24 +165,25 @@ class CaddyChiTiet extends Component {
             </Col>
             <Col sm={6}>
             <Form.Item label={<b>Địa chỉ</b>} name="diachi" validateTrigger={['onChange', 'onBlur']}
+            rules={[{ required: true, message: 'địa chỉ không được để trống' }]}
                        >
               <Input placeholder='địa chỉ' disabled={loading}/>
             </Form.Item>
             </Col>
             <Col sm={6}>
-            <Form.Item label={<b>Số điện thoại</b>} name="sdt" validateTrigger={['onChange', 'onBlur']}
-                       >
-              <Input placeholder='số điện thoại' disabled={loading} type = 'number'/>
+            <Form.Item label={<b>Số điện thoại</b>} name="sdt" validateTrigger={['onChange','onBlur']}           
+                       rules={[{ required: true, message: 'số điện thoại không được để trống' }]}>
+              <Input placeholder='số điện thoại'   disabled={loading} type = 'number'/>
             </Form.Item>
             </Col>
             <Col sm={6}>
             <Form.Item label={<b>Email</b>} name="email" validateTrigger={['onChange', 'onBlur']}
-                 >
-              <Input placeholder='email' disabled={loading}/>
+                 rules={[{ required: true, message: 'email không được để trống' }]}>
+              <Input placeholder='email' type="email" disabled={loading}/>
             </Form.Item>
             </Col>
             <Col sm={6}>
-            <Form.Item label="Trạng thái" name="trangthai_id" validateTrigger={['onChange', 'onBlur']}
+            <Form.Item label="Trạng thái" name="trangthai_id" validateTrigger={['onChange',  'onBlur']}
                            rules={[{ required: true, message: 'trạng thái không được để trống' }]}>
                   <Select placeholder='Chọn trạng thái' disabled={loading} dropdownClassName='small' showSearch
                           filterOption={(input, option) => {

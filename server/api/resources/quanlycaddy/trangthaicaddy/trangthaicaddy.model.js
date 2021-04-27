@@ -9,7 +9,7 @@ const trangthaicaddySchema = new Schema({
     required: true,
   },
   mota: { type: String },
-  thutu: { type: Number },
+  thutu: { type: String },
 
   is_deleted: { type: Boolean, default: false, select: false },
 }, {

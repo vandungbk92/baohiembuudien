@@ -21,6 +21,24 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
+        sdt: Joi.string()
+        .label('số điện thoại')
+        .trim()
+        .required()
+        .error((errors) => {
+          return {
+            template: 'là bắt buộc nhập',
+          };
+        }),
+        diachi: Joi.string()
+        .label('địa chỉ')
+        .trim()
+        .required()
+        .error((errors) => {
+          return {
+            template: 'là bắt buộc nhập',
+          };
+        }),
         matkhau: Joi.string()
         .label('Mật khẩu')
         .trim()
@@ -39,20 +57,7 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
-        diachi: Joi.string()
-        .trim(),
-        sdt : Joi.number(),
-        email: Joi.string()
-        .trim(),
-        trangthai_id: Joi.string().label('Trạng thái')
-        .trim()
-        .required()
-        .error((errors) => {
-          return {
-  
-            template: 'là bắt buộc nhập',
-          };
-        }),
+      
         trinhdohocvan: Joi.string()
         .trim(),
         kinhnghiem: Joi.string()

@@ -61,9 +61,11 @@ function delById(id) {
 function updateById(id, data) {
   return axios.put(`${API.TRANG_THAI_CADDY_ID.format(id)}`, data).then(res => {
     if (res.data) {
+      console.log("e",res.data);
       return res.data;
     }
     else {
+      console.log("e",res.data);
       return null
     }
   })

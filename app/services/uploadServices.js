@@ -41,9 +41,9 @@ function uploadImages(images) {
     formData.append("image", file);
     // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
     return axios.post(path, formData, config).then(response => {
-     console.log("dadtaa",response);
+     
       const data = response.data;
-      console.log("đây",data);
+     
       if(data){
         dataRes = [...dataRes, data.image_id]
       }

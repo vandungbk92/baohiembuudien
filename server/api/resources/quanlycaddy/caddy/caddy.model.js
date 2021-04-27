@@ -25,21 +25,23 @@ const caddySchema = new Schema({
   diachi:
   {
     type: String,
+    require:true
  
   },
   sdt:
   {
-    type: Number,
+    type:String,
+    require:true
 
   },
   email:
   {
     type: String,
- 
+    require:true
   },
   trangthai_id: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+   
     ref: 'TrangThaiCaddy'
   },
   trinhdohocvan:
