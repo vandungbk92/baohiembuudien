@@ -226,4 +226,21 @@ export const URL = {
   KET_LUAN_THANH_TRA: '/ket-luan-thanh-tra',
   KET_LUAN_THANH_TRA_ID: '/ket-luan-thanh-tra/{0}',
   KET_LUAN_THANH_TRA_ADD: '/ket-luan-thanh-tra/add',
+
+  //Đánh giá dịch vụ
+  DANH_GIA_DICH_VU: '/danh-gia-dich-vu',
+  DANH_GIA_DICH_VU_ID: '/danh-gia-dich-vu/{0}',
+  DANH_GIA_DICH_VU_ADD: '/danh-gia-dich-vu/add',
+
+  DANH_GIA_DICH_VU_NV: '/danh-gia-dich-vu/thong-ke',
+
+  DANH_GIA_DICH_VU_SAN_GOLF: '/danh-gia-dich-vu-san-golf',
+  DANH_GIA_DICH_VU_SAN_GOLF_ID: '/danh-gia-dich-vu-san-golf/{0}',
+  DANH_GIA_DICH_VU_SAN_GOLF_ADD: '/danh-gia-dich-vu-san-golf/add',
+
+  DANH_GIA_DICH_VU_SANGOLF: '/danh-gia-dich-vu-san-golf/thong-ke',
+
+
+  //Danh mục chỉ số
+  DANHMUC_DANHGIA: '/dmdanhgia',
 }

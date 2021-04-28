@@ -71,6 +71,12 @@ import TrangThaiFnB from '@containers/Pages/FnB/TrangThaiFnB/Loadable';
 import DanhmucTintuc from '@containers/Pages/TinTucSanGolf/Danhmuctintuc/Loadable';
 import Tintuc from '@containers/Pages/TinTucSanGolf/Tintuc/Loadable';
 import TintucChitiet from '@containers/Pages/TinTucSanGolf/Tintuc/Chitiet/Loadable';
+
+import ChiTietDanhGia from '@containers/Pages/DanhGia/ChiTietDanhGia/Loadable';
+import ThongKeDanhGia from '@containers/Pages/DanhGia/ThongKeDanhGia/Loadable';
+import ChiTietDanhGiaDichVu from '@containers/Pages/DanhGia/ChiTietDanhGiaDichVu/Loadable';
+import ThongKeDanhGiaDichVu from '@containers/Pages/DanhGia/ThongKeDanhGiaDichVu/Loadable';
+import DanhmucDanhGia from '@containers/Pages/DanhGia/DanhMucDanhGia/Loadable';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -274,6 +280,18 @@ const constantsRoutes = [
         component: DanhMucHuongDan,
         role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
       },
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    menuName: 'Đánh giá',
+    icon: renderMenuIcon('fa-thumbs-up'),
+    children: [
+      { path: URL.DANH_GIA_DICH_VU, menuName: 'Chi tiết đánh giá', component: ChiTietDanhGia, exact: true, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.DANH_GIA_DICH_VU_NV, menuName: 'Thống kê đánh giá', component: ThongKeDanhGia, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.DANH_GIA_DICH_VU_SAN_GOLF, menuName: 'Chi tiết đánh giá dịch vụ', component: ChiTietDanhGiaDichVu, exact: true, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.DANH_GIA_DICH_VU_SANGOLF, menuName: 'Thống kê đánh giá dịch vụ', component: ThongKeDanhGiaDichVu, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      { path: URL.DANHMUC_DANHGIA, menuName: 'Danh mục đánh giá', component: DanhmucDanhGia, role: [CONSTANTS.ADMIN] },
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },

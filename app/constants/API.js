@@ -226,4 +226,39 @@ export const API = {
   THONGBAOCHUNG_QUERY: '/api/thong-bao-chung?{0}',
   THONGBAOCHUNG_ID: '/api/thong-bao-chung/{0}',
 
+  //đánh giá dịch vụ
+
+  DANH_GIA_DICH_VU: '/api/danh-gia-dich-vu',
+  DANH_GIA_DICH_VU_ID: '/api/danh-gia-dich-vu/{0}',
+  DANH_GIA_DICH_VU_QUERY: '/api/danh-gia-dich-vu?page={0}&limit={1}{2}',
+
+  DANH_GIA_DICH_VU_SAN_GOLF: '/api/danh-gia-dich-vu-san-golf',
+  DANH_GIA_DICH_VU_SAN_GOLF_ID: '/api/danh-gia-dich-vu-san-golf/{0}',
+  DANH_GIA_DICH_VU_SAN_GOLF_QUERY: '/api/danh-gia-dich-vu-san-golf?page={0}&limit={1}{2}',
+
+  DANH_GIA_DICH_VU_CADDY: '/api/danh-gia-dich-vu/',
+  DANH_GIA_DICH_VU_CADDY_QUERY: '/api/danh-gia-dich-vu/thong-ke?{0}',
+  DANH_GIA_DICH_VU_CADDY_ID: '/api/danh-gia-dich-vu/{0}',
+
+  DANH_GIA_DICH_VU_SANGOLF_QUERY: '/api/danh-gia-dich-vu-san-golf/thong-ke?{0}',
+
+
+  DANHMUC_DANHGIA: '/api/dmdanhgia',
+  DANHMUC_DANHGIA_QUERY: '/api/dmdanhgia?page={0}&limit={1}{2}',
+  DANHMUC_DANHGIA_ID: '/api/dmdanhgia/{0}',
+
+  DANHMUC_PHONG: '/api/dmphong',
+  DANHMUC_PHONG_QUERY: '/api/dmphong?page={0}&limit={1}{2}',
+  DANHMUC_PHONG_ID: '/api/dmphong/{0}',
+
+  DANHMUC_NHANVIEN: '/api/dmnhanvien',
+  DANHMUC_NHANVIEN_QUERY: '/api/dmnhanvien?page={0}&limit={1}{2}',
+  DANHMUC_NHANVIEN_ID: '/api/dmnhanvien/{0}',
+
+
+  //Danh mục dịch vụ
+  DANHMUC_DICHVU: '/api/dmdichvu',
+  DANHMUC_DICHVU_QUERY: '/api/dmdichvu?page={0}&limit={1}{2}',
+  DANHMUC_DICHVU_ID: '/api/dmdichvu/{0}',
+
 };

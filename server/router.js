@@ -58,6 +58,8 @@ import {cauhoithuonggapRouter} from './api/resources/cauhoithuonggap/cauhoithuon
 import {huongdanRouter} from './api/resources/huongdan/huongdan/huongdan.router';
 import {danhmuchuongdanRouter} from './api/resources/huongdan/danhmuchuongdan/danhmuchuongdan.router'
 import {thongbaochungRouter} from './api/resources/thongbaochung/thongbaochung.router';
+import {dmdanhgiaRouter} from './api/resources/dmdanhgia/dmdanhgia.router';
+import {danhgiadichvuRouter} from './api/resources/danhgiadichvu/danhgiadichvu.router';
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
@@ -98,8 +100,8 @@ router.use('/ket-luan-thanh-tra', ketluanthanhtraRouter);
 router.use('/thong-tin-du-an', thongtinduanRouter);
 router.use('/tin-tuc',tintucRouter);
 router.use('/danhmuc-tin-tuc',danhmuctintucRouter);
-
-
+router.use('/dmdanhgia',dmdanhgiaRouter);
+router.use('/danh-gia-dich-vu',danhgiadichvuRouter);
 
 router.use('/san-pham', sanphamRouter);
 router.use('/cong-nghe-san-xuat', congnghesanxuatRouter);
