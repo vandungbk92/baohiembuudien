@@ -8,7 +8,8 @@ const thongtinchungSchema = new Schema({
     logo: { type: String},
     diachi: {type: String},
     songayhenkham: {type: Number},
-    hinhanh: []
+    hinhanh: [],
+    danhgiadichvu: Number // 1: cho phép đánh giá tất cả dịch vụ, 2: là chỉ đánh giá dịch vụ cho phép.
   },
   {
     timestamps: {

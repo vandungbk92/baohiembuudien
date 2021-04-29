@@ -9,6 +9,7 @@ const userSchema = new Schema({
     role: { type: String, required: true },
     password: { type: String, required: true },
     gender: { type: String },
+    avatar: { type: String },
     phone: { type: String, required: true },
     is_deleted: { type: Boolean, default: false, select: false },
     active: { type: Boolean, default: true },
