@@ -51,6 +51,9 @@ export default function Basic() {
   };
 
   const onSaveProfile = debounce(values => {
+    console.log(values,'valuesvalues');
+    console.log(imageFile,'imageFile');
+
     const reqData = {
       _id: myInfoResponse._id,
       phone: values.phoneNumber,

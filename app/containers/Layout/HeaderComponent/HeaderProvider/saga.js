@@ -4,6 +4,7 @@ import { API } from '@api';
 import { GET_MY_INFO, UPDATE_MY_INFO } from './constants';
 import { myInfoLoaded, myInfoLoadingError, updateMyInfoSuccess, updateMyInfoError} from './actions';
 import { updateById, updateAvatarById } from '@services/userService';
+import { uploadImage, uploadImages } from '@services/uploadServices';
 
 export function* getInfo() {
   const response = yield call(() => axios.get(API.USER_INFO));
@@ -23,20 +24,38 @@ export function* updateInfo(action) {
   try {
     let avatarId;
     if (avatarFile) {
-      const formData = new FormData();
-      formData.append("file", avatarFile);
-      const responseAvatar = yield call(updateAvatarById, _id, formData);
-      if (responseAvatar) {
-        avatarId = responseAvatar.file_id;
-      }
+      const image_id = yield call(uploadImage, avatarFile);
+      if(image_id) userData.avatar = image_id
+      console.log(image_id, 'image_id', userData)
     }
-
     const responseData = yield call(updateById, _id, userData);
-    yield put(updateMyInfoSuccess({...responseData, ...avatarId && {avatar: avatarId}}));
+    yield put(updateMyInfoSuccess(responseData));
   } catch (e) {
     yield put(updateMyInfoError());
   }
 }
+
+
+// export function* updateInfo(action) {
+//   const { data } = action;
+//   const { _id, avatarFile, ...userData } = data;
+//   try {
+//     let avatarId;
+//     if (avatarFile) {
+//       const formData = new FormData();
+//       formData.append("file", avatarFile);
+//       const responseAvatar = yield call(updateAvatarById, _id, formData);
+//       if (responseAvatar) {
+//         avatarId = responseAvatar.file_id;
+//       }
+//     }
+//
+//     const responseData = yield call(updateById, _id, userData);
+//     yield put(updateMyInfoSuccess({...responseData, ...avatarId && {avatar: avatarId}}));
+//   } catch (e) {
+//     yield put(updateMyInfoError());
+//   }
+// }
 
 export default function* saga() {
   yield all([

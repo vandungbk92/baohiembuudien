@@ -21,7 +21,7 @@ userRouter
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), userController.findOne)
   .delete(passport.authenticate('jwt', { session: false }), userController.delete)
-  .put(passport.authenticate('jwt', { session: false }), userController.update);
+  .put(passport.authenticate('jwt', { session: false }), userController.updateInfo);
 
 export default userRouter;
 

@@ -20,7 +20,7 @@ import {
 
 import { URL } from '@url';
 import { CONSTANTS } from '@constants';
-
+import Profile from 'Pages/Profile';
 import HomePage from '../Pages/HomePage/Loadable';
 import DanhMucHuongDan from '@containers/Pages/HuongDan/DanhmucHuongDan/Loadable';
 import HuongDan from '@containers/Pages/HuongDan/HuongDan/Loadable';
@@ -64,6 +64,12 @@ function renderMenuIcon(icon) {
 }
 
 const constantsRoutes = [
+  {
+    path: URL.PROFILE,
+    breadcrumbName: 'Hồ sơ cá nhân',
+    component: Profile,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
   {
     path: URL.HOMEPAGE,
     menuName: 'Trang chủ',
