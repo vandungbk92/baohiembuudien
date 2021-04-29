@@ -12,8 +12,6 @@ import './Header.scss';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withLoaiPhieu } from '@reduxApp/LoaiPhieu/connect';
-import { withSetting } from '@reduxApp/Setting/connect';
 import { loadMyInfo } from './HeaderProvider/actions';
 import { makeGetMyInfo } from './HeaderProvider/selectors';
 
@@ -110,4 +108,4 @@ const withReducer = injectReducer({ key: 'HeaderComponent', reducer });
 const withSaga = injectSaga({ key: 'HeaderComponent', saga });
 
 
-export default withCookies(compose(withConnect, withLoaiPhieu, withSetting, withReducer, withSaga)(withRouter(HeaderComponent)));
+export default withCookies(compose(withConnect, withReducer, withSaga)(withRouter(HeaderComponent)));

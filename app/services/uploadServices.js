@@ -229,9 +229,34 @@ async function uploadFilePublic(fileUpload, requestId) {
   return axios.all(uploaders).then(axios.spread(function (res1, res2) {
     return dataRes
   }));*/
+};
+
+async function uploadImage(image) {
+  const config = {
+    headers: {'content-type': 'multipart/form-data'}
+  }
+  let path = '/api/files'
+  let image_id = ''
+  const formData = new FormData();
+  formData.append("image", image);
+  let dataRes = await axios.post(path, formData, config);
+  if(dataRes){
+    let data = dataRes.data;
+    image_id = data.image_id
+  }
+  return image_id
+  /*return axios.post(path, formData, config).then(response => {
+    const data = response.data;
+    if(data){
+      image_id = data.image_id
+    }
+  }).catch(error => {
+    console.log(error, 'upload k thành công')
+  });*/
 }
 
 export {
+  uploadImage,
   uploadFiles,
   uploadImages,
   deleteProcess,

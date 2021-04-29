@@ -134,3 +134,28 @@ export const generateDocument = (apiRes,loaiphieu_id) => {
     saveAs(out, "output.docx");
   });
 };
+
+export const convertUrlToListFile = (list) => {
+  let arr = list.map((data, idx) => {
+    return {
+      uid: idx,
+      name: data,
+      status: 'done',
+      url: API.FILES.format(data),
+    }
+  })
+  return arr
+};
+
+export const getfileDetail = (listFile) => {
+  let originFileNm = []
+  let fileUpload = []
+  listFile.filter(data => {
+    if(data.url){
+      originFileNm = [...originFileNm, data.name]
+    }else{
+      fileUpload = [...fileUpload, data.originFileObj]
+    }
+  })
+  return [originFileNm, fileUpload]
+}

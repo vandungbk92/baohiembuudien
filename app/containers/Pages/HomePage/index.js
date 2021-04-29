@@ -3,9 +3,6 @@ import moment from 'moment';
 import Box from '@containers/Box';
 import { Pie, Column } from '@ant-design/charts';
 import { Col, Row, Spin, Typography, Radio, Space, DatePicker, Tooltip, Button } from 'antd';
-import { makeGetLoaiPhieu } from '@reduxApp/LoaiPhieu/selectors';
-
-import { getThongKe } from '@services/danhmucloaiphieuService';
 import { getDataSoure } from './homepage.utils';
 import produce from 'immer';
 import { createStructuredSelector } from 'reselect';
@@ -209,7 +206,6 @@ class HomePage extends Component {
 
 const mapStateToProps = createStructuredSelector({
   loading: makeGetLoading(),
-  loaiphieu: makeGetLoaiPhieu(),
 });
 const withConnect = connect(mapStateToProps);
 

@@ -22,37 +22,12 @@ import { URL } from '@url';
 import { CONSTANTS } from '@constants';
 
 import HomePage from '../Pages/HomePage/Loadable';
-import Profile from '../Pages/Profile/Loadable';
-import Setting from '../Pages/Setting/Loadable';
 import DanhMucHuongDan from '@containers/Pages/HuongDan/DanhmucHuongDan/Loadable';
 import HuongDan from '@containers/Pages/HuongDan/HuongDan/Loadable';
 import ChiTietHuongDan from '@containers/Pages/HuongDan/HuongDan/Chitiet/Loadable';
 import NotFoundPage from '../Pages/NotFoundPage/Loadable';
 import CauHoiThuongGap from '@containers/Pages/CauHoiThuongGap/Loadable';
-import TinhThanh from '@containers/Pages/DanhMuc/TinhThanh/Loadable';
-import QuanHuyen from '@containers/Pages/DanhMuc/QuanHuyen/Loadable';
-import PhuongXa from '@containers/Pages/DanhMuc/PhuongXa/Loadable';
 import TaiKhoan from '@containers/Pages/TaiKhoan/Loadable';
-import DonViDuocDieuTra from '@containers/Pages/DonViDuocDieuTra/Loadable';
-import DonViDuocDieuTraChiTiet from '@containers/Pages/DonViDuocDieuTra/ChiTiet/Loadable';
-import DanhMucLoaiPhieu from '@containers/Pages/DanhMucLoaiPhieu/Loadable';
-import DanhMucLoaiPhieuChiTiet from '@containers/Pages/DanhMucLoaiPhieu/ChiTiet/Loadable';
-import LoaiHinhKinhTe from '@containers/Pages/DanhMucDuLieu/LoaiHinhKinhTeBenhVien/Loadable';
-import LoaiHinhThucHien from '@containers/Pages/DanhMucDuLieu/LoaiHinhThucHienXuLy/Loadable';
-import XepHangCSYT from '@containers/Pages/DanhMucDuLieu/XepHangCSYT/Loadable';
-import DMDonViDuocDieuTra from '@containers/Pages/DanhMucDuLieu/DanhMucDonViDuocDieuTra/Loadable';
-import HoatDongDonVi from '@containers/Pages/DanhMucDuLieu/HoatDongDonVi/Loadable';
-import SanPham from '@containers/Pages/DanhMuc/SanPham/Loadable';
-import CongNgheSanXuat from '@containers/Pages/DanhMuc/CongNgheSanXuat/Loadable';
-import DonVi from '@containers/Pages/DanhMuc/DonVi/Loadable';
-import HoaChatSuDung from '@containers/Pages/DanhMuc/HoaChatSuDung/Loadable';
-import DMNguyenVatLieu from '@containers/Pages/DanhMuc/DMNguyenVatLieu/Loadable';
-import DanhSachPhieu from '@containers/Pages/PhieuDieuTra/DanhSachPhieu/Loadable';
-import PhieuDieuTraChiTiet from '@containers/Pages/PhieuDieuTra/ChiTiet/Loadable';
-import NhienLieuTieuThu from '@containers/Pages/DanhMuc/NhienLieuTieuThu/Loadable';
-import LoaiHinhChanNuoi from '@containers/Pages/DanhMuc/QuyMoBenhVien/Loadable';
-import QuyMoBenhVien from '@containers/Pages/DanhMuc/LoaiHinhChanNuoi/Loadable';
-import LoaiHoatDong from '@containers/Pages/DanhMuc/LoaiHoatDong/Loadable';
 import DonViTinh from '@containers/Pages/cuahangdungcu/DonViTinh/Loadable';
 import ProShop from '@containers/Pages/cuahangdungcu/ProShop/Loadable';
 import TrangThai from '@containers/Pages/cuahangdungcu/TrangThai/Loadable';
@@ -71,12 +46,15 @@ import TrangThaiFnB from '@containers/Pages/FnB/TrangThaiFnB/Loadable';
 import DanhmucTintuc from '@containers/Pages/TinTucSanGolf/Danhmuctintuc/Loadable';
 import Tintuc from '@containers/Pages/TinTucSanGolf/Tintuc/Loadable';
 import TintucChitiet from '@containers/Pages/TinTucSanGolf/Tintuc/Chitiet/Loadable';
-
+import TinhThanh from '@containers/Pages/DanhMuc/TinhThanh/Loadable';
+import QuanHuyen from '@containers/Pages/DanhMuc/QuanHuyen/Loadable';
+import PhuongXa from '@containers/Pages/DanhMuc/PhuongXa/Loadable';
 import ChiTietDanhGia from '@containers/Pages/DanhGia/ChiTietDanhGia/Loadable';
 import ThongKeDanhGia from '@containers/Pages/DanhGia/ThongKeDanhGia/Loadable';
 import ChiTietDanhGiaDichVu from '@containers/Pages/DanhGia/ChiTietDanhGiaDichVu/Loadable';
 import ThongKeDanhGiaDichVu from '@containers/Pages/DanhGia/ThongKeDanhGiaDichVu/Loadable';
 import DanhmucDanhGia from '@containers/Pages/DanhGia/DanhMucDanhGia/Loadable';
+import ThongTinChung from '@containers/Pages/ThongTinChung/Loadable';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -319,93 +297,6 @@ const constantsRoutes = [
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-
-  // Đơn vị được điều tra
-
-
-  // {
-  //   path: URL.CATEGORY,
-  //   breadcrumbName: 'Danh mục chung',
-  //   menuName: 'Danh mục chung',
-  //   icon: <InsertRowLeftOutlined/>,
-  //   children: [
-  //     { path: URL.SAN_PHAM, menuName: 'Sản phẩm', component: SanPham, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  //     {
-  //       path: URL.CONG_NGHE_SAN_XUAT,
-  //       menuName: 'Công nghệ sản xuất',
-  //       component: CongNgheSanXuat,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     {
-  //       path: URL.DM_NGUYEN_VAT_LIEU,
-  //       menuName: 'Nguyên, vật liệu',
-  //       component: DMNguyenVatLieu,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     { path: URL.DON_VI, menuName: 'Đơn vị', component: DonVi, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  //     { path: URL.HOA_CHAT_SU_DUNG, menuName: 'Hóa chất sử dụng', component: HoaChatSuDung, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  //     // {
-  //     //   path: URL.LOAI_HINH_CHAN_NUOI,
-  //     //   menuName: 'Loại hình chăn nuôi',
-  //     //   component: LoaiHinhChanNuoi,
-  //     //   role: [CONSTANTS.ADMIN],
-  //     // },
-  //     { path: URL.LOAI_HOAT_DONG, menuName: 'Loại hoạt động', component: LoaiHoatDong, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-  //     // { path: URL.QUY_MO_BENH_VIEN, menuName: 'Quy mô bệnh viện', component: QuyMoBenhVien, role: [CONSTANTS.ADMIN] },
-  //     {
-  //       path: URL.NHIEN_LIEU_TIEU_THU,
-  //       menuName: 'Nhiên liệu tiêu thụ',
-  //       component: NhienLieuTieuThu,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     { path: URL.TINH_THANH, menuName: 'Tỉnh thành', component: TinhThanh, role: [CONSTANTS.ADMIN] },
-  //     { path: URL.QUAN_HUYEN, menuName: 'Quận huyện', component: QuanHuyen, role: [CONSTANTS.ADMIN] },
-  //     { path: URL.PHUONG_XA, menuName: 'Phường xã', component: PhuongXa, role: [CONSTANTS.ADMIN] },
-  //   ],
-  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  // },
-
-
-  // {
-  //   path: URL.CATEGORY,
-  //   breadcrumbName: 'Danh mục dữ liệu',
-  //   menuName: 'Danh mục dữ liệu',
-  //   icon: <InsertRowLeftOutlined/>,
-  //   children: [
-  //     {
-  //       path: URL.HOAT_DONG_DON_VI,
-  //       menuName: 'Hoạt động của đơn vị được điều tra',
-  //       component: HoatDongDonVi,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     {
-  //       path: URL.DM_DON_VI_DUOC_DIEU_TRA,
-  //       menuName: 'Danh mục đơn vị được điều tra',
-  //       component: DMDonViDuocDieuTra,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     {
-  //       path: URL.LOAI_HINH_THUC_HIEN,
-  //       menuName: 'Loại hình thực hiện xử lý',
-  //       component: LoaiHinhThucHien,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     {
-  //       path: URL.LOAI_HINH_KINH_TE,
-  //       menuName: 'Loại hình kinh tế của bệnh viện',
-  //       component: LoaiHinhKinhTe,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //     {
-  //       path: URL.XEP_HANG_CSYT,
-  //       menuName: 'Xếp hạng cơ sở y tế',
-  //       component: XepHangCSYT,
-  //       role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  //     },
-  //   ],
-  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  // },
-
   {
     path: URL.TAI_KHOAN,
     menuName: 'Quản lý tài khoản',
@@ -416,9 +307,9 @@ const constantsRoutes = [
   },
 
   {
-    path: URL.SETTING,
-    menuName: 'Cấu hình',
-    component: Setting,
+    path: URL.THONGTINCHUNG,
+    menuName: 'Thông tin chung',
+    component: ThongTinChung,
     icon: renderMenuIcon('fa-user-md'),
     exact: true,
     role: [CONSTANTS.ADMIN],
