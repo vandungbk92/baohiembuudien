@@ -18,6 +18,7 @@ import { withPhong } from "@reduxApp/PhongBan/connect";
 import { withNhanVien } from "@reduxApp/NhanVien/connect";
 import { withDmDanhGia } from "@reduxApp/DmDanhGia/connect";
 import { getAll as getAllDichVu } from "@services/danhmucdichvu/dichvuService";
+
 class ChiTietDanhGia extends React.Component {
   columns = [
     {
@@ -182,7 +183,7 @@ class ChiTietDanhGia extends React.Component {
     return (
       <Card size="small" md="24" bordered
           title={<span><UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách đánh giá của khách hàng</span>}>
-        {/* <Search onFilterChange={this.handleRefresh} dataSearch={dataSearch} /> */}
+        <Search onFilterChange={this.handleRefresh} dataSearch={dataSearch} />
         {dataSearch.map((item)=>{
           <div>
             {item}

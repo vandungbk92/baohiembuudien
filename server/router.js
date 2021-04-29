@@ -25,7 +25,7 @@ import {dmdanhgiaRouter} from './api/resources/dmdanhgia/dmdanhgia.router';
 import {danhgiadichvuRouter} from './api/resources/danhgiadichvu/danhgiadichvu.router';
 import {thongtinchungRouter} from './api/resources/thongtinchung/thongtinchung.router';
 import {thongtinungdungRouter} from './api/resources/thongtinungdung/thongtinungdung.router';
-
+import {dmdichvuRouter} from './api/resources/danhmuc/dmdichvu/dmdichvu.router'
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
 router.use('/voucher', voucherRouter);
@@ -52,6 +52,6 @@ router.use('/thong-bao-chung',thongbaochungRouter)
 router.use('/thong-tin-chung', thongtinchungRouter);
 router.use('/thong-tin-ung-dung', thongtinungdungRouter);
 router.use('/don-vi-tinh',donvitinhRouter );
-
+router.use('/dmdichvu',dmdichvuRouter);
 
 module.exports = router;
