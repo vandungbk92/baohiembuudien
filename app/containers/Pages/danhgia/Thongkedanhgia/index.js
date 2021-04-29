@@ -58,6 +58,7 @@ class ThongKeDanhGia extends React.Component {
   };
 
   xemdanhgianhanvien(value){
+    console.log('Capnhat');
     const search = queryString.parse(this.props.location.search);
     let query = `?manv=${value}`
     if(search.from_date) query += '&from_date=' + search.from_date
