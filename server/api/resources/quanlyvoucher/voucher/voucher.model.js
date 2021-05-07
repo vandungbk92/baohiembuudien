@@ -40,13 +40,19 @@ const voucherSchema = new Schema({
 
   soluongvoucher:  {
     type: Number,
+    required:true,
   },
-
+ 
   trangthai_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'TrangThaiVoucher'
   },
+  solo_id:[{
+    type:mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref:'Solo'
+  }],
 
   is_deleted: {type: Boolean, default: false}
 }, {

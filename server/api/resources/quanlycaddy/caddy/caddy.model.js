@@ -49,6 +49,7 @@ const caddySchema = new Schema({
     type: String,
     required: true
   },
+  avatar: { type: String },
   kinhnghiem:
   {
     type: String,

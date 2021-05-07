@@ -88,7 +88,7 @@ class TrangThaiCaddyhModal extends Component {
         </Form.Item>
         <Form.Item label="Thứ tự" name="thutu" hasFeedback labelCol={{ span: 8 }} validateTrigger={['onChange', 'onBlur']}
                    rules={[{ required: false, whitespace: true }]}>
-          <Input placeholder='Thứ tự' disabled={loading}/>
+          <Input placeholder='Thứ tự' disabled={loading} type='number'/>
         </Form.Item>
       </Form>
     </Modal>;

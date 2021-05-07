@@ -14,16 +14,16 @@ import {
   Select,
   Radio,
   Checkbox,
-  Upload
+  Upload,Table
 } from "antd";
 import { UploadOutlined, SaveOutlined, BellOutlined, UserOutlined } from "@ant-design/icons";
-import { add, getById, updateById } from "@services/quanlycaddy/caddyService";
+import { add, getById, updateById } from "@services/job/jobService";
 import { CONSTANTS } from "@constants";
 import { uploadImages } from "@services/uploadServices";
-import { getAll as getAllTT } from "@services/quanlycaddy/trangthaicaddyService";
+import { getAll as getAllTT } from "@services/job/trangThaiJobService";
 import { createStructuredSelector } from "reselect";
 import { makeGetLoading } from "@containers/App/AppProvider/selectors";
-import { makeGetMyInfo } from "../../../../Layout/HeaderComponent/HeaderProvider/selectors";
+import { makeGetMyInfo } from "../../../Layout/HeaderComponent/HeaderProvider/selectors";
 import { connect } from "react-redux";
 import axios from "axios";
 import { URL } from "@url";
@@ -33,7 +33,7 @@ import moment from "moment";
 import { API } from '@api';
 const layoutCol = { xl: 8, md: 24, lg: 24, xs: 24, sm: 24 };
 const { TabPane } = Tabs;
-class CaddyChiTiet extends Component {
+class JobChiTiet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -366,4 +366,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(CaddyChiTiet);
+export default withConnect(JobChiTiet);

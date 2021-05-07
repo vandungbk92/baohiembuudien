@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 export default {
   validateBody(body, method) {
-    
     let objSchema = {
       id: Joi.string()
         .label('ID')
@@ -13,8 +12,8 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
-        tenvoucher: Joi.string()
-        .label('tên voucher')
+        tencv: Joi.string()
+        .label('Tên công việc')
         .trim()
         .required()
         .error((errors) => {
@@ -22,22 +21,35 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
-      tgbatdau: Joi.date().iso(),
-      tgketthuc : Joi.date().iso().min(Joi.ref('tgbatdau')).required(()=>{
-        return {
-          template:'ngày kết thúc phải lớn hơn ngày bắt đầu'
-        }
-      })
+        loaicv: Joi.string()
+        .label('Loại công việc')
+        .trim()
+        .required()
+        .error((errors) => {
+          return {
+            template: 'là bắt buộc nhập',
+          };
+        }),
+        tgbatdau: Joi.string()
+        .label('Thời gian bắt đầu')
+        .trim()
+        .required()
+        .error((errors) => {
+          return {
+            template: 'là bắt buộc nhập',
+          };
+        }),
+        tgketthuc: Joi.string()
+        .label('Thời gian kết thúc')
+        .trim()
+        .required()
+        .error((errors) => {
+          return {
+            template: 'là bắt buộc nhập',
+          };
+        }),
         
-    ,
-
-      mota: Joi.string().trim(),
-      muchoivien: Joi.string().trim(),
-      diemtichluy: Joi.number(),
-      soluongvoucher: Joi.number(),
-      tgbatdau: Joi.date().label('Thời gian bắt đầu'),
-      tgkethuc: Joi.date().label('Thời gian kết thúc'),
-      trangthai: Joi.string().trim(),
+      
     };
 
     let newSchema = {};

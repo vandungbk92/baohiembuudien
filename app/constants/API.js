@@ -52,6 +52,15 @@ export const API = {
   TRANG_THAI_VOUCHER_QUERY: '/api/trang-thai-voucher?page={0}&limit={1}{2}',
   TRANG_THAI_VOUCHER_ID: '/api/trang-thai-voucher/{0}',
 
+
+  SOLO: '/api/solo',
+  SOLO_QUERY: '/api/solo?page={0}&limit={1}{2}',
+  SOLO_ID: '/api/solo/{0}',
+
+  TRANG_THAI_SOLO: '/api/trang-thai-solo',
+  TRANG_THAI_SOLO_QUERY: '/api/trang-thai-solo?page={0}&limit={1}{2}',
+  TRANG_THAI_SOLO_ID: '/api/trang-thai-solo/{0}',
+
   FNB: '/api/fnb',
   FNB_QUERY: '/api/fnb?page={0}&limit={1}{2}',
   FNB_ID: '/api/fnb/{0}',
@@ -67,6 +76,15 @@ export const API = {
   TRANG_THAI_CADDY: '/api/trang-thai-caddy',
   TRANG_THAI_CADDY_QUERY: '/api/trang-thai-caddy?page={0}&limit={1}{2}',
   TRANG_THAI_CADDY_ID: '/api/trang-thai-caddy/{0}',
+
+
+  JOB: '/api/job',
+  JOB_QUERY: '/api/job?page={0}&limit={1}{2}',
+  JOB_ID: '/api/job/{0}',
+
+  TRANG_THAI_JOB: '/api/trang-thai-job',
+  TRANG_THAI_JOB_QUERY: '/api/trang-thai-job?page={0}&limit={1}{2}',
+  TRANG_THAI_JOB_ID: '/api/trang-thai-job/{0}',
 
   PROSHOP: '/api/proshop',
   PROSHOP_QUERY: '/api/proshop?page={0}&limit={1}{2}',

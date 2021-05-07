@@ -53,6 +53,15 @@ export const URL = {
   VOUCHER_ID: '/voucher/{0}',
   VOUCHER_ADD: '/voucher/add',
 
+  
+  TRANG_THAI_SOLO: '/trang-thai-solo',
+  TRANG_THAI_SOLO_ID: '/trang-thai-solo/{0}',
+  TRANG_THAI_SOLO_ADD: '/trang-thai-solo/add',
+
+  SOLO: '/solo',
+  SOLO_ID: '/solo/{0}',
+  SOLO_ADD: '/solo/add',
+
   TRANG_THAI_CADDY: '/trang-thai-caddy',
   TRANG_THAI_CADDY_ID: '/trang-thai-caddy/{0}',
   TRANG_THAI_CADDY_ADD: '/trang-thai-caddy/add',
@@ -60,6 +69,14 @@ export const URL = {
   CADDY: '/caddy',
   CADDY_ID: '/caddy/{0}',
   CADDY_ADD: '/caddy/add',
+
+  TRANG_THAI_JOB: '/trang-thai-job',
+  TRANG_THAI_JOB_ID: '/trang-thai-job/{0}',
+  TRANG_THAI_JOB_ADD: '/trang-thai-job/add',
+
+  JOB: '/job',
+  JOB_ID: '/job/{0}',
+  JOB_ADD: '/job/add',
 
   TRANG_THAI_FNB: '/trang-thai-fnb',
   TRANG_THAI_FNB_ID: '/trang-thai-fnb/{0}',

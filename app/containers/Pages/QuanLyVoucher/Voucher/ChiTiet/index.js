@@ -16,6 +16,7 @@ import { add, getById, updateById } from '@services/quanlyvoucher/voucherService
 import {  CONSTANTS } from '@constants';
 
 import {getAll as getAllTT} from '@services/quanlyvoucher/trangthaivoucherService'
+import {getAll as getAllSOLO} from '@services/quanlysologolf/soloService'
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
 import { makeGetMyInfo } from '../../../../Layout/HeaderComponent/HeaderProvider/selectors';
@@ -36,6 +37,7 @@ class VoucherChiTiet extends Component {
     this.state = {
         
         dsTrangThai: [],
+        dsSolo:[],
 
         _id: this.props.match.params.id,
 
@@ -46,25 +48,28 @@ class VoucherChiTiet extends Component {
 
   async componentDidMount() {
     let apiRequest = [
-      
-        getAllTT(1, 0)
+        getAllTT(1, 0),
+        getAllSOLO(1,0),
+
       ];
 
-      let apiResponse = await axios.all(apiRequest).then(axios.spread(function( dsTrangThai) {
+      let apiResponse = await axios.all(apiRequest).then(axios.spread(function( dsTrangThai,dsSolo) {
         return {
             dsTrangThai: dsTrangThai,
+            dsSolo:dsSolo,
           
         };
       }));
 
       let dsTrangThai = apiResponse.dsTrangThai ? apiResponse.dsTrangThai.docs : this.state.dsTrangThai;
-   
+      let dsSolo = apiResponse.dsSolo ? apiResponse.dsSolo.docs : this.state.dsSolo;
           
       this.setState({ dsTrangThai});
+      this.setState({ dsSolo});
       if(this.state._id){
        
         let dataRes = await getById(this.state._id)
-        console.log(dataRes);
+        console.log('qư',dataRes);
         dataRes.tgbatdau = moment(dataRes.tgbatdau);
         dataRes.tgketthuc = moment(dataRes.tgketthuc);
         this.formRef.current.setFieldsValue({
@@ -76,10 +81,11 @@ class VoucherChiTiet extends Component {
           tgbatdau: dataRes.tgbatdau, 
           tgketthuc: dataRes.tgketthuc,
           soluongvoucher: dataRes.soluongvoucher, 
-          trangthai_id : dataRes.trangthai_id.tentrangthai,
+          trangthai_id : dataRes.trangthai_id._id,
+          solo_id:dataRes.solo_id,
         })
      
-        // set form
+        
       }
   }
 
@@ -118,8 +124,8 @@ class VoucherChiTiet extends Component {
   render() {
     
     const { loading} = this.props;
-    const { _id,  dsTrangThai, tgbatdau, tgketthuc } = this.state;
-    console.log(dsTrangThai,"tt");
+    const { _id,  dsTrangThai, tgbatdau, tgketthuc,dsSolo } = this.state;
+    console.log(this.state,"tt");
     
     
     return <Form ref={this.formRef} layout='vertical' size='small' autoComplete='off' onFinish={this.onFinish} onValuesChange={this.onFieldsChange}>
@@ -137,6 +143,12 @@ class VoucherChiTiet extends Component {
             <Form.Item label={<b>Tên voucher</b>} name="tenvoucher" validateTrigger={['onChange', 'onBlur']}
                        rules={[{ required: true, message: 'tên voucher không được để trống' }]}>
               <Input placeholder='Tên voucher' disabled={loading}/>
+            </Form.Item>
+            </Col>
+            <Col sm={6}>
+            <Form.Item label={<b>Số lượng voucher</b>} name="soluongvoucher" validateTrigger={['onChange', 'onBlur']}
+                       rules={[{ required: true, message: 'số lượng voucher không được để trống' }]}>
+              <Input placeholder='số lượng voucher' min={1} type='number' disabled={loading}/>
             </Form.Item>
             </Col>
             <Col sm={6}>
@@ -160,8 +172,6 @@ class VoucherChiTiet extends Component {
                   </Select>
                 </Form.Item>
 
-
-
             </Col>
             <Col sm={6}>
             <Form.Item label={<b>Mức hội viên yêu cầu</b>} name="muchoivien" validateTrigger={['onChange', 'onBlur']}
@@ -172,7 +182,7 @@ class VoucherChiTiet extends Component {
             <Col sm={6}>
             <Form.Item label={<b>Điểm tích lũy yêu cầu</b>} name="diemtichluy" validateTrigger={['onChange', 'onBlur']}
                        >
-              <Input placeholder='Điểm tích lũy yêu cầu' disabled={loading}/>
+              <Input placeholder='Điểm tích lũy yêu cầu' disabled={loading} type='number' min={0}/>
             </Form.Item>
             </Col>
             <Col sm={6}>        
@@ -187,6 +197,22 @@ class VoucherChiTiet extends Component {
                 <DatePicker showTime format="DD-MM-YYYY" disabled={loading} className="w-full"/>
               </Form.Item>
               </Col>
+              <Col sm={6}>
+              <Form.Item label="loại sân golf" name="solo_id" validateTrigger={['onChange', 'onBlur']}
+                           rules={[{ required: true, message: 'số lỗ không được để trống' }]}>
+                  <Select mode="multiple" placeholder='Chọn số lỗ' disabled={loading} dropdownClassName='small' showSearch
+                          filterOption={(input, option) => {
+                            return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+                          }}>
+                    {dsSolo.map(data => {
+                      return <Select.Option key={data._id} value={data._id}>
+                        {data.solo}
+                      </Select.Option>;
+                    })}
+                  </Select>
+                </Form.Item>
+
+            </Col> 
         </Row>       
       </Box>
     </Form>;

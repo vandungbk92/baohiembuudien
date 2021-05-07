@@ -1,4 +1,5 @@
-const DEFAULT_DB_URI = "mongodb://sysAdmin:thinklabs36@thinklabs.ddns.net:28018/tgolf?connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.databases=admin";
+// const DEFAULT_DB_URI = "mongodb://sysAdmin:thinklabs36@thinklabs.ddns.net:28018/tgolf?connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.databases=admin";
+const DEFAULT_DB_URI = "mongodb://localhost:27017/my-data"
 const config = {
   production: {
     secret: 'AIBOLIT',
@@ -33,7 +34,8 @@ const config = {
   },
   development: {
     secret: 'AIBOLIT',
-    MONGO_URI: 'mongodb://sysAdmin:thinklabs36@thinklabs.ddns.net:28018/tgolf?connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.databases=admin',
+    // MONGO_URI: 'mongodb://sysAdmin:thinklabs36@thinklabs.ddns.net:28018/tgolf?connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.databases=admin',
+    MONGO_URI:"mongodb://localhost:27017/my-data",
     port: 27017,
     "cos": {
       "credentials": {

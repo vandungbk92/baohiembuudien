@@ -3,7 +3,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
 
-const trangthaivoucherSchema = new Schema({
+const trangthaijobSchema = new Schema({
   tentrangthai: {
     type: String,
     required: true,
@@ -18,6 +18,6 @@ const trangthaivoucherSchema = new Schema({
     updatedAt: 'updated_at',
   }
 });
-trangthaivoucherSchema.plugin(mongoosePaginate);
+trangthaijobSchema.plugin(mongoosePaginate);
 
-export default mongoose.model('TrangThaiVoucher', trangthaivoucherSchema);
+export default mongoose.model('TrangThaiJob', trangthaijobSchema);

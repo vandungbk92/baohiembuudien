@@ -2,10 +2,9 @@ import Joi from 'joi';
 
 export default {
   validateBody(body, method) {
-    
     let objSchema = {
-      id: Joi.string()
-        .label('ID')
+      tentrangthai: Joi.string()
+        .label('Tên trạng thái')
         .trim()
         .required()
         .error((errors) => {
@@ -13,31 +12,7 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
-        tenvoucher: Joi.string()
-        .label('tên voucher')
-        .trim()
-        .required()
-        .error((errors) => {
-          return {
-            template: 'là bắt buộc nhập',
-          };
-        }),
-      tgbatdau: Joi.date().iso(),
-      tgketthuc : Joi.date().iso().min(Joi.ref('tgbatdau')).required(()=>{
-        return {
-          template:'ngày kết thúc phải lớn hơn ngày bắt đầu'
-        }
-      })
-        
-    ,
-
       mota: Joi.string().trim(),
-      muchoivien: Joi.string().trim(),
-      diemtichluy: Joi.number(),
-      soluongvoucher: Joi.number(),
-      tgbatdau: Joi.date().label('Thời gian bắt đầu'),
-      tgkethuc: Joi.date().label('Thời gian kết thúc'),
-      trangthai: Joi.string().trim(),
     };
 
     let newSchema = {};

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Input, Button, Form, message, Modal, InputNumber} from "antd";
 import { CloseOutlined, SaveOutlined } from '@ant-design/icons';
-import { add, updateById } from '@services/quanlyvoucher/trangthaivoucherService';
+import { add, updateById } from '@services/quanlysologolf/trangthaisologolfService';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
 import { connect } from 'react-redux';
 
 
-class TrangThaiVoucherhModal extends Component {
+class TrangThaiSoLoModal extends Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class TrangThaiVoucherhModal extends Component {
       if(apiResponse){
         if(this.props.getDataAfterSave) this.props.getDataAfterSave(apiResponse, 'UPDATE')
         this.setState({ showModal: false });
-        // this.props.dispatch(fetchTrangThaiVoucher());
+        // this.props.dispatch(fetchTrangThaiSolo());
         message.success('Chỉnh sửa trạng thái');
       }
     } else {
@@ -59,7 +59,7 @@ class TrangThaiVoucherhModal extends Component {
       if (apiResponse) {
         if(this.props.getDataAfterSave) this.props.getDataAfterSave(apiResponse, 'ADD')
         this.setState({ showModal: false });
-        // this.props.dispatch(fetchTrangThaiVoucher());
+        // this.props.dispatch(fetchTrangThaiSolo());
         message.success('Thêm mới trạng thái');
       }
     }
@@ -87,8 +87,8 @@ class TrangThaiVoucherhModal extends Component {
           <Input placeholder='Mô tả' disabled={loading}/>
         </Form.Item>
         <Form.Item label="Thứ tự" name="thutu" hasFeedback labelCol={{ span: 8 }} validateTrigger={['onChange', 'onBlur']}
-                   rules={[{ required: false, whitespace: true }]}>
-          <Input placeholder='Thứ tự' disabled={loading} type='number' min={0}/>
+                  rules={[{ required: false, whitespace: true }]} >
+          <Input placeholder='Thứ tự' disabled={loading} type='number'/>
         </Form.Item>
       </Form>
     </Modal>;
@@ -101,4 +101,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(TrangThaiVoucherhModal);
+export default withConnect(TrangThaiSoLoModal);

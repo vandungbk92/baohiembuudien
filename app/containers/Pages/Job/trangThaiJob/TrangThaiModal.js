@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Button, Form, message, Modal, InputNumber} from "antd";
 import { CloseOutlined, SaveOutlined } from '@ant-design/icons';
-import { add, updateById } from '@services/quanlyvoucher/trangthaivoucherService';
+import { add, updateById } from '@services/job/trangThaiJobService';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
 import { connect } from 'react-redux';

@@ -40,6 +40,12 @@ import TrangThaiCaddy from '@containers/Pages/QuanLyCaddy/TrangThaiCaddy/Loadabl
 import Voucher from '@containers/Pages/QuanLyVoucher/Voucher/Loadable';
 import VoucherChiTiet from '@containers/Pages/QuanLyVoucher/Voucher/ChiTiet/Loadable';
 import TrangThaiVoucher from '@containers/Pages/QuanLyVoucher/TrangThaiVoucher/Loadable';
+import TrangThaiJob from '@containers/Pages/Job/trangThaiJob/Loadable';
+import Job from '@containers/Pages/Job/Loadable';
+import JobChiTiet from '@containers/Pages/Job/chitiet/Loadable';
+import Solo from '@containers/Pages/SoloGolf/solo/Loadable';
+import SoloChiTiet from '@containers/Pages/SoloGolf/solo/chitiet/Loadable';
+import TrangThaiSolo from '@containers/Pages/SoloGolf/trangthai/Loadable';
 import FnB from '@containers/Pages/FnB/FnB/Loadable';
 import FnBChiTiet from '@containers/Pages/FnB/FnB/ChiTiet/Loadable';
 import TrangThaiFnB from '@containers/Pages/FnB/TrangThaiFnB/Loadable';
@@ -78,11 +84,43 @@ const constantsRoutes = [
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+  //quản lý công việc
+
+  {
+    path: URL.CATEGORY,
+    breadcrumbName: 'Quản lý Công việc',
+    menuName: 'Quản lý Công việc',
+    icon: <InsertRowLeftOutlined/>,
+    children: [
+      { path: URL.JOB, menuName: 'Công việc', exact: true, component: Job, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.TRANG_THAI_JOB, menuName: 'Trạng thái Công việc', exact: true, component: TrangThaiJob, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/job/add',
+    component: JobChiTiet,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: '/caddy/:id',
+    component: CaddyChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  //kết thúc
   
   {
     path: URL.CATEGORY,
     breadcrumbName: 'Quản lý Caddy',
-    menuName: 'Quản lý caddy',
+    menuName: 'Quản lý Caddy',
     icon: <InsertRowLeftOutlined/>,
     children: [
       { path: URL.CADDY, menuName: 'Caddy', exact: true, component: Caddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
@@ -192,6 +230,41 @@ const constantsRoutes = [
   {
     path: '/voucher/:id',
     component: VoucherChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+
+
+  //SỐ LỖ GOLF
+
+  
+  {
+    path: URL.CATEGORY,
+    breadcrumbName: 'Quản lý Số lỗ golf',
+    menuName: 'Quản lý Số lỗ',
+    icon: <InsertRowLeftOutlined/>,
+    children: [
+      { path: URL.SOLO, menuName: 'Số lỗ golf', exact: true, component: Solo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.TRANG_THAI_SOLO, menuName: 'Trạng thái Số lỗ', exact: true, component: TrangThaiSolo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+  {
+    path: '/solo/add',
+    component: SoloChiTiet,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: '/solo/:id',
+    component: SoloChiTiet,
     // breadcrumbName: 'Thêm dữ liệu',
     icon: <WeiboCircleOutlined/>,
     exact: true,
