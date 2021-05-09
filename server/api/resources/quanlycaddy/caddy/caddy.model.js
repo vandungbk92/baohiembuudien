@@ -3,10 +3,7 @@ import mongoosePaginate from 'mongoose-paginate';
 
 const {Schema} = mongoose;
 const caddySchema = new Schema({
-  id: {
-    type: String,
-    required: true
-  },
+
   taikhoan:
   {
     type: String,
@@ -47,13 +44,13 @@ const caddySchema = new Schema({
   trinhdohocvan:
   {
     type: String,
-    required: true
+    required: false
   },
   avatar: { type: String },
   kinhnghiem:
   {
     type: String,
-    required: true
+    required: false
   },
   is_deleted: {type: Boolean, default: false}
 }, {

@@ -106,15 +106,6 @@ const constantsRoutes = [
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-
-  {
-    path: '/caddy/:id',
-    component: CaddyChiTiet,
-    // breadcrumbName: 'Thêm dữ liệu',
-    icon: <WeiboCircleOutlined/>,
-    exact: true,
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
   //kết thúc
   
   {

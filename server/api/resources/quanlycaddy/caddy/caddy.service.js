@@ -3,15 +3,6 @@ import Joi from 'joi';
 export default {
   validateBody(body, method) {
     let objSchema = {
-      id: Joi.string()
-        .label('ID')
-        .trim()
-        .required()
-        .error((errors) => {
-          return {
-            template: 'là bắt buộc nhập',
-          };
-        }),
         taikhoan: Joi.string()
         .label('Tài khoản')
         .trim()
@@ -57,11 +48,6 @@ export default {
             template: 'là bắt buộc nhập',
           };
         }),
-      
-        trinhdohocvan: Joi.string()
-        .trim(),
-        kinhnghiem: Joi.string()
-        .trim(),
     };
 
     let newSchema = {};

@@ -49,7 +49,6 @@ class CaddyChiTiet extends Component {
 
   async componentDidMount() {
     let apiRequest = [getAllTT(1, 0)];
-
     let apiResponse = await axios.all(apiRequest).then(
       axios.spread(function(dsTrangThai) {
         return {
@@ -57,16 +56,13 @@ class CaddyChiTiet extends Component {
         };
       })
     );
-
+    console.log(this.props.match.params,'this.props.match.params');
     let dsTrangThai = apiResponse.dsTrangThai ? apiResponse.dsTrangThai.docs : this.state.dsTrangThai;
-
     this.setState({ dsTrangThai });
     if (this.state._id) {
       let dataRes = await getById(this.state._id);
-      //console.log("rress",dataRes);
       this.setState({ avatarUpload: [{ url: API.FILES.format(dataRes.avatar) }] });
       this.formRef.current.setFieldsValue({
-        id: dataRes.id,
         taikhoan: dataRes.taikhoan,
         matkhau: dataRes.matkhau,
         hoten: dataRes.hoten,
@@ -79,7 +75,6 @@ class CaddyChiTiet extends Component {
         avatar:dataRes.avatar,
       
       });
-
       // set form
     }
   }
@@ -90,8 +85,6 @@ class CaddyChiTiet extends Component {
   };
 
   onFinish = async values => {
-    console.log(values,'values');
-    console.log(this.state.avatarUpload,'this.state.avatarUpload');
     if (this.state.avatarUpload[0]?.originFileObj) {
       const fileUpload = this.state.avatarUpload.map(data => data.originFileObj);
       const files = await uploadImages(fileUpload);
@@ -99,7 +92,6 @@ class CaddyChiTiet extends Component {
         values.avatar = files[0];
       }
     }
-
     if (this.state._id) {
       const caddyRes = await updateById(this.state._id, values);
       if (caddyRes) {
@@ -133,8 +125,6 @@ class CaddyChiTiet extends Component {
   render() {
     const { loading } = this.props;
     const { _id, dsTrangThai, mode, value, selectedValue } = this.state;
-    console.log(dsTrangThai, "tt");
-
     return (
       <div>
         <Tabs defaultActiveKey="1">
@@ -198,12 +188,22 @@ class CaddyChiTiet extends Component {
                 <Row gutter={10}>
                   <Col sm={6}>
                     <Form.Item
-                      label={<b>ID</b>}
-                      name="id"
+                      label={<b>Tài khoản đăng nhập</b>}
+                      name="taikhoan"
                       validateTrigger={["onChange", "onBlur"]}
-                      rules={[{ required: true, message: "ID không được để trống" }]}
+                      rules={[{ required: true, message: "Tài khoản không được để trống" }]}
                     >
-                      <Input placeholder="ID" disabled={loading} />
+                      <Input placeholder="Tài khoản đăng nhập" disabled={loading} />
+                    </Form.Item>
+                  </Col>
+                  <Col sm={6}>
+                    <Form.Item
+                      label={<b>Mật khẩu</b>}
+                      name="matkhau"
+                      validateTrigger={["onChange", "onBlur"]}
+                      rules={[{ required: true, message: "Mật khẩu không được để trống" }]}
+                    >
+                      <Input placeholder="Mật khẩu" disabled={loading} />
                     </Form.Item>
                   </Col>
                   <Col sm={6}>
@@ -291,57 +291,6 @@ class CaddyChiTiet extends Component {
                       ules={[{ required: true, message: "Kinh nghiệm không được để trống" }]}
                     >
                       <Input placeholder="Kinh nghiệm" disabled={loading} />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Box>
-            </Form>
-            ;
-          </TabPane>
-          <TabPane tab="Thông tin tài khoản" key="2">
-            <Form
-              ref={this.formRef}
-              layout="vertical"
-              size="small"
-              autoComplete="off"
-              onFinish={this.onFinish}
-              onValuesChange={this.onFieldsChange}
-            >
-              <Box
-                title="cập nhật mật khẩu"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Row gutter={10}>
-                  <Col sm={6}>
-                    <Form.Item
-                      label={<b>Tài khoản</b>}
-                      name="taikhoan"
-                      validateTrigger={["onChange", "onBlur"]}
-                      rules={[{ required: true, message: "Tài khoản không được để trống" }]}
-                    >
-                      <Input
-                        placeholder="tài khoản"
-                        prefix={<UserOutlined className="site-form-item-icon" />}
-                        disabled={loading}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col sm={6}>
-                    <Form.Item
-                      label={<b>Mật khẩu</b>}
-                      name="matkhau"
-                      validateTrigger={["onChange", "onBlur"]}
-                      rules={[{ required: true, message: "Mật khẩu không được để trống" }]}
-                    >
-                      <Input.Password placeholder="mật khẩu" disabled={loading} />
                     </Form.Item>
                   </Col>
                 </Row>

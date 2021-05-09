@@ -22,6 +22,7 @@ export const CONSTANTS = {
   FEMALE: 'FEMALE',
   ALL: 'ALL',
   ADMIN: 'ADMIN',
+  CADDY: 'CADDY',
   MANAGE: 'QUAN_LY',
   DOCTOR: 'BAC_SY',
   ADMINISTRATOR: 'ADMINISTRATOR',
@@ -58,5 +59,7 @@ export const DISEASE_GENDER_OPTIONS = [
 export const ROLE_OPTIONS = [
   { value: CONSTANTS.ADMIN, label: 'Quản trị hệ thống' },
   { value: CONSTANTS.MANAGE, label: 'Quản lý' },
+  { value: CONSTANTS.CADDY, label: 'Caddy' },
+
 ];
 
