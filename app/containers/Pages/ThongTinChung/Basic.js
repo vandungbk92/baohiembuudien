@@ -27,7 +27,7 @@ import {
 import ImgCrop from 'antd-img-crop';
 import { getBase64 } from '@utils/imageUtil';
 
-import { getOne, update } from '@services/thongtinchungService';
+import { getOne, update ,add} from '@services/thongtinchungService';
 
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
 
@@ -94,13 +94,23 @@ export default function Basic() {
       if (image_id_list && image_id_list.length) originFileNm = [...originFileNm, ...image_id_list];
     }
     values.hinhanh = originFileNm
-   const apiRequest = await update(values._id, values);
-    if (apiRequest) {
+    if (values._id){
+      const apiRequest = await update(values._id, values);
+      if (apiRequest) {
+        setDataResponse(apiRequest);
+        setImageFile(null);
+        setPreviewState(apiRequest.hinhanh)
+        message.success('Cập nhật dữ liệu thành công.');
+      }
+    }else {
+      const apiRequest = await add(values);
       setDataResponse(apiRequest);
       setImageFile(null);
       setPreviewState(apiRequest.hinhanh)
-      message.success('Cập nhật dữ liệu thành công.');
+      message.success('Thêm mới dữ liệu thành công.');
     }
+
+
   });
 
   const handlePreview = async file => {
@@ -154,7 +164,7 @@ export default function Basic() {
         <Col xl={8}>
           <Form.Item className="text-center" name="logo">
             <Space direction="vertical">
-              <Avatar src={imageSrc || (dataResponse.logo ? API.FILES.format(dataResponse.logo) : '')} size={128}
+              <Avatar src={imageSrc || (dataResponse?.logo ? API.FILES.format(dataResponse.logo) : '')} size={128}
                       style={{ fontSize: 48 }}>
               </Avatar>
               <Upload
