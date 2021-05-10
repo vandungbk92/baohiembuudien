@@ -31,6 +31,7 @@ import Box from "@containers/Box";
 import { number } from "prop-types";
 import moment from "moment";
 import { API } from '@api';
+import LichLamViec from 'Pages/QuanLyCaddy/Caddy/LichLamViec/LichLamViec';
 const layoutCol = { xl: 8, md: 24, lg: 24, xs: 24, sm: 24 };
 const { TabPane } = Tabs;
 class CaddyChiTiet extends Component {
@@ -63,6 +64,7 @@ class CaddyChiTiet extends Component {
       let dataRes = await getById(this.state._id);
       this.setState({ avatarUpload: [{ url: API.FILES.format(dataRes.avatar) }] });
       this.formRef.current.setFieldsValue({
+        id: dataRes.id,
         taikhoan: dataRes.taikhoan,
         matkhau: dataRes.matkhau,
         hoten: dataRes.hoten,
@@ -127,8 +129,8 @@ class CaddyChiTiet extends Component {
     const { _id, dsTrangThai, mode, value, selectedValue } = this.state;
     return (
       <div>
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="Thông tin hành chính" key="1">
+        <Tabs defaultActiveKey="1" >
+          <TabPane tab="Thông tin Caddy" key="1">
             <Form
               ref={this.formRef}
               layout="vertical"
@@ -298,9 +300,9 @@ class CaddyChiTiet extends Component {
             </Form>
             ;
           </TabPane>
-          <TabPane tab="Lịch làm việc" key="3">
-            <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
-            <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
+          <TabPane tab="Lịch làm việc" key="2">
+            <LichLamViec ></LichLamViec>
+
           </TabPane>
         </Tabs>
       </div>
