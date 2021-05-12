@@ -159,4 +159,8 @@ export const API = {
   THONG_TIN_UNG_DUNG_ID: '/api/thong-tin-ung-dung/page={0}&limit={1}{2}',
   THONG_TIN_UNG_DUNG_QUERY: '/api/thong-tin-ung-dung?{0}',
 
+  LICH_LAM_VIEC_CADDY: '/api/lich-lam-viec-caddy',
+  LICH_LAM_VIEC_CADDY_QUERY: '/api/lich-lam-viec-caddy?page={0}&limit={1}{2}',
+  LICH_LAM_VIEC_CADDY_ID: '/api/lich-lam-viec-caddy/{0}',
+
 };

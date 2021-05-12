@@ -53,7 +53,7 @@ export const URL = {
   VOUCHER_ID: '/voucher/{0}',
   VOUCHER_ADD: '/voucher/add',
 
-  
+
   TRANG_THAI_SOLO: '/trang-thai-solo',
   TRANG_THAI_SOLO_ID: '/trang-thai-solo/{0}',
   TRANG_THAI_SOLO_ADD: '/trang-thai-solo/add',
@@ -111,4 +111,8 @@ export const URL = {
   THONGTINCHUNG: '/thong-tin-chung',
 
   THONG_TIN_UNG_DUNG: '/thong-tin-ung-dung',
+
+  LICH_LAM_VIEC_CADDY: '/lich-lam-viec-caddy',
+  LICH_LAM_VIEC_CADDY_ID: '/lich-lam-viec-caddy/{0}',
+  LICH_LAM_VIEC_CADDY_ADD: '/lich-lam-viec-caddy/add',
 }

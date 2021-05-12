@@ -4,6 +4,7 @@ import userService from '../../user/user.service'
 import * as responseAction from '../../../utils/responseAction'
 import {filterRequest, optionsRequest} from '../../../utils/filterRequest';
 import caddyService from "./caddy.service";
+import LichLamViecCaddy from '../lichlamvieccaddy/lichlamvieccaddy.model'
 
 export default {
   async create(req, res) {
@@ -62,7 +63,7 @@ export default {
     try {
       const {id} = req.params;
       const data = await Caddy.findById(id)
-     
+
       .populate({path: 'trangthai_id',select:'tentrangthai'})
       if (!data) {
         return responseAction.error(res, 404, '')
@@ -96,7 +97,7 @@ export default {
       if (error && error.details) {
         return  responseAction.error(res, 400, error.details[0])
       }
-      
+
 
       const data = await Caddy.findOneAndUpdate({_id: id}, value, {new: true});
       if (!data) {
@@ -108,5 +109,19 @@ export default {
       console.error(err);
       return res.status(500).send(err);
     }
-  }
+  },
+
+  async getAllDslichlamviec(req, res) {
+    try {
+      let { id } = req.params;
+      let data = await LichLamViecCaddy.find({ caddy_id: id, is_deleted: false }).sort({created_at : -1})
+        .populate({path: 'caddy_id', select: 'hoten'});
+      return res.json(data);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+  },
 };
+
+

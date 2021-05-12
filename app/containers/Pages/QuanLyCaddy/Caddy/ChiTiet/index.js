@@ -75,7 +75,7 @@ class CaddyChiTiet extends Component {
         kinhnghiem: dataRes.kinhnghiem,
         trangthai_id: dataRes.trangthai_id._id,
         avatar:dataRes.avatar,
-      
+
       });
       // set form
     }
@@ -153,7 +153,7 @@ class CaddyChiTiet extends Component {
               >
                 <Row>
                   <Col xs={24} sm={24} md={24} lg={12} xl={12} >
-                    <Form.Item 
+                    <Form.Item
                       name="avatar"
                       labelCol={layoutCol}
                       label="Ảnh đại diện"
@@ -161,7 +161,7 @@ class CaddyChiTiet extends Component {
                     >
                       <div  >
                         <Upload
-                          
+
                           action={false}
                           accept="image/*"
                           listType="picture-card"
@@ -301,9 +301,10 @@ class CaddyChiTiet extends Component {
             ;
           </TabPane>
           <TabPane tab="Lịch làm việc" key="2">
-            <LichLamViec ></LichLamViec>
+            <LichLamViec caddy_id = {this.state._id} ></LichLamViec>
 
           </TabPane>
+
         </Tabs>
       </div>
     );

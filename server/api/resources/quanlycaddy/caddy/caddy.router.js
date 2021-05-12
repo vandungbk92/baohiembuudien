@@ -13,3 +13,5 @@ caddyRouter
   .get(caddyController.findOne)
   .put(passport.authenticate('jwt', { session: false }), caddyController.update)
   .delete(passport.authenticate('jwt', { session: false }), caddyController.delete);
+
+caddyRouter.get('/:id/lich-lam-viec-caddy', passport.authenticate('jwt', { session: false }), caddyController.getAllDslichlamviec);

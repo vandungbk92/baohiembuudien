@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom';
 class Caddy extends Component {
 
   columns = [
-   
+
     {
       title: 'Họ tên',
       dataIndex: 'hoten',
@@ -78,8 +78,8 @@ class Caddy extends Component {
     if(trangthaiApi){
       this.setState({dstrangthai: trangthaiApi.docs})
     }
-   
-   
+
+
     this.getDataFilter();
   }
 
@@ -91,6 +91,9 @@ class Caddy extends Component {
 
   async getDataFilter() {
     let search = queryString.parse(this.props.location.search);
+    let search1 = this.props.location.search;
+    console.log(search,'search');
+    console.log(search1,'search1search1');
     let page = parseInt(search.page ? search.page : this.state.page);
     let limit = parseInt(search.limit ? search.limit : this.state.limit);
     let queryStr = '';
@@ -138,10 +141,10 @@ class Caddy extends Component {
 
   // showTrangThai(value){
   //   return <React.Fragment>
-  //   {       
+  //   {
   //     <div>{value.trangthai_id.tentrangthai} </div>
   //   }
-    
+
   // </React.Fragment>
   // }
 
@@ -185,10 +188,10 @@ class Caddy extends Component {
 
   // showTrangThai(value){
   //   return <React.Fragment>
-  //   {       
+  //   {
   //     <div>{value.tentrangthai} </div>
   //   }
-    
+
   // </React.Fragment>
   // }
 
@@ -207,19 +210,19 @@ class Caddy extends Component {
     options: dstrangthai,
     key: '_id',
     value: 'tentrangthai'}
-   
+
   ];
     return <div>
 
 
 <Card size="small" title={<span>
         <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách Caddy
-      </span>} 
-      md="24" 
+      </span>}
+      md="24"
       bordered extra={
       <Link to={URL.CADDY_ADD}>
         {this.props.myInfoResponse.role === CONSTANTS.ADMIN ?   <Button type="primary" className='pull-right' size="small" icon={<PlusOutlined/>}>Thêm</Button> : ''}
-        
+
       </Link>
     }
     >

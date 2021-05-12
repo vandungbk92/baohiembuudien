@@ -3,7 +3,7 @@ import { API } from '@api';
 
 function getAll(page, limit, query) {
   query = query ? query : ''
-  return axios.get(`${API.CADDY_QUERY.format(page, limit, query)}`).then(res => {
+  return axios.get(`${API.LICH_LAM_VIEC_CADDY_QUERY.format(page, limit, query)}`).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -17,7 +17,7 @@ function getAll(page, limit, query) {
 }
 
 function add(data) {
-  return axios.post(`${API.CADDY}`, data).then(res => {
+  return axios.post(`${API.LICH_LAM_VIEC_CADDY}`, data).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -31,7 +31,7 @@ function add(data) {
 }
 
 function getById(id) {
-  return axios.get(`${API.CADDY_ID.format(id)}`).then(res => {
+  return axios.get(`${API.LICH_LAM_VIEC_CADDY_ID.format(id)}`).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -45,7 +45,7 @@ function getById(id) {
 }
 
 function delById(id) {
-  return axios.delete(`${API.CADDY_ID.format(id)}`).then(res => {
+  return axios.delete(`${API.LICH_LAM_VIEC_CADDY_ID.format(id)}`).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -58,8 +58,8 @@ function delById(id) {
     });
 }
 
-function  updateById(id, data) {
-  return axios.put(`${API.CADDY_ID.format(id)}`, data).then(res => {
+function updateById(id, data) {
+  return axios.put(`${API.LICH_LAM_VIEC_CADDY_ID.format(id)}`, data).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -72,8 +72,9 @@ function  updateById(id, data) {
     });
 }
 
-function getAllDslichByCaddy(id) {
-  return axios.get(`${API.CADDY_ID.format(id)}/lich-lam-viec-caddy`).then(res => {
+function getAllLichByCaddy(page, limit, query) {
+  query = query ? query : ''
+  return axios.get(`${API.LICH_LAM_VIEC_CADDY_QUERY.format(page, limit, query)}`).then(res => {
     if (res.data) {
       return res.data;
     }
@@ -87,4 +88,4 @@ function getAllDslichByCaddy(id) {
 }
 
 
-export {add, getById, getAll, delById, updateById, getAllDslichByCaddy}
+export {add, getById, getAll, delById, updateById}
