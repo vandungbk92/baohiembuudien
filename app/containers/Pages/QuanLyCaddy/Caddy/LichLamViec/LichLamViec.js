@@ -37,7 +37,9 @@ const layoutCol = { xl: 8, md: 24, lg: 24, xs: 24, sm: 24 };
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
 import LichSuLichLamViec from 'Pages/QuanLyCaddy/Caddy/LichLamViec/LichSuLichLamViec';
-
+import { getAllDslichByCaddy } from '@services/quanlycaddy/caddyService';
+import {dateFormatter, dateFormatYMD} from '@commons/dateFormat';
+import ThemMoiLich from 'Pages/QuanLyCaddy/Caddy/LichLamViec/ThemMoiLich';
 class LichLamViec extends Component {
   constructor(props) {
     super(props);
@@ -45,43 +47,31 @@ class LichLamViec extends Component {
       mode: "top",
       dsTrangThai: [],
       avatarUpload: [],
+      propChild : "",
+      activeTab : '1',
       value: moment("2017-01-25"),
       selectedValue: moment("2017-01-25"),
-      caddy_id: this.props.caddy_id
+      caddy_id: this.props.caddy_id,
+      dataRes : [],
+      endTime : '',
+      stt : null
     };
     this.formRefLichLamViec = React.createRef();
   }
-
   async componentDidMount() {
-    let apiRequest = [getAllTT(1, 0)];
-    let apiResponse = await axios.all(apiRequest).then(
-      axios.spread(function(dsTrangThai) {
-        return {
-          dsTrangThai: dsTrangThai
-        };
-      })
-    );
-    let dsTrangThai = apiResponse.dsTrangThai ? apiResponse.dsTrangThai.docs : this.state.dsTrangThai;
-    this.setState({ dsTrangThai });
-    if (this.state._id) {
-      let dataRes = await getById(this.state._id);
-      this.setState({ avatarUpload: [{ url: API.FILES.format(dataRes.avatar) }] });
-      this.formRef.current.setFieldsValue({
-        taikhoan: dataRes.taikhoan,
-        matkhau: dataRes.matkhau,
-        hoten: dataRes.hoten,
-        diachi: dataRes.diachi,
-        sdt: dataRes.sdt,
-        email: dataRes.email,
-        trinhdohocvan: dataRes.trinhdohocvan,
-        kinhnghiem: dataRes.kinhnghiem,
-        trangthai_id: dataRes.trangthai_id._id,
-        avatar:dataRes.avatar,
-
-      });
-      // set form
+    let dataRes = await getAllDslichByCaddy(this.state.caddy_id)
+    console.log(dataRes,'dataResdataResdataRes');
+    if(dataRes){
+      this.setState({endTime : dataRes[0].denngay})
     }
+    if (this.state.stt !== null){
+      this.formRefLichLamViec.current.setFieldsValue(this.state.stt);
+    }
+
   }
+  componentDidUpdate(prevProps, prevState){
+  }
+
 
   handleModeChange = e => {
     const mode = e.target.value;
@@ -91,6 +81,22 @@ class LichLamViec extends Component {
   onFinish = async values => {
     values.tungay = values.tungay ? values.tungay.format('YYYY-MM-DD HH:mm:ss') : '';
     values.denngay = values.denngay ? values.denngay.format('YYYY-MM-DD HH:mm:ss') : '';
+
+    let getTungay = dateFormatYMD(values.tungay)
+    let getDenngay = dateFormatYMD(values.denngay)
+    let getEndtime = dateFormatYMD(this.state.endTime)
+    let ssTuNgay, ssEndTime, ssDenngay
+    ssTuNgay = new Date(getTungay)
+    ssEndTime = new Date(getEndtime)
+    ssDenngay = new Date (getDenngay)
+    if (ssTuNgay < ssEndTime) {
+      message.error("Lịch làm việc cũ chưa kết thúc");
+      return
+    }
+    if (ssTuNgay > ssDenngay) {
+      message.error("Ngày bắt đầu không được lớn hơn ngày kết thúc");
+      return
+    }
     let casang = [];
     let cachieu = [];
     let cangay = [];
@@ -115,14 +121,10 @@ class LichLamViec extends Component {
     values.cachieu = cachieu
     values.nghi = nghi
     values.cangay = cangay
-
     const lichcaddyRes = await add(values);
       if (lichcaddyRes) {
-        console.log(lichcaddyRes,'lichcaddyReslichcaddyRes');
         message.success("Thêm dữ liệu thành công");
-        // this.props.history.push(URL.CADDY_ID.format(caddyRes._id));
       }
-
   };
   onFieldsChange = async (changedValues, allValues) => {
     //console.log(changedValues, "changedValues");
@@ -138,10 +140,22 @@ class LichLamViec extends Component {
     this.setState({ value });
   };
 
+  callbackFunction = (key,activetab)  => {
+    this.setState({
+      stt: key,
+      activeTab :  activetab
+    })
+  };
    onChange = e => {
-    console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
+
+  changeTab = activeKey => {
+    this.setState({
+      activeTab: activeKey
+    });
+  };
+
 
   render() {
     const { loading } = this.props;
@@ -149,272 +163,15 @@ class LichLamViec extends Component {
     return (
       <div>
         {/*<Divider/>*/}
-        <Tabs defaultActiveKey="1" >
-          <TabPane tab="Cập nhật lịch" key="1">
-            <Form
-              ref={this.formRefLichLamViec}
-              layout="vertical"
-              size="small"
-              autoComplete="off"
-              onFinish={this.onFinish}
-              onValuesChange={this.onFieldsChange}
-            >
-              <Box
-                title="Lịch làm việc của Caddy"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Row>
-                  <Col sm={24} lg={6} xl={6}>
-                    <Form.Item
-                      label={<b>Thời gian bắt đầu </b>}
-                      name= 'tungay'
-                      rules={[{ required: true, message: "Thời gian không được để trống" }]}
-                    >
-                      <DatePicker/>
-                    </Form.Item>
-                  </Col>
-                  <Col  sm={24} lg={6} xl={6}>
-                    <Form.Item
-                      name= 'denngay'
-                      rules={[{ required: false, message: "Thời gian không được để trống" }]}
-                      label={<b>Thời gian kết thúc</b>}>
-                      <DatePicker/>
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={24}  lg={6} xl={6}>
-                    <Form.Item
-                      name= 'laplai'
-                      rules={[{ required: true, message: "Lặp lại không được để trống" }]}
-                      label={<b>Lặp lại </b>}>
-                      <Select defaultValue="KHONG" style={{ width: 120 }}>
-                        <Option value="THEOTUAN">Theo tuần</Option>
-                        <Option value="THEOTHANG">Theo tháng</Option>
-                        <Option value="KHONG">Không lặp lại</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col sm={24} lg={6} xl={6}>
-                    <Form.Item
-                      name= 'thu2'
-                      rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}
-                      label={<b>Thứ 2 </b>}
-                    >
-                      <Select style={{ width: 120 }}>
-                        <Option value="SANG">Buổi sáng</Option>
-                        <Option value="CHIEU">Buổi chiều</Option>
-                        <Option value="CANGAY"> Cả ngày</Option>
-                        <Option value="NGHILEM">Nghỉ làm</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col sm={24} lg={6} xl={6}>
-
-                    <Form.Item
-                      name= 'thu3'
-                      rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}
-                      label={<b>Thứ 3 </b>}>
-                      <Select style={{ width: 120 }}>
-                        <Option value="SANG">Buổi sáng</Option>
-                        <Option value="CHIEU">Buổi chiều</Option>
-                        <Option value="CANGAY"> Cả ngày</Option>
-                        <Option value="NGHILEM">Nghỉ làm</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col sm={24} lg={6} xl={6}>
-
-                    <Form.Item
-                      name= 'thu4'
-                      rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}label={<b>Thứ 4 </b>}>
-                      <Select style={{ width: 120 }}>
-                        <Option value="SANG">Buổi sáng</Option>
-                        <Option value="CHIEU">Buổi chiều</Option>
-                        <Option value="CANGAY"> Cả ngày</Option>
-                        <Option value="NGHILEM">Nghỉ làm</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-
-
-              <Row>
-                <Col sm={24} lg={6} xl={6}>
-                  <Form.Item
-                    name= 'thu5'
-                    rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}
-                    label={<b>Thứ 5 </b>}>
-                    <Select style={{ width: 120 }}>
-                      <Option value="SANG">Buổi sáng</Option>
-                      <Option value="CHIEU">Buổi chiều</Option>
-                      <Option value="CANGAY"> Cả ngày</Option>
-                      <Option value="NGHILEM">Nghỉ làm</Option>
-                    </Select>
-                  </Form.Item>
-
-                </Col>
-                <Col sm={24} lg={6} xl={6}>
-
-                  <Form.Item
-                    name= 'thu6'
-                    rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}label={<b>Thứ 6 </b>}>
-                    <Select style={{ width: 120 }}>
-                      <Option value="SANG">Buổi sáng</Option>
-                      <Option value="CHIEU">Buổi chiều</Option>
-                      <Option value="CANGAY"> Cả ngày</Option>
-                      <Option value="NGHILEM">Nghỉ làm</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col sm={24} lg={6} xl={6}>
-                  <Form.Item
-                    name= 'thu7'
-                    rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}label={<b>Thứ 7 </b>}>
-                    <Select style={{ width: 120 }}>
-                      <Option value="SANG">Buổi sáng</Option>
-                      <Option value="CHIEU">Buổi chiều</Option>
-                      <Option value="CANGAY"> Cả ngày</Option>
-                      <Option value="NGHILEM">Nghỉ làm</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col sm={24} lg={6} xl={6}>
-                  <Form.Item
-                    name= 'chunhat'
-                    rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}label={<b>Chủ nhật </b>}>
-                    <Select style={{ width: 120 }}>
-                      <Option value="SANG">Buổi sáng</Option>
-                      <Option value="CHIEU">Buổi chiều</Option>
-                      <Option value="CANGAY"> Cả ngày</Option>
-                      <Option value="NGHILEM">Nghỉ làm</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-                <Row>
-                  <Col sm={24} lg={12} xl={12}>
-                    <Form.Item
-                      name= 'ghichu'
-                      rules={[{ required: true, message: "Thời gian làm việc là bắt buộc chọn" }]}label={<b>Ghi chú</b>}>
-                      <Input placeholder="Ghi chú" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Box>
-            </Form>
-
-            {/*<Form>*/}
-            {/*  <Box*/}
-            {/*    title="Lịch làm việc của Caddy"*/}
-            {/*    boxActions={*/}
-            {/*      this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (*/}
-            {/*        <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">*/}
-            {/*          Lưu dữ liệu*/}
-            {/*        </Button>*/}
-            {/*      ) : (*/}
-            {/*        ""*/}
-            {/*      )*/}
-            {/*    }*/}
-            {/*  >*/}
-            {/*    <Form.Item label={<b>Thời gian làm việc </b>}>*/}
-            {/*      <RangePicker />*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 2 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 3 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 4 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 5 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 6 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Thứ 7 </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*    <Form.Item label={<b>Chủ nhật </b>}>*/}
-            {/*      <Radio.Group onChange={this.onChange} value={value}>*/}
-            {/*        <Radio value={1}>Cả ngày</Radio>*/}
-            {/*        <Radio value={2}>Buổi sáng</Radio>*/}
-            {/*        <Radio value={3}>Buổi chiều</Radio>*/}
-            {/*        <Radio value={4}> Nghỉ làm</Radio>*/}
-            {/*      </Radio.Group>*/}
-            {/*    </Form.Item>*/}
-            {/*  </Box>*/}
-            {/*</Form>*/}
+        <Tabs activeKey={this.state.activeTab } onChange={this.changeTab}>
+          <TabPane tab="Danh sách lịch làm việc" key="1">
+            <LichSuLichLamViec parentCallback={this.callbackFunction} caddy_id = {this.state.caddy_id}/>
           </TabPane>
-          <TabPane tab="Chi tiết lịch" key="2">
-
-                <ChiTietLich caddy_id = {this.state.caddy_id}/>
-
-
+          <TabPane tab="Cập nhật lịch" key="2">
+            <ThemMoiLich caddy_id = {this.state.caddy_id} stt ={this.state.stt}/>
           </TabPane>
-          <TabPane tab="Lịch sử cập nhật" key="3">
-               <LichSuLichLamViec caddy_id = {this.state.caddy_id}/>
-          </TabPane>
-          <TabPane tab="Thống kê ngày nghỉ" key="4">
-            <Form>
-              <Box
-                title="Lịch làm việc của Caddy"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
-                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
-
-              </Box>
-            </Form>
+          <TabPane tab="Lịch trong tuần" key="3">
+            <ChiTietLich caddy_id = {this.state.caddy_id}/>
           </TabPane>
         </Tabs>
       </div>

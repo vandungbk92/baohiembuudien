@@ -302,9 +302,47 @@ class CaddyChiTiet extends Component {
           </TabPane>
           <TabPane tab="Lịch làm việc" key="2">
             <LichLamViec caddy_id = {this.state._id} ></LichLamViec>
-
           </TabPane>
+          <TabPane tab="Lịch với khách hàng" key="3">
+            <Form>
+              <Box
+                title="Lịch làm việc của Caddy"
+                boxActions={
+                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
+                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
+                      Lưu dữ liệu
+                    </Button>
+                  ) : (
+                    ""
+                  )
+                }
+              >
+                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
+                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
 
+              </Box>
+            </Form>
+          </TabPane>
+          <TabPane tab="Thống kê ngày nghỉ" key="4">
+            <Form>
+              <Box
+                title="Lịch làm việc của Caddy"
+                boxActions={
+                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
+                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
+                      Lưu dữ liệu
+                    </Button>
+                  ) : (
+                    ""
+                  )
+                }
+              >
+                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
+                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
+
+              </Box>
+            </Form>
+          </TabPane>
         </Tabs>
       </div>
     );

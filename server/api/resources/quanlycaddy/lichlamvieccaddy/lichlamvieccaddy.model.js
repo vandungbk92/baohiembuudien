@@ -17,6 +17,13 @@ const lichlamvieccaddySchema = new Schema({
   cangay:[],
   casang:[],
   cachieu:[],
+  thu2: { type: String },
+  thu3: { type: String },
+  thu4: { type: String },
+  thu5: { type: String },
+  thu6: { type: String },
+  thu7: { type: String },
+  chunhat: { type: String },
   nghi:[],
   caddy_id: {
     type: mongoose.Schema.Types.ObjectId,

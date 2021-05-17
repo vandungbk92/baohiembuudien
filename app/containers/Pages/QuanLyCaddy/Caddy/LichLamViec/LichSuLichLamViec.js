@@ -9,11 +9,17 @@ import { Link } from 'react-router-dom';
 import { URL } from '@url';
 import { CloseOutlined, DeleteOutlined, EditOutlined, EyeOutlined, SaveOutlined } from '@ant-design/icons';
 import { CONSTANTS } from '@constants';
+import Box from '@containers/Box';
 
 const { Text, Title } = Typography;
-
+let index = 1
 class LichSuLichLamViec extends Component {
    columns = [
+     {
+       title: 'STT',
+       key: 'name',
+       render: (limit, page, value) => this.formatSTT(this.state.limit, this.state.page, value),
+     },
     {
       title: 'Caddy',
       dataIndex: 'caddy_id',
@@ -28,7 +34,7 @@ class LichSuLichLamViec extends Component {
     },
     {
       title: 'Đến ngày',
-      dataIndex: 'tungay',
+      dataIndex: 'denngay',
       key: 'name',
       render: text => <a> {dateFormatter(text)}</a>,
     },
@@ -41,7 +47,7 @@ class LichSuLichLamViec extends Component {
 
     {
       title: 'Hành động',
-      render: (value) => this.formatActionCell(value),
+      render: (value,r,i) => this.formatActionCell(value,i),
       width: 150,
       align: 'center',
     },
@@ -143,8 +149,15 @@ class LichSuLichLamViec extends Component {
       dataRes : [],
       datasource: [],
       dataModal : [],
-      showModal: false
+      showModal: false,
+      propChild: '',
+      page: 1,
+      limit: 10,
     };
+  }
+
+  formatSTT(limit, page, index) {
+    return (page - 1) * limit + (index + 1)
   }
 
   async componentDidMount() {
@@ -161,7 +174,6 @@ class LichSuLichLamViec extends Component {
     let datacachieuRes = data.cachieu
     if (!data.cangay.length !== 0){
       data.cangay.forEach(data =>{
-          console.log(data,'dataforEach');
           datacasangRes.push(data)
           datacachieuRes.push(data)
         }
@@ -176,6 +188,7 @@ class LichSuLichLamViec extends Component {
 
     return datasource
   }
+
   toggleModal = (data) => {
     const { showModal } = this.state;
     let dataTable = this.getDataTable(data)
@@ -186,26 +199,45 @@ class LichSuLichLamViec extends Component {
     const { showModal } = this.state;
     this.setState({ showModal: !showModal, datasource : [] , dataModal : []});
   };
-  formatActionCell(value) {
+
+
+  ThemMoi = () => {
+    this.props.parentCallback("ADD", "2")
+  };
+
+  ChinhSua = (value) => {
+    this.props.parentCallback(value, "2")
+  };
+
+  formatActionCell(value,index) {
     return <>
       <Tooltip placement="left" title={'Xem chi tiết'} color="#2db7f5">
         <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' //ant-tag-cyan
                 onClick={() => this.toggleModal(value)}></Button>
       </Tooltip>
 
-      {/*<Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"*/}
-      {/*            onConfirm={() => this.handleDelete(value)}*/}
-      {/*            cancelText='Huỷ' okText='Xoá' okButtonProps={{ type: 'danger' }}>*/}
-      {/*  <Tooltip placement="right" title={'Xóa dữ liệu'} color="#f50">*/}
-      {/*    <Button icon={<DeleteOutlined/>} type='danger' size='small' className="mr-1"></Button> }*/}
-      {/*  </Tooltip>*/}
-      {/*</Popconfirm>*/}
+      {index == 0 ? <Tooltip placement="left" title={'Cập nhật'} color="#2db7f5">
+        <Button icon={<EditOutlined/>} size='small' type="link" className='mr-1' //ant-tag-cyan
+                onClick={() => this.ChinhSua(value)}></Button>
+      </Tooltip> : '   ' }
+
     </>;
   }
 
+
+
+
   render() {
     return <div>
+      <Box
+        boxActions={
+            <Button onClick={this.ThemMoi} icon={<SaveOutlined />} size="small" type="primary">
+              Thêm mới
+            </Button>
+        }
+      >
       <Table columns={this.columns} bordered dataSource={this.state.dataRes} />
+      </Box>
 
       <Modal title={' Chi tiết lịch'}
              visible={this.state.showModal}
