@@ -3,7 +3,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
 
-const lichlamvieccaddySchema = new Schema({
+const lichsangolfSchema = new Schema({
   tungay: {
     type: Date,
     required: true,
@@ -17,6 +17,7 @@ const lichlamvieccaddySchema = new Schema({
   cangay:[],
   casang:[],
   cachieu:[],
+  nghi:[],
   thu2: { type: String },
   thu3: { type: String },
   thu4: { type: String },
@@ -24,11 +25,8 @@ const lichlamvieccaddySchema = new Schema({
   thu6: { type: String },
   thu7: { type: String },
   chunhat: { type: String },
-  nghi:[],
-  caddy_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Caddy'
-  },
+  malich: { type: String },
+  khunggio: { type: String },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
   timestamps: {
@@ -36,6 +34,6 @@ const lichlamvieccaddySchema = new Schema({
     updatedAt: 'updated_at',
   }
 });
-lichlamvieccaddySchema.plugin(mongoosePaginate);
+lichsangolfSchema.plugin(mongoosePaginate);
 
-export default mongoose.model('LichLamViecCaddy', lichlamvieccaddySchema);
+export default mongoose.model('LichSanGolf', lichsangolfSchema);

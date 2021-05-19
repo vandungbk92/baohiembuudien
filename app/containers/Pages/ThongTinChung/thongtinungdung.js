@@ -18,6 +18,7 @@ export default function Basic() {
   React.useEffect(() => {
     const getDataInfo = async () => {
       const apiRequest = await getOne();
+      console.log(apiRequest,'apiRequestapiRequestapiRequest');
       const fieldsValue = {
         noidung: apiRequest ? apiRequest.noidung : '' ,
       };

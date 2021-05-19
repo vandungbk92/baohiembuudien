@@ -155,8 +155,13 @@ export default function Basic() {
               </Form.Item>
             </Col>
             <Col xs={24} lg={12}>
-              <Form.Item name="diachi" label="Địa chỉ" rules={[RULE.REQUIRED]} hasFeedback>
+              <Form.Item name="diachi" label="Địa chỉ sân gofl" rules={[RULE.REQUIRED]} hasFeedback>
                 <Input placeholder="Địa chỉ" disabled={loading}/>
+              </Form.Item>
+            </Col>
+            <Col xs={24} lg={24}>
+              <Form.Item name="gioithieu" label="Giới thiệu sân gofl" rules={[RULE.REQUIRED]} hasFeedback>
+                <Input placeholder="Giới thiệu sân golf" disabled={loading}/>
               </Form.Item>
             </Col>
           </Row>
@@ -196,17 +201,17 @@ export default function Basic() {
 
       <Typography.Title level={5} className="underline">2. Cài đặt ứng dụng</Typography.Title>
       <Row gutter={10}>
-        <Col xl={8}>
-          <Form.Item
-            name="songayhenkham"
-            label="Số ngày nhắc trước hẹn khám"
-            hasFeedback
-            rules={[{ required: true, message: 'Không được để trống' }]}
-            tooltip="Số ngày nhắc trước khi đến lịch hẹn tái khám"
-          >
-            <InputNumber placeholder="Đường dây nóng" disabled={loading}/>
-          </Form.Item>
-        </Col>
+        {/*<Col xl={8}>*/}
+        {/*  <Form.Item*/}
+        {/*    name="songayhenkham"*/}
+        {/*    label="Số ngày nhắc trước hẹn khám"*/}
+        {/*    hasFeedback*/}
+        {/*    rules={[{ required: true, message: 'Không được để trống' }]}*/}
+        {/*    tooltip="Số ngày nhắc trước khi đến lịch hẹn tái khám"*/}
+        {/*  >*/}
+        {/*    <InputNumber placeholder="Đường dây nóng" disabled={loading}/>*/}
+        {/*  </Form.Item>*/}
+        {/*</Col>*/}
         <Col sm={16}>
           <Form.Item name="danhgiadichvu" label="Đánh giá dịch vụ"
                      tooltip="Cho phép bệnh nhân đánh giá các dịch vụ đã sử dụng hoặc chỉ dịch vụ cho phép đánh giá">
@@ -217,7 +222,7 @@ export default function Basic() {
           </Form.Item>
         </Col>
         <Col xs={24} xxl={24}>
-          <Form.Item label="Hình ảnh" name="hinhanh">
+          <Form.Item label="Hình ảnh sân gofl" name="hinhanh">
             <ImgCrop rotate modalTitle="Tải ảnh lên" aspect={2}>
               <Upload
                 accept="image/*"

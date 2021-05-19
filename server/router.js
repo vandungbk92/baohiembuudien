@@ -26,11 +26,12 @@ import {danhgiadichvuRouter} from './api/resources/danhgiadichvu/danhgiadichvu.r
 import {thongtinchungRouter} from './api/resources/thongtinchung/thongtinchung.router';
 import {thongtinungdungRouter} from './api/resources/thongtinungdung/thongtinungdung.router';
 import {dmdichvuRouter} from './api/resources/danhmuc/dmdichvu/dmdichvu.router';
-import {soloRouter} from './api/resources/quanlysologolf/solo/solo.router';
 import {trangthaisoloRouter} from './api/resources/quanlysologolf/trangthaisolo/trangthaisolo.router';
 import {trangthaijobRouter} from './api/resources/quanlyJob/trangthaiJob/trangthaijob.router';
 import {jobRouter} from './api/resources/quanlyJob/job/job.router';
 import {lichlamvieccaddyRouter} from './api/resources/quanlycaddy/lichlamvieccaddy/lichlamvieccaddy.router';
+import {khunggiosangolfRouter} from './api/resources/khunggiosangolf/khunggiosangolf.router';
+import {lichsangolfRouter} from './api/resources/lichsangolf/lichsangolf.router';
 
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
@@ -60,9 +61,10 @@ router.use('/thong-tin-ung-dung', thongtinungdungRouter);
 router.use('/don-vi-tinh',donvitinhRouter );
 router.use('/dmdichvu',dmdichvuRouter);
 router.use('/trang-thai-solo', trangthaisoloRouter);
-router.use('/solo', soloRouter);
 router.use('/job',jobRouter);
 router.use('/trang-thai-job',trangthaijobRouter);
 router.use('/lich-lam-viec-caddy', lichlamvieccaddyRouter);
+router.use('/lich-san-golf',lichsangolfRouter);
+router.use('/khung-gio-san-golf', khunggiosangolfRouter);
 
 module.exports = router;

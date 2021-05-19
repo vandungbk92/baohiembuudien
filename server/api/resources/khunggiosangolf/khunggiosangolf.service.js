@@ -3,16 +3,14 @@ import Joi from 'joi';
 export default {
   validateBody(body, method) {
     let objSchema = {
-      solo: Joi.string()
-        .label('Số lỗ')
-        .trim()
+      khunggio: Joi.string()
+        .label('Khung giờ')
         .required()
         .error((errors) => {
           return {
             template: 'là bắt buộc nhập',
           };
         }),
-      mota: Joi.string().trim(),
     };
 
     let newSchema = {};

@@ -9,7 +9,9 @@ const thongtinchungSchema = new Schema({
     diachi: {type: String},
     songayhenkham: {type: Number},
     hinhanh: [],
-    danhgiadichvu: Number // 1: cho phép đánh giá tất cả dịch vụ, 2: là chỉ đánh giá dịch vụ cho phép.
+    danhgiadichvu: Number ,// 1: cho phép đánh giá tất cả dịch vụ, 2: là chỉ đánh giá dịch vụ cho phép.
+    gioithieu: {type: String},
+
   },
   {
     timestamps: {

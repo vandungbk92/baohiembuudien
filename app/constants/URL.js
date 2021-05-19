@@ -115,4 +115,13 @@ export const URL = {
   LICH_LAM_VIEC_CADDY: '/lich-lam-viec-caddy',
   LICH_LAM_VIEC_CADDY_ID: '/lich-lam-viec-caddy/{0}',
   LICH_LAM_VIEC_CADDY_ADD: '/lich-lam-viec-caddy/add',
+
+  LICH_SAN_GOLF: '/lich-san-golf',
+  LICH_SAN_GOLF_ID: '/lich-san-golf/{0}',
+  LICH_SAN_GOLF_ADD: '/lich-san-golf/add',
+
+  KHUNG_GIO_SAN_GOLF: '/khung-gio-san-golf',
+  KHUNG_GIO_SAN_GOLF_ID: '/khung-gio-san-golf/{0}',
+  KHUNG_GIO_SAN_GOLF_ADD: '/khung-gio-san-golf/add',
+
 }

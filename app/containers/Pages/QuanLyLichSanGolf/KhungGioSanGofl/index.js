@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Table, Popconfirm, message, Card, Tooltip, } from 'antd';
+import { Button, Table, Popconfirm, message, Card, Tooltip} from 'antd';
 import {
-  EyeOutlined,
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import { add, getById, getAll, delById, updateById } from '@services/quanlycaddy/caddyService';
+import { add, getById, getAll, delById, updateById } from '@services/quanlylichsangolf/khunggiosangolfService';
 import { PAGINATION_CONFIG } from '@constants';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
@@ -16,38 +15,36 @@ import Search from '@components/Search/Search';
 import { stringify } from 'qs';
 import queryString from 'query-string';
 // import { fetchSanPham } from '@reduxApp/HoatDongSanXuat/actions';
+import DonViTinhModal from '@containers/Pages/QuanLyLichSanGolf/KhungGioSanGofl/KhungGioModal';
 import { makeGetMyInfo } from '../../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
-import {getAll as getAllTT} from '@services/quanlycaddy/trangthaicaddyService'
-import axios from 'axios'
-import { URL } from "../../../../constants/URL";
-import { Link } from 'react-router-dom';
 
-class Caddy extends Component {
+
+
+class KhungGioSanGolf extends Component {
 
   columns = [
+    {
+      title: 'Khung giờ ',
+      dataIndex: 'khunggio',
+      width: 400,
 
-    {
-      title: 'Họ tên',
-      dataIndex: 'hoten',
-      width: 150,
-      align: 'center',
     },
     {
-      title: 'Trình độ học vấn',
-      dataIndex: 'trinhdohocvan',
-      width: 150,
-      align: 'center',
+      title: 'Giá tiền ',
+      dataIndex: 'giatien',
+      width: 400,
+
     },
     {
-      title: 'Kinh nghiệm',
-      dataIndex: 'kinhnghiem',
-      width: 150,
-      align: 'center',
-    },
+        title: 'Mô tả',
+        dataIndex: 'mota',
+        width: 400,
+        align: 'center',
+      },
     {
-      title: 'Trạng thái',
-      dataIndex: ["trangthai_id", "tentrangthai"],
+      title: 'Thứ tự',
+      dataIndex: 'thutu',
       width: 150,
       align: 'center',
     },
@@ -63,23 +60,14 @@ class Caddy extends Component {
     super(props);
     this.state = {
       dataRes: [],
-      dstrangthai:[],
-
       page: 1,
       limit: 10,
       totalDocs: 0,
       data: null
     };
-    this.formRef = React.createRef();
   }
 
-  async componentDidMount() {
-    let trangthaiApi = await getAllTT(1, 0)
-    if(trangthaiApi){
-      this.setState({dstrangthai: trangthaiApi.docs})
-    }
-
-
+  componentDidMount() {
     this.getDataFilter();
   }
 
@@ -91,15 +79,10 @@ class Caddy extends Component {
 
   async getDataFilter() {
     let search = queryString.parse(this.props.location.search);
-    let search1 = this.props.location.search;
-    console.log(search,'search');
-    console.log(search1,'search1search1');
     let page = parseInt(search.page ? search.page : this.state.page);
     let limit = parseInt(search.limit ? search.limit : this.state.limit);
     let queryStr = '';
-    queryStr += `${search.hoten ? '&hoten[like]={0}'.format(search.hoten) : ''}`;
-    queryStr += `${search.trangthai_id ? '&trangthai_id={0}'.format(search.trangthai_id) : ''}`;
-
+    queryStr += `${search.khunggio ? '&khunggio[like]={0}'.format(search.khunggio) : ''}`;
     const apiResponse = await getAll(page, limit, queryStr);
     if (apiResponse) {
       const dataRes = apiResponse.docs;
@@ -116,18 +99,22 @@ class Caddy extends Component {
     const apiResponse = await delById(value._id);
     if (apiResponse) {
       this.getDataFilter();
-      message.success('Xoá caddy thành công');
+     
+      message.success('Xoá trạng thái thành công');
     }
   }
 
+  toggleModal = (data) => {
+    const { showModal } = this.state;
+    this.setState({ showModal: !showModal, data });
+  };
 
   formatActionCell(value) {
-    return <>
-      <Link to={URL.CADDY_ID.format(value._id)}>
-        <Tooltip title={'Xem chi tiết'} color="#2db7f5">
-          <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1'></Button>
-        </Tooltip>
-      </Link>
+    return <Fragment>
+      <Tooltip placement="left" title={'Cập nhật thông tin'} color="#2db7f5">
+        <Button icon={<EditOutlined/>} size='small' type="primary" className='mr-1' //ant-tag-cyan
+                onClick={() => this.toggleModal(value)}></Button>
+      </Tooltip>
 
       <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
                   onConfirm={() => this.handleDelete(value)}
@@ -136,43 +123,8 @@ class Caddy extends Component {
           { this.props.myInfoResponse.role === CONSTANTS.ADMIN? <Button icon={<DeleteOutlined/>} type='danger' size='small' className="mr-1"></Button> :''}
         </Tooltip>
       </Popconfirm>
-    </>;
+    </Fragment>;
   }
-
-  // showTrangThai(value){
-  //   return <React.Fragment>
-  //   {
-  //     <div>{value.trangthai_id.tentrangthai} </div>
-  //   }
-
-  // </React.Fragment>
-  // }
-
-  // handleRefresh = (newQuery, changeTable) => {
-  //   const { location, history } = this.props;
-  //   const { pathname } = location;
-  //   console.log(pathname,'pathname');
-  //   console.log(location,'location');
-  //   console.log(history,'history');
-  //
-  //   let { page, limit } = this.state;
-  //   let objFilterTable = { page, limit };
-  //   if (changeTable) {
-  //     newQuery = queryString.parse(this.props.location.search);
-  //     delete newQuery.page;
-  //     delete newQuery.limit;
-  //   }
-  //   newQuery = Object.assign(objFilterTable, newQuery);
-  //
-  //   let query  = {idcongan:1111111}
-  //   console.log(newQuery,'NEWQUERY');
-  //   console.log(query,'query');
-  //   console.log(stringify({...query}, { arrayFormat: 'repeat' }),'stringify({query}');
-  //   console.log(stringify({...newQuery}, { arrayFormat: 'repeat' }),'stringify({query}');
-  //   history.push({
-  //     pathname, search: stringify({...query}, { arrayFormat: 'repeat' }),
-  //   });
-  // };
 
   handleRefresh = (newQuery, changeTable) => {
     const { location, history } = this.props;
@@ -185,9 +137,8 @@ class Caddy extends Component {
       delete newQuery.limit;
     }
     newQuery = Object.assign(objFilterTable, newQuery);
-    let query  = {idcongan:1111111}
     history.push({
-      pathname, search: stringify({...newQuery}, { arrayFormat: 'repeat' }),
+      pathname, search: stringify({ ...newQuery }, { arrayFormat: 'repeat' }),
     });
   };
 
@@ -213,46 +164,24 @@ class Caddy extends Component {
     }
   }
 
-  // showTrangThai(value){
-  //   return <React.Fragment>
-  //   {
-  //     <div>{value.tentrangthai} </div>
-  //   }
-
-  // </React.Fragment>
-  // }
-
   render() {
     const { loading } = this.props;
-    const { dataRes, totalDocs, page, limit, dstrangthai } = this.state;
+    const { dataRes, totalDocs, page, limit } = this.state;
     const dataSearch = [{
       type: 'text',
       operation: 'like',
-      name: 'hoten',
-      label: 'Họ tên',
-    },
-    { type: 'select',
-    name: 'trangthai_id',
-    label: 'Trạng thái',
-    options: dstrangthai,
-    key: '_id',
-    value: 'tentrangthai'}
-
-  ];
+      name: 'khunggio',
+      label: 'Khung giờ',
+    }];
     return <div>
 
 
-<Card size="small" title={<span>
-        <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách Caddy
-      </span>}
-      md="24"
-      bordered extra={
-      <Link to={URL.CADDY_ADD}>
-        {this.props.myInfoResponse.role === CONSTANTS.ADMIN ?   <Button type="primary" className='pull-right' size="small" icon={<PlusOutlined/>}>Thêm</Button> : ''}
-
-      </Link>
-    }
-    >
+      <Card size="small" title={<span>
+        <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách trạng thái
+      </span>} md="24" bordered extra={<div>
+        <Button type="primary" onClick={() => this.toggleModal(null)} className='pull-right' size="small"
+                icon={<PlusOutlined/>}>Thêm</Button>
+      </div>}>
         <Search onFilterChange={this.handleRefresh} dataSearch={dataSearch}/>
         <Table loading={loading} bordered columns={this.columns} dataSource={dataRes}
                size="small" rowKey="_id"
@@ -264,6 +193,7 @@ class Caddy extends Component {
                }}
                onChange={this.onChangeTable}/>
       </Card>
+      <DonViTinhModal data={this.state.data} showModal={this.state.showModal} getDataAfterSave={this.getDataAfterSave}/>
     </div>;
   }
 }
@@ -276,4 +206,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(Caddy);
+export default withConnect(KhungGioSanGolf);

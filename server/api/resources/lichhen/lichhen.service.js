@@ -1,30 +1,16 @@
-import { template } from '@babel/core';
 import Joi from 'joi';
 
 export default {
   validateBody(body, method) {
     let objSchema = {
-      id: Joi.string()
-        .label('ID')
-        .trim()
+      tungay: Joi.string()
+        .label('Từ ngày')
         .required()
         .error((errors) => {
           return {
             template: 'là bắt buộc nhập',
           };
         }),
-       
-        solo: Joi.number()
-        .label(' số lỗ')     
-        .required()
-        .error((errors) => {
-          return {
-            template: 'là bắt buộc nhập',
-          };
-        }),
-      
-      mota: Joi.string().trim(),
-      trangthai: Joi.string().trim(),
     };
 
     let newSchema = {};

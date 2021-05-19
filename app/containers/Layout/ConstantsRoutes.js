@@ -61,6 +61,10 @@ import ChiTietDanhGiaDichVu from '@containers/Pages/DanhGia/ChiTietDanhGiaDichVu
 import ThongKeDanhGiaDichVu from '@containers/Pages/DanhGia/ThongKeDanhGiaDichVu/Loadable';
 import DanhmucDanhGia from '@containers/Pages/DanhGia/DanhMucDanhGia/Loadable';
 import ThongTinChung from '@containers/Pages/ThongTinChung/Loadable';
+import LichSanGolf from 'Pages/QuanLyLichSanGolf/LichSanGolf/LichSanGolf/LichSuLichLamViec';
+import KhungGioSanGolf from 'Pages/QuanLyLichSanGolf/KhungGioSanGofl';
+import ChiTietLichSanGolf from 'Pages/QuanLyLichSanGolf/LichSanGolf/LichSanGolf/ThemMoiLich';
+
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -88,8 +92,8 @@ const constantsRoutes = [
 
   {
     path: URL.CATEGORY,
-    breadcrumbName: 'Quản lý Công việc',
-    menuName: 'Quản lý Công việc',
+    breadcrumbName: 'Quản lý Lịch hẹn',
+    menuName: 'Quản lý Lịch hẹn',
     icon: <InsertRowLeftOutlined/>,
     children: [
       { path: URL.JOB, menuName: 'Công việc', exact: true, component: Job, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
@@ -110,17 +114,51 @@ const constantsRoutes = [
   
   {
     path: URL.CATEGORY,
+    breadcrumbName: 'Lịch sân Golf',
+    menuName: 'Lịch sân Golf',
+    icon: <InsertRowLeftOutlined/>,
+    children: [
+      { path: URL.LICH_SAN_GOLF, menuName: 'Lịch sân golf', exact: true, component: LichSanGolf, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+   
+      { path: URL.KHUNG_GIO_SAN_GOLF, menuName: 'Khung giờ sân ', exact: true, component: KhungGioSanGolf, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      
+    ],
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: URL.CATEGORY,
     breadcrumbName: 'Quản lý Caddy',
     menuName: 'Quản lý Caddy',
     icon: <InsertRowLeftOutlined/>,
     children: [
       { path: URL.CADDY, menuName: 'Caddy', exact: true, component: Caddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-   
+
       { path: URL.TRANG_THAI_CADDY, menuName: 'Trạng thái Caddy', exact: true, component: TrangThaiCaddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      
+
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+
+  {
+    path: '/lich-san-golf/add',
+    component: ChiTietLichSanGolf,
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+  {
+    path: '/lich-san-golf/:id',
+    component: ChiTietLichSanGolf,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
+
+
   {
     path: '/caddy/add',
     component: CaddyChiTiet,
@@ -138,19 +176,19 @@ const constantsRoutes = [
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
   
-  {
-    path: URL.CATEGORY,
-    breadcrumbName: 'Quản lý FnB',
-    menuName: 'Quản lý FnB',
-    icon: <InsertRowLeftOutlined/>,
-    children: [
-      { path: URL.FNB, menuName: 'FnB', exact: true, component: FnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-   
-      { path: URL.TRANG_THAI_FNB, menuName: 'Trạng thái FnB', exact: true, component: TrangThaiFnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      
-    ],
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
+  // {
+  //   path: URL.CATEGORY,
+  //   breadcrumbName: 'Quản lý FnB',
+  //   menuName: 'Quản lý FnB',
+  //   icon: <InsertRowLeftOutlined/>,
+  //   children: [
+  //     { path: URL.FNB, menuName: 'FnB', exact: true, component: FnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //
+  //     { path: URL.TRANG_THAI_FNB, menuName: 'Trạng thái FnB', exact: true, component: TrangThaiFnB, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //
+  //   ],
+  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  // },
   {
     path: '/fnb/add',
     component: FnBChiTiet,
@@ -228,23 +266,21 @@ const constantsRoutes = [
   },
 
 
-
   //SỐ LỖ GOLF
 
   
-  {
-    path: URL.CATEGORY,
-    breadcrumbName: 'Quản lý Số lỗ golf',
-    menuName: 'Quản lý Số lỗ',
-    icon: <InsertRowLeftOutlined/>,
-    children: [
-      { path: URL.SOLO, menuName: 'Số lỗ golf', exact: true, component: Solo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-   
-      { path: URL.TRANG_THAI_SOLO, menuName: 'Trạng thái Số lỗ', exact: true, component: TrangThaiSolo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      
-    ],
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
+  // {
+  //   path: URL.CATEGORY,
+  //   breadcrumbName: 'Danh mục chung',
+  //   menuName: 'Danh mục chung',
+  //   icon: <InsertRowLeftOutlined/>,
+  //   children: [
+  //     { path: URL.SOLO, menuName: 'Số lỗ golf', exact: true, component: Solo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     { path: URL.TRANG_THAI_SOLO, menuName: 'Số lỗ', exact: true, component: TrangThaiSolo, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //
+  //   ],
+  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  // },
   {
     path: '/solo/add',
     component: SoloChiTiet,
@@ -262,19 +298,19 @@ const constantsRoutes = [
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
 
-  {
-    path: URL.CATEGORY,
-    breadcrumbName: 'Cửa hàng dụng cụ',
-    menuName: 'Cửa hàng dụng cụ',
-    icon: <InsertRowLeftOutlined/>,
-    children: [
-      { path: URL.DON_VI_TINH, menuName: 'Đơn vị tính', exact: true, component: DonViTinh, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.PROSHOP, menuName: 'ProShop', exact: true, component: ProShop, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      { path: URL.TRANG_THAI, menuName: 'Trạng thái', exact: true, component: TrangThai, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      
-    ],
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
+  // {
+  //   path: URL.CATEGORY,
+  //   breadcrumbName: 'Cửa hàng dụng cụ',
+  //   menuName: 'Cửa hàng dụng cụ',
+  //   icon: <InsertRowLeftOutlined/>,
+  //   children: [
+  //     { path: URL.DON_VI_TINH, menuName: 'Đơn vị tính', exact: true, component: DonViTinh, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     { path: URL.PROSHOP, menuName: 'ProShop', exact: true, component: ProShop, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //     { path: URL.TRANG_THAI, menuName: 'Trạng thái', exact: true, component: TrangThai, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+  //
+  //   ],
+  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  // },
   {
     path: '/proshop/add',
     component: ProShopChiTiet,
@@ -344,14 +380,14 @@ const constantsRoutes = [
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
 
-  {
-    path: '/muc-thanh-vien',
-    menuName: 'Chi tiết mức thành viên',
-    component: MucThanhVien,
-    icon: <WeiboCircleOutlined/>,
-    exact: true,
-    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
-  },
+  // {
+  //   path: '/muc-thanh-vien',
+  //   menuName: 'Chi tiết mức thành viên',
+  //   component: MucThanhVien,
+  //   icon: <WeiboCircleOutlined/>,
+  //   exact: true,
+  //   role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  // },
   {
     path: '/muc-thanh-vien/add',
     component: MucThanhVienChiTiet,

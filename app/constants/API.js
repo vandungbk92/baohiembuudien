@@ -163,4 +163,15 @@ export const API = {
   LICH_LAM_VIEC_CADDY_QUERY: '/api/lich-lam-viec-caddy?page={0}&limit={1}{2}',
   LICH_LAM_VIEC_CADDY_ID: '/api/lich-lam-viec-caddy/{0}',
 
+  LICH_SAN_GOLF: '/api/lich-san-golf',
+  LICH_SAN_GOLF_QUERY: '/api/lich-san-golf?page={0}&limit={1}{2}',
+  LICH_SAN_GOLF_ID: '/api/lich-san-golf/{0}',
+
+  KHUNG_GIO_SAN_GOLF: '/api/khung-gio-san-golf',
+  KHUNG_GIO_SAN_GOLF_QUERY: '/api/khung-gio-san-golf?page={0}&limit={1}{2}',
+  KHUNG_GIO_SAN_GOLF_ID: '/api/khung-gio-san-golf/{0}',
+
+
+
+
 };

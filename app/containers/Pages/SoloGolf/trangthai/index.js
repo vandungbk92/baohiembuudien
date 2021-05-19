@@ -25,7 +25,7 @@ class TrangThaiSolo extends Component {
 
   columns = [
     {
-      title: 'Tên trạng thái ',
+      title: 'Số lỗ',
       dataIndex: 'tentrangthai',
       width: 400,
 

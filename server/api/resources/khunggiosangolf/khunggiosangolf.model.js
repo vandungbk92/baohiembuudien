@@ -3,14 +3,12 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
 
-const trangthaisoloSchema = new Schema({
-  solo: {
-    type: String,
-    required: true,
-  },
+const khunggiosangolfSchema = new Schema({
   mota: { type: String },
   thutu: { type: String },
-
+  khunggio: { type: String , required: true},
+  giatien: { type: Number },
+  ca : [],
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
   timestamps: {
@@ -18,6 +16,6 @@ const trangthaisoloSchema = new Schema({
     updatedAt: 'updated_at',
   }
 });
-trangthaisoloSchema.plugin(mongoosePaginate);
+khunggiosangolfSchema.plugin(mongoosePaginate);
 
-export default mongoose.model('TrangThaiSoLo', trangthaisoloSchema);
+export default mongoose.model('KhungGioSanGolf', khunggiosangolfSchema);
