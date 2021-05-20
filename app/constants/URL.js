@@ -124,4 +124,8 @@ export const URL = {
   KHUNG_GIO_SAN_GOLF_ID: '/khung-gio-san-golf/{0}',
   KHUNG_GIO_SAN_GOLF_ADD: '/khung-gio-san-golf/add',
 
+  LICH_HEN: '/lich-hen',
+  LICH_HEN_ID: '/lich-hen/{0}',
+  LICH_HEN_ADD: '/lich-hen/add',
+
 }

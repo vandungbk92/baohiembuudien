@@ -21,7 +21,7 @@ const lichhenSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'KhungGioSanGolf'
   },
-  trangthai : {type : String},
+  trangthai : {type : String}, // Đang chờ, đã duyệt, đã hoàn thành
   voucher_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Voucher'

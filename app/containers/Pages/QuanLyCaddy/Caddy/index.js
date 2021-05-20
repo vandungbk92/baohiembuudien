@@ -26,6 +26,12 @@ import { Link } from 'react-router-dom';
 class Caddy extends Component {
 
   columns = [
+    {
+      title: 'Mã caddy',
+      dataIndex: 'macaddy',
+      width: 150,
+      align: 'center',
+    },
 
     {
       title: 'Họ tên',
@@ -33,23 +39,24 @@ class Caddy extends Component {
       width: 150,
       align: 'center',
     },
+
     {
-      title: 'Trình độ học vấn',
-      dataIndex: 'trinhdohocvan',
-      width: 150,
-      align: 'center',
-    },
-    {
-      title: 'Kinh nghiệm',
-      dataIndex: 'kinhnghiem',
+      title: 'Địa chỉ',
+      dataIndex: 'diachi',
       width: 150,
       align: 'center',
     },
     {
       title: 'Trạng thái',
-      dataIndex: ["trangthai_id", "tentrangthai"],
+      dataIndex: "trangthailamviec",
       width: 150,
       align: 'center',
+      render: (value) => {
+        return (
+        value == 0 ? 'Chưa có lịch' : "Đã có lịch"
+        )
+      },
+
     },
     {
       title: 'Hành động',

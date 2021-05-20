@@ -36,12 +36,15 @@ const caddySchema = new Schema({
     type: String,
     require:true
   },
-  trangthai_id: {
-    type: mongoose.Schema.Types.ObjectId,
-   
-    ref: 'TrangThaiCaddy'
-  },
-  trinhdohocvan:
+  // trangthai_id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'TrangThaiCaddy'
+  // },
+  trangthailamviec :
+    {
+      type: Number,
+    },
+  macaddy:
   {
     type: String,
     required: false
@@ -52,6 +55,7 @@ const caddySchema = new Schema({
     type: String,
     required: false
   },
+  active: { type: Boolean, default: true },
   is_deleted: {type: Boolean, default: false}
 }, {
   timestamps: {

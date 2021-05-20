@@ -228,10 +228,10 @@ class LichSuLamViec extends Component {
         </Tooltip>
         </Link>
 
-        <Tooltip placement="left" title={'Xem chi tiết'} color="#2db7f5">
-          <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' //ant-tag-cyan
-                  onClick={() => this.toggleModal(value)}></Button>
-        </Tooltip>
+        {/*<Tooltip placement="left" title={'Xem chi tiết'} color="#2db7f5">*/}
+        {/*  <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' //ant-tag-cyan*/}
+        {/*          onClick={() => this.toggleModal(value)}></Button>*/}
+        {/*</Tooltip>*/}
 
         <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
         onConfirm={() => this.handleDelete(value)}

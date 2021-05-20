@@ -14,19 +14,49 @@ const lichsangolfSchema = new Schema({
   },
   ghichu: { type: String },
   laplai: { type: String },
-  cangay:[],
-  casang:[],
-  cachieu:[],
-  nghi:[],
-  thu2: { type: String },
-  thu3: { type: String },
-  thu4: { type: String },
-  thu5: { type: String },
-  thu6: { type: String },
-  thu7: { type: String },
-  chunhat: { type: String },
+  thu2 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  thu3 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  thu4 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  thu5 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  thu6 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  thu7 :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
+  chunhat :[
+    {
+      ref: 'KhungGioSanGolf',
+      type: mongoose.Schema.Types.ObjectId,
+    }
+  ],
   malich: { type: String },
-  khunggio: { type: String },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
   timestamps: {

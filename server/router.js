@@ -32,6 +32,7 @@ import {jobRouter} from './api/resources/quanlyJob/job/job.router';
 import {lichlamvieccaddyRouter} from './api/resources/quanlycaddy/lichlamvieccaddy/lichlamvieccaddy.router';
 import {khunggiosangolfRouter} from './api/resources/khunggiosangolf/khunggiosangolf.router';
 import {lichsangolfRouter} from './api/resources/lichsangolf/lichsangolf.router';
+import {lichhenRouter} from './api/resources/lichhen/lichhen.router';
 
 const router = express.Router();
 router.use('/trang-thai-voucher', trangthaivoucherRouter);
@@ -66,5 +67,6 @@ router.use('/trang-thai-job',trangthaijobRouter);
 router.use('/lich-lam-viec-caddy', lichlamvieccaddyRouter);
 router.use('/lich-san-golf',lichsangolfRouter);
 router.use('/khung-gio-san-golf', khunggiosangolfRouter);
+router.use('/lich-hen', lichhenRouter);
 
 module.exports = router;

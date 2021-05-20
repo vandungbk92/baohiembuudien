@@ -3,8 +3,8 @@ import Joi from 'joi';
 export default {
   validateBody(body, method) {
     let objSchema = {
-      tungay: Joi.string()
-        .label('Từ ngày')
+      ngayhen: Joi.string()
+        .label('Ngày hẹn')
         .required()
         .error((errors) => {
           return {

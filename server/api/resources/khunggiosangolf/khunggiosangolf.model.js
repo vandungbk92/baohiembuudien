@@ -8,7 +8,8 @@ const khunggiosangolfSchema = new Schema({
   thutu: { type: String },
   khunggio: { type: String , required: true},
   giatien: { type: Number },
-  ca : [],
+  ca : { type: String },
+  // thu:[],
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
   timestamps: {

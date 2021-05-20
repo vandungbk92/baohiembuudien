@@ -23,7 +23,6 @@ export default {
         const totalQuery = await LichLamViecCaddy.paginate(query, {limit: 0})
         req.query.limit = totalQuery.total
       }
-
       let options = optionsRequest(req.query)
       const data = await LichLamViecCaddy.paginate(query, options)
       return res.json(data);

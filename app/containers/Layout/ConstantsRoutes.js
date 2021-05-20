@@ -64,7 +64,8 @@ import ThongTinChung from '@containers/Pages/ThongTinChung/Loadable';
 import LichSanGolf from 'Pages/QuanLyLichSanGolf/LichSanGolf/LichSanGolf/LichSuLichLamViec';
 import KhungGioSanGolf from 'Pages/QuanLyLichSanGolf/KhungGioSanGofl';
 import ChiTietLichSanGolf from 'Pages/QuanLyLichSanGolf/LichSanGolf/LichSanGolf/ThemMoiLich';
-
+import LichHen from 'Pages/LichHen';
+import LichHenChiTiet from 'Pages/LichHen/ChiTiet';
 function renderMenuIcon(icon) {
   return (
     <span className="anticon m-0" style={{ transform: 'translateY(-2px)' }}>
@@ -88,7 +89,7 @@ const constantsRoutes = [
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
-  //quản lý công việc
+  //quản lý lịch hẹn
 
   {
     path: URL.CATEGORY,
@@ -96,20 +97,27 @@ const constantsRoutes = [
     menuName: 'Quản lý Lịch hẹn',
     icon: <InsertRowLeftOutlined/>,
     children: [
-      { path: URL.JOB, menuName: 'Công việc', exact: true, component: Job, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-   
-      { path: URL.TRANG_THAI_JOB, menuName: 'Trạng thái Công việc', exact: true, component: TrangThaiJob, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
-      
+      { path: URL.LICH_HEN, menuName: 'Danh sách lịch hẹn', exact: true, component: LichHen, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
   {
-    path: '/job/add',
-    component: JobChiTiet,
+    path: '/lich-hen/add',
+    component: LichHenChiTiet,
     icon: <WeiboCircleOutlined/>,
     exact: true,
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
   },
+
+  {
+    path: '/lich-hen/:id',
+    component: LichHenChiTiet,
+    // breadcrumbName: 'Thêm dữ liệu',
+    icon: <WeiboCircleOutlined/>,
+    exact: true,
+    role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],
+  },
+
   //kết thúc
   
   {
@@ -134,7 +142,7 @@ const constantsRoutes = [
     children: [
       { path: URL.CADDY, menuName: 'Caddy', exact: true, component: Caddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
 
-      { path: URL.TRANG_THAI_CADDY, menuName: 'Trạng thái Caddy', exact: true, component: TrangThaiCaddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
+      // { path: URL.TRANG_THAI_CADDY, menuName: 'Trạng thái Caddy', exact: true, component: TrangThaiCaddy, role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE] },
 
     ],
     role: [CONSTANTS.ADMIN, CONSTANTS.MANAGE],

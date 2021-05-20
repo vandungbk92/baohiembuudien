@@ -9,7 +9,12 @@ lichsangolfRouter
   .post(passport.authenticate('jwt', { session: false }), lichsangolfController.create)
 
 lichsangolfRouter
+  .get('/khung-gio-theo-thu/',passport.authenticate('jwt', { session: false }),lichsangolfController.getKhungGioTheoThu)
+
+lichsangolfRouter
   .route('/:id')
   .get(lichsangolfController.findOne)
   .put(passport.authenticate('jwt', { session: false }), lichsangolfController.update)
   .delete(passport.authenticate('jwt', { session: false }), lichsangolfController.delete);
+
+

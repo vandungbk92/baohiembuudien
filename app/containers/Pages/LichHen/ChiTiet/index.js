@@ -20,10 +20,10 @@ import { UploadOutlined, SaveOutlined, BellOutlined, UserOutlined, CheckOutlined
 import { add, getById, updateById } from "@services/quanlycaddy/caddyService";
 import { CONSTANTS } from "@constants";
 import { uploadImages } from "@services/uploadServices";
-import { getAll as getAllTT } from "@services/quanlycaddy/trangthaicaddyService";
+import { getAll } from "@services/lichhen/lichhenService";
 import { createStructuredSelector } from "reselect";
 import { makeGetLoading } from "@containers/App/AppProvider/selectors";
-import { makeGetMyInfo } from "../../../../Layout/HeaderComponent/HeaderProvider/selectors";
+import { makeGetMyInfo } from "../../../Layout/HeaderComponent/HeaderProvider/selectors";
 import { connect } from "react-redux";
 import axios from "axios";
 import { URL } from "@url";
@@ -31,10 +31,9 @@ import Box from "@containers/Box";
 import { number } from "prop-types";
 import moment from "moment";
 import { API } from '@api';
-import LichLamViec from 'Pages/QuanLyCaddy/Caddy/LichLamViec/LichLamViec';
 const layoutCol = { xl: 8, md: 24, lg: 24, xs: 24, sm: 24 };
 const { TabPane } = Tabs;
-class CaddyChiTiet extends Component {
+class LichHenChiTiet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -132,8 +131,6 @@ class CaddyChiTiet extends Component {
     const { _id, dsTrangThai, mode, value, selectedValue } = this.state;
     return (
       <div>
-        <Tabs defaultActiveKey="1" >
-          <TabPane tab="Thông tin Caddy" key="1">
             <Form
               ref={this.formRef}
               layout="vertical"
@@ -259,9 +256,9 @@ class CaddyChiTiet extends Component {
                       validateTrigger={["onChange", "onBlur"]}
                       rules={[{ required: true, message: "trạng thái không được để trống" }]}
                     >
-                      <Select defaultValue= {0}>
-                        <Option value={0}>Chưa có lịch hẹn</Option>
-                        <Option value= {1}>Đã có lịch hẹn</Option>
+                      <Select defaultValue='CHUACOLICH'>
+                        <Option value={'CHUACOLICH'}>Chưa có lịch hẹn</Option>
+                        <Option value= {'DACOLICH'}>Đã có lịch hẹn</Option>
                       </Select>
                     </Form.Item>
                   </Col>
@@ -298,51 +295,7 @@ class CaddyChiTiet extends Component {
               </Box>
             </Form>
             ;
-          </TabPane>
-          <TabPane tab="Lịch làm việc" key="2">
-            <LichLamViec caddy_id = {this.state._id} ></LichLamViec>
-          </TabPane>
-          <TabPane tab="Lịch với khách hàng" key="3">
-            <Form>
-              <Box
-                title="Lịch làm việc của Caddy"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
-                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
 
-              </Box>
-            </Form>
-          </TabPane>
-          <TabPane tab="Thống kê ngày nghỉ" key="4">
-            <Form>
-              <Box
-                title="Lịch làm việc của Caddy"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
-                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
-
-              </Box>
-            </Form>
-          </TabPane>
-        </Tabs>
       </div>
     );
   }
@@ -355,4 +308,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(CaddyChiTiet);
+export default withConnect(LichHenChiTiet);

@@ -171,7 +171,9 @@ export const API = {
   KHUNG_GIO_SAN_GOLF_QUERY: '/api/khung-gio-san-golf?page={0}&limit={1}{2}',
   KHUNG_GIO_SAN_GOLF_ID: '/api/khung-gio-san-golf/{0}',
 
-
+  LICH_HEN: '/api/lich-hen',
+  LICH_HEN_QUERY: '/api/lich-hen?page={0}&limit={1}{2}',
+  LICH_HEN_ID: '/api/lich-hen/{0}',
 
 
 };

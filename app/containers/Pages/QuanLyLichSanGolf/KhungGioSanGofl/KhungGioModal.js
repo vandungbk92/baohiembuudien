@@ -13,7 +13,6 @@ class KhungGioSanGolfModal extends Component {
     super(props);
     this.state = {
       showModal: false,
-      khunggio:''
     };
     this.formRef = React.createRef();
   }
@@ -23,6 +22,9 @@ class KhungGioSanGolfModal extends Component {
     if(showModal !== prevProps.showModal){
       await this.setState({showModal: true});
       if(data){
+        console.log(data,'dataaaaa');
+        data.khunggio = data.khunggio ? moment(data.khunggio) : null;
+        console.log( data.khunggio,' data.khunggio');
         this.formRef?.current?.setFieldsValue(data);
       }else{
         this.formRef?.current?.resetFields();
@@ -37,6 +39,7 @@ class KhungGioSanGolfModal extends Component {
   }
 
   handleSaveData = async (dataForm) => {
+    console.log(dataForm.khunggio,'dataForm.khunggiodataForm.khunggiodataForm.khunggiodataForm.khunggio');
     dataForm.khunggio = dataForm.khunggio ? dataForm.khunggio.format('HH:mm') : '';
     const { data } = this.props;
     if (data) {
