@@ -4,6 +4,7 @@ import * as responseAction from '../../utils/responseAction'
 import {filterRequest, optionsRequest} from '../../utils/filterRequest'
 import Caddy from '../quanlycaddy/caddy/caddy.model';
 import LichLamViecCaddy from '../quanlycaddy/lichlamvieccaddy/lichlamvieccaddy.model'
+import path from 'path';
 
 export default {
   async create(req, res) {
@@ -28,7 +29,7 @@ export default {
 
       let options = optionsRequest(req.query)
 
-      // options.populate=[{path: ''}]
+      options.populate=[{path: 'khachchoi_id'} , {path: 'khunggio_id'}, {path : "caddy_id"}]
       const data = await LichHen.paginate(query, options)
       return res.json(data);
     } catch (err) {
@@ -41,7 +42,7 @@ export default {
   async findOne(req, res) {
     try {
       const { id } = req.params;
-      const data = await LichHen.findOne({is_deleted: false, _id: id})
+      const data = await LichHen.findOne({is_deleted: false, _id: id}).populate('khachchoi_id').populate('khunggio_id').populate('caddy_id' )
       if (!data) {
           responseAction.error(res, 404, '')
       }
@@ -94,6 +95,17 @@ export default {
 
       // options.populate=[{path: ''}]
       const data = await LichHen.paginate(query, options)
+      return res.json(data);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+  },
+  async getLichHenByCaddy(req, res) {
+    try {
+      let { id } = req.params;
+      let data = await LichHen.find({ caddy_id: id, is_deleted: false }).sort({created_at : -1}).populate('khachchoi_id').populate('khunggio_id')
+        .populate({path: 'caddy_id', select: 'hoten'});
       return res.json(data);
     } catch (err) {
       console.error(err);

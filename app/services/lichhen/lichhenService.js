@@ -72,5 +72,17 @@ function updateById(id, data) {
     });
 }
 
-
-export {add, getById, getAll, delById, updateById}
+function getLichHenByCaddy(id) {
+  return axios.get(`${API.LICH_HEN_ID.format(id)}/lich-hen-by-caddy`).then(res => {
+    if (res.data) {
+      return res.data;
+    }
+    else {
+      return null
+    }
+  })
+    .catch(error => {
+      return null
+    });
+}
+export {add, getById, getAll, delById, updateById, getLichHenByCaddy}

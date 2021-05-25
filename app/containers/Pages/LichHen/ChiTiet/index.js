@@ -17,7 +17,7 @@ import {
   Upload
 } from "antd";
 import { UploadOutlined, SaveOutlined, BellOutlined, UserOutlined, CheckOutlined , CloseOutlined  } from "@ant-design/icons";
-import { add, getById, updateById } from "@services/quanlycaddy/caddyService";
+import { add, getById, updateById } from "@services/lichhen/lichhenService";
 import { CONSTANTS } from "@constants";
 import { uploadImages } from "@services/uploadServices";
 import { getAll } from "@services/lichhen/lichhenService";

@@ -39,6 +39,19 @@ class Caddy extends Component {
       width: 150,
       align: 'center',
     },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      width: 150,
+      align: 'center',
+    },
+
+    {
+      title: 'Điện thoại',
+      dataIndex: 'sdt',
+      width: 150,
+      align: 'center',
+    },
 
     {
       title: 'Địa chỉ',
@@ -46,18 +59,18 @@ class Caddy extends Component {
       width: 150,
       align: 'center',
     },
-    {
-      title: 'Trạng thái',
-      dataIndex: "trangthailamviec",
-      width: 150,
-      align: 'center',
-      render: (value) => {
-        return (
-        value == 0 ? 'Chưa có lịch' : "Đã có lịch"
-        )
-      },
-
-    },
+    // {
+    //   title: 'Trạng thái',
+    //   dataIndex: "trangthailamviec",
+    //   width: 150,
+    //   align: 'center',
+    //   render: (value) => {
+    //     return (
+    //     value == 0 ? 'Chưa có lịch' : "Đã có lịch"
+    //     )
+    //   },
+    //
+    // },
     {
       title: 'Hành động',
       render: (value) => this.formatActionCell(value),

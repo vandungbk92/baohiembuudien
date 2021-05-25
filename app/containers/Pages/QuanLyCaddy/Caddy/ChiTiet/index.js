@@ -32,6 +32,7 @@ import { number } from "prop-types";
 import moment from "moment";
 import { API } from '@api';
 import LichLamViec from 'Pages/QuanLyCaddy/Caddy/LichLamViec/LichLamViec';
+import LichHenVoiKhach from 'Pages/QuanLyCaddy/Caddy/LichLamViec/LichHenVoiKhach';
 const layoutCol = { xl: 8, md: 24, lg: 24, xs: 24, sm: 24 };
 const { TabPane } = Tabs;
 class CaddyChiTiet extends Component {
@@ -303,24 +304,7 @@ class CaddyChiTiet extends Component {
             <LichLamViec caddy_id = {this.state._id} ></LichLamViec>
           </TabPane>
           <TabPane tab="Lịch với khách hàng" key="3">
-            <Form>
-              <Box
-                title="Lịch làm việc của Caddy"
-                boxActions={
-                  this.props.myInfoResponse.role === CONSTANTS.ADMIN ? (
-                    <Button key="submit" htmlType="submit" icon={<SaveOutlined />} size="small" type="primary">
-                      Lưu dữ liệu
-                    </Button>
-                  ) : (
-                    ""
-                  )
-                }
-              >
-                <Alert message={`You selected date: ${selectedValue && selectedValue.format("YYYY-MM-DD")}`} />
-                <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
-
-              </Box>
-            </Form>
+            <LichHenVoiKhach caddy_id = {this.state._id} ></LichHenVoiKhach>
           </TabPane>
           <TabPane tab="Thống kê ngày nghỉ" key="4">
             <Form>

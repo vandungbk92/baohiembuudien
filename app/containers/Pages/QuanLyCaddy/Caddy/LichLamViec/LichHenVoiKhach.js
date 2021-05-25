@@ -21,7 +21,7 @@ import {
   PlusOutlined,
   UnorderedListOutlined, CloseOutlined, SaveOutlined,
 } from '@ant-design/icons';
-import { PAGINATION_CONFIG, RULE, TRANG_THAI_LICH_HEN } from '@constants';
+import { PAGINATION_CONFIG, RULE } from '@constants';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
 import { connect } from 'react-redux';
@@ -29,17 +29,17 @@ import Search from '@components/Search/Search';
 import { stringify } from 'qs';
 import queryString from 'query-string';
 // import { fetchSanPham } from '@reduxApp/HoatDongSanXuat/actions';
-import { makeGetMyInfo } from '../../Layout/HeaderComponent/HeaderProvider/selectors';
+import { makeGetMyInfo } from '../../../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
-import {getAll, updateById} from '@services/lichhen/lichhenService'
+import {getAll, updateById, getLichHenByCaddy} from '@services/lichhen/lichhenService'
 import {getAll as getAllCaddy, getById as getCaddyByID} from '@services/quanlycaddy/caddyService'
 
 import axios from 'axios'
-import { URL } from "../../../constants/URL";
+import { URL } from "../../../../../constants/URL";
 import { Link } from 'react-router-dom';
 import {dateFormatter} from '@commons/dateFormat';
 
-class LichHen extends Component {
+class LichHenVoiKhach extends Component {
 
   columns = [
 
@@ -76,15 +76,13 @@ class LichHen extends Component {
       width: 150,
       align: 'center',
     },
-    {
-      title: 'Caddy chơi cùng ',
-      dataIndex: 'caddy_id',
-      width: 150,
-      align: 'center',
-      render : (value) => this.showTTCaddy(value),
-
-
-    },
+    // {
+    //   title: 'Caddy chơi cùng ',
+    //   dataIndex: 'caddy_id',
+    //   width: 150,
+    //   align: 'center',
+    //   render : (value) => this.showTTCaddy(value),
+    // },
     {
       title: 'Trạng thái ',
       dataIndex: 'trangthai',
@@ -92,12 +90,12 @@ class LichHen extends Component {
       align: 'center',
       render: (value) => this.showTrangThai(value)
     },
-    {
-      title: 'Hành động',
-      render: (value) => this.formatActionCell(value),
-      width: 150,
-      align: 'center',
-    },
+    // {
+    //   title: 'Hành động',
+    //   render: (value) => this.formatActionCell(value),
+    //   width: 150,
+    //   align: 'center',
+    // },
   ];
 
   constructor(props) {
@@ -116,10 +114,10 @@ class LichHen extends Component {
   }
 
   async componentDidMount() {
-    let dataApi = await getAll(1, 0)
-    if(dataApi){
-      this.setState({dslichhen: dataApi.docs})
-    }
+    // let dataApi = await getAll(1, 0)
+    // if(dataApi){
+    //   this.setState({dslichhen: dataApi.docs})
+    // }
     this.getDataFilter();
   }
   async getAllCaddy(){
@@ -130,26 +128,17 @@ class LichHen extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.location.search !== prevProps.location.search) {
-      this.getDataFilter();
-    }
+    // if (this.props.location.search !== prevProps.location.search) {
+    //   this.getDataFilter();
+    // }
   }
 
   async getDataFilter() {
-    let search = queryString.parse(this.props.location.search);
-    let page = parseInt(search.page ? search.page : this.state.page);
-    let limit = parseInt(search.limit ? search.limit : this.state.limit);
-    let queryStr = '';
-    queryStr += `${search.hoten ? '&hoten[like]={0}'.format(search.hoten) : ''}`;
-    queryStr += `${search.trangthai_id ? '&trangthai_id={0}'.format(search.trangthai_id) : ''}`;
-    const apiResponse = await getAll(page, limit, queryStr);
+    const apiResponse = await getLichHenByCaddy(this.props.caddy_id);
     if (apiResponse) {
-      const dataRes = apiResponse.docs;
+      const dataRes = apiResponse;
       this.setState({
         dataRes,
-        totalDocs: apiResponse.totalDocs,
-        limit: apiResponse.limit,
-        page: apiResponse.page,
       });
     }
   }
@@ -196,9 +185,9 @@ class LichHen extends Component {
   }
   formatActionCell(value) {
     return <>
-        <Tooltip title={'Xem chi tiết'} color="#2db7f5">
-          <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
-        </Tooltip>
+      <Tooltip title={'Xem chi tiết'} color="#2db7f5">
+        <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
+      </Tooltip>
 
       <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
                   onConfirm={() => this.handleDelete(value)}
@@ -296,16 +285,16 @@ class LichHen extends Component {
     lichhenCurrent.caddy_id = data.caddy_id
     lichhenCurrent.trangthai = data.trangthai
     const apiResponse = await updateById(_id, lichhenCurrent);
-      if (apiResponse) {
-        const dataRes = this.state.dataRes.map(data => {
-          if (data._id === apiResponse._id) {
-            return apiResponse;
-          }
-          return data;
-        });
-        await this.setState({ dataRes, showModal: false });
-        message.success("Chỉnh sửa dữ liệu thành công")
-        this.getDataFilter()
+    if (apiResponse) {
+      const dataRes = this.state.dataRes.map(data => {
+        if (data._id === apiResponse._id) {
+          return apiResponse;
+        }
+        return data;
+      });
+      await this.setState({ dataRes, showModal: false });
+      message.success("Chỉnh sửa dữ liệu thành công")
+      this.getDataFilter()
 
     }
   }
@@ -329,28 +318,28 @@ class LichHen extends Component {
       name: 'hoten',
       label: 'Họ tên',
     },
-    { type: 'select',
-    name: 'trangthai_id',
-    label: 'Trạng thái',
-    options: dslichhen,
-    key: '_id',
-    value: 'tentrangthai'}
+      { type: 'select',
+        name: 'trangthai_id',
+        label: 'Trạng thái',
+        options: dslichhen,
+        key: '_id',
+        value: 'tentrangthai'}
 
-  ];
+    ];
     return <div>
 
 
       <Card size="small" title={<span>
-        <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách LichHen
+        <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách LichHenVoiKhach
       </span>}
-      md="24"
-      bordered extra={
-      <Link to={URL.LICH_HEN_ADD}>
-        {this.props.myInfoResponse.role === CONSTANTS.ADMIN ?   <Button type="primary" className='pull-right' size="small" icon={<PlusOutlined/>}>Thêm</Button> : ''}
+            md="24"
+            bordered extra={
+        <Link to={URL.LICH_HEN_ADD}>
+          {this.props.myInfoResponse.role === CONSTANTS.ADMIN ?   <Button type="primary" className='pull-right' size="small" icon={<PlusOutlined/>}>Thêm</Button> : ''}
 
-      </Link>
-    }
-    >
+        </Link>
+      }
+      >
         <Search onFilterChange={this.handleRefresh} dataSearch={dataSearch}/>
         <Table loading={loading} bordered columns={this.columns} dataSource={dataRes}
                size="small" rowKey="_id"
@@ -429,17 +418,15 @@ class LichHen extends Component {
               validateTrigger={["onChange", "onBlur"]}
               rules={[{ required: true, message: "trạng thái không được để trống" }]}
             >
-                <Select
-                  placeholder="Chọn trạng thái"
-                  disabled={this.props.loading}
-                  dropdownClassName="small"
-                  filterOption={(input, option) => { return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-                  }}>
-                  {TRANG_THAI_LICH_HEN.map(data => (
-                    <Select.Option key={data.value} value={data.value}>
-                      {data.label}
-                    </Select.Option>
-                  ))}
+              <Select
+                placeholder="Chọn trạng thái"
+                disabled={this.props.loading}
+                dropdownClassName="small"
+                filterOption={(input, option) => { return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+                }}>
+                <Option value={'PENDING'}>Đang chờ duyệt</Option>
+                <Option value= {'APPROVED'}>Đã duyệt</Option>
+                <Option value= {'COMPLETED'}>Hoàn thành</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -457,4 +444,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default withConnect(LichHen);
+export default withConnect(LichHenVoiKhach);

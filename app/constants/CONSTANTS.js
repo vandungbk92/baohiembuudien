@@ -23,6 +23,7 @@ export const CONSTANTS = {
   ALL: 'ALL',
   ADMIN: 'ADMIN',
   CADDY: 'CADDY',
+  CUSTOMER: 'CUSTOMER',
   MANAGE: 'QUAN_LY',
   DOCTOR: 'BAC_SY',
   ADMINISTRATOR: 'ADMINISTRATOR',
@@ -60,7 +61,13 @@ export const ROLE_OPTIONS = [
   { value: CONSTANTS.ADMIN, label: 'Quản trị hệ thống' },
   { value: CONSTANTS.MANAGE, label: 'Quản lý' },
   { value: CONSTANTS.CADDY, label: 'Caddy' },
+  { value: CONSTANTS.CUSTOMER, label: 'Khách hàng' },
+];
 
+export const TRANG_THAI_LICH_HEN = [
+  { value: 'PENDING', label: 'Đang chờ' },
+  { value: 'APPROVED', label: 'Đã xác nhận' },
+  { value: 'COMPLETED', label: 'Đã hoàn thành' },
 ];
 
 
