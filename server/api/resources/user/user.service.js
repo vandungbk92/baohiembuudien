@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import bcrypt from 'bcryptjs';
-
+import  User from './user.model'
 export default {
   encryptPassword(palinText) {
     const salt = bcrypt.genSaltSync(10);
@@ -91,11 +91,33 @@ export default {
           template: 'không được bỏ trống'
         };
       }),
+      device_token: Joi.string().allow(null).allow('')
     });
     const { value, error } = Joi.validate(body, schema);
     if (error && error.details) {
       return { error };
     }
     return { value };
+  },
+
+  async addOrUpdateDeviceToken(nguoidung, deviceToken) {
+    if (nguoidung && deviceToken) {
+      let deviceTokens = nguoidung.device_tokens ? nguoidung.device_tokens : [];
+      let deviceIndex = deviceTokens.indexOf(deviceToken);
+      if (deviceIndex === -1) {
+        deviceTokens.push(deviceToken);
+        await User.findByIdAndUpdate(nguoidung._id, { device_tokens: deviceTokens }, { new: true });
+      }
+    }
+  },
+  async findAndRemoveDeviceToken(nguoidung, deviceToken) {
+    if (nguoidung && deviceToken) {
+      let deviceTokens = nguoidung.device_tokens ? nguoidung.device_tokens : [];
+      let deviceIndex = deviceTokens.indexOf(deviceToken);
+      if (deviceIndex !== -1) {
+        deviceTokens.splice(deviceIndex, 1);
+        await User.findByIdAndUpdate(nguoidung._id, { device_tokens: deviceTokens }, { new: true });
+      }
+    }
   },
 };

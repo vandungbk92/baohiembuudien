@@ -68,7 +68,6 @@ export default {
       if (error) {
         return res.status(400).json(error);
       }
-
       // Đầu tiên kiểm tra xem có phải tài khoản của giáo viên không.
       const user = await User.findOne({ username: value.username, is_deleted: false });
       if(!user){
@@ -82,6 +81,7 @@ export default {
             return res.status(401).json({ success: false, message: 'Tài khoản đã tạm khóa, vui lòng liên hệ quản trị viên.' });
           }
           const token = jwt.issue({ id: user._id, isUser: true }, '10d');
+          await userService.addOrUpdateDeviceToken(user, req.body.device_token);
           return res.json({ token });
         }
         return res.status(401).json({ success: false, message: 'Tài khoản hoặc mật khẩu không đúng' });

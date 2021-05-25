@@ -13,6 +13,7 @@ const userSchema = new Schema({
     phone: { type: String, required: true },
     is_deleted: { type: Boolean, default: false, select: false },
     active: { type: Boolean, default: true },
+    device_tokens: [],
   },
   {
     timestamps: {

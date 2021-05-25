@@ -7,7 +7,6 @@ caddyRouter
   .route('/')
   .get(caddyController.getAll)
   .post(passport.authenticate('jwt', { session: false }), caddyController.create)
-
 caddyRouter
   .route('/:id')
   .get(caddyController.findOne)

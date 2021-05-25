@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { makeSelectToggleSider } from '../HeaderComponent/selectors';
 
-import LOGO from '@assets/images/logos/logo.svg';
+import LOGO from '@assets/images/logos/logo.png';
 import constantsRoutes from '../ConstantsRoutes';
 import './SiderComponent.scss';
 

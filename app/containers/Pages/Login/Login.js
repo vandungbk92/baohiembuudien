@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 import './Login.scss';
-import LOGO from '../../../assets/images/logos/logo.svg';
+import LOGO from '../../../assets/images/logos/logo.png';
+import BG from '../../../assets/images/bggolf.jpg';
+
 import { login } from './services';
 import { createStructuredSelector } from 'reselect';
 import { makeGetLoading } from '@containers/App/AppProvider/selectors';
@@ -31,11 +33,12 @@ class Login extends Component {
     const { loading } = this.props;
 
     return (
-      <div style={{ height: "100vh" }}>
+      <div style={{ height: "100vh",width: "100vw", backgroundImage : `url(${BG})`,opacity : 0.9 , backgroundSize: 'cover',
+        position: 'relative'}}>
         <div id='login' className='login-form'>
           <div className='logo'>
             <img alt="logo" src={LOGO}/>
-            <span>Quản lý sân Golf</span>
+            <span >Quản lý sân Golf</span >
           </div>
           <Form onFinish={this.handleLogin.bind(this)}>
             <FormItem name="username" rules={[{ required: true, message: 'Không được để trống' }]} hasFeedback>
