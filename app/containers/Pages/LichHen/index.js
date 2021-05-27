@@ -53,27 +53,27 @@ class LichHen extends Component {
     {
       title: 'Thông tin khách đặt',
       dataIndex: 'khachchoi_id',
-      width: 150,
+      width: 250,
       align: 'center',
       render : (value) => this.showKhachDat(value),
     },
     {
-      title: 'Thông tin khung giờ',
+      title: 'Tee Time',
       dataIndex: 'khunggio_id',
-      width: 150,
+      width: 100,
       align: 'center',
       render : (value) => this.showKhungGio(value),
     },
     {
       title: 'Loại lỗ',
       dataIndex: 'solo',
-      width: 150,
+      width: 100,
       align: 'center',
     },
     {
       title: 'Số người chơi ',
       dataIndex: 'songuoichoi',
-      width: 150,
+      width: 100,
       align: 'center',
     },
     {
@@ -164,20 +164,20 @@ class LichHen extends Component {
 
   showKhachDat(value){
     return <>
-      <span className={"float-left"}> Họ tên: {value.full_name} </span>
+      <div className="float-left"> - Họ tên: {value.full_name} </div>
       <br/>
-      <span className={"float-left"}>Điện thoại: {value.phone} </span>
+      <div className="float-left">- Điện thoại: {value.phone} </div>
       <br/>
-      <span className={"float-left"}> Mail: {value.email} </span>
+      <div className="float-left">- Mail: {value.email} </div>
     </>;
 
   }
 
   showKhungGio(value){
     return <>
-      <span className={"float-left"}> Khung giờ: {value.khunggio} </span>
+      <div className="style-time"> {value.khunggio} </div>
       <br/>
-      <span className={"float-left"}>Mô tả: {value.mota} </span>
+      {/*<div className="style-time">Mô tả: {value.mota} </div>*/}
     </>;
   }
   showTrangThai(value){

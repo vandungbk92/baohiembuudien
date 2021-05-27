@@ -34,8 +34,9 @@ const config = {
   },
   development: {
     secret: 'AIBOLIT',
-    // MONGO_URI: 'mongodb://sysAdmin:thinklabs36@thinklabs.ddns.net:28018/tgolf?connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.databases=admin',
-    MONGO_URI:"mongodb://localhost:27017/my-data",
+    // MONGO_URI: 'mongodb://localhost:27017/dbgofl',
+    MONGO_URI: 'mongodb://tgolf:Thinklabs36@118.70.156.51:4014/tgolf?authSource=tgolf&authMechanism=SCRAM-SHA-256',
+
     port: 27017,
     "cos": {
       "credentials": {
