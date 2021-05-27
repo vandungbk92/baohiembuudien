@@ -68,6 +68,7 @@ export const TRANG_THAI_LICH_HEN = [
   { value: 'PENDING', label: 'Đang chờ' },
   { value: 'APPROVED', label: 'Đã xác nhận' },
   { value: 'COMPLETED', label: 'Đã hoàn thành' },
+  { value: 'CANCEL', label: 'Đã hủy' },
 ];
 
 

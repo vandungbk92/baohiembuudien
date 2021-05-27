@@ -19,7 +19,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
-  UnorderedListOutlined, CloseOutlined, SaveOutlined,
+  UnorderedListOutlined, CloseOutlined, SaveOutlined, BellOutlined,
 } from '@ant-design/icons';
 import { PAGINATION_CONFIG, RULE, TRANG_THAI_LICH_HEN } from '@constants';
 import { createStructuredSelector } from 'reselect';
@@ -28,10 +28,10 @@ import { connect } from 'react-redux';
 import Search from '@components/Search/Search';
 import { stringify } from 'qs';
 import queryString from 'query-string';
-// import { fetchSanPham } from '@reduxApp/HoatDongSanXuat/actions';
+import { add as addThongBao, getAll as getAllThongBao } from '@services/thongbaochung/thongbaochungService';
 import { makeGetMyInfo } from '../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
-import {getAll, updateById} from '@services/lichhen/lichhenService'
+import {getAll, updateById, delById} from '@services/lichhen/lichhenService'
 import {getAll as getAllCaddy, getById as getCaddyByID} from '@services/quanlycaddy/caddyService'
 
 import axios from 'axios'
@@ -135,13 +135,24 @@ class LichHen extends Component {
     }
   }
 
+  addThongBao = async () => {
+    const data = {
+      loaithongbao: 'LichHen',
+      link_push_id: this.state.lichhenCurrent._id,
+    };
+    const apiResponse = await addThongBao(data);
+    if (apiResponse) {
+      message.success('Đẩy thông báo thành công');
+    }
+  };
+
   async getDataFilter() {
     let search = queryString.parse(this.props.location.search);
     let page = parseInt(search.page ? search.page : this.state.page);
     let limit = parseInt(search.limit ? search.limit : this.state.limit);
     let queryStr = '';
     queryStr += `${search.hoten ? '&hoten[like]={0}'.format(search.hoten) : ''}`;
-    queryStr += `${search.trangthai_id ? '&trangthai_id={0}'.format(search.trangthai_id) : ''}`;
+    queryStr += `${search.trangthai ? '&trangthai={0}'.format(search.trangthai) : ''}`;
     const apiResponse = await getAll(page, limit, queryStr);
     if (apiResponse) {
       const dataRes = apiResponse.docs;
@@ -182,8 +193,9 @@ class LichHen extends Component {
   }
   showTrangThai(value){
     return <>
-      {value === 'PENDING' ? <Tag color="#f50"> Đang chờ duyệt</Tag>  : value === 'APPROVED' ?
-        <Tag color="#87d068"> Đã  xác nhận</Tag> :  <Tag color="#108ee9"> Đã chơi xong</Tag>
+      {value === 'PENDING' ? <Tag color="#2db7f5"> Đang chờ duyệt</Tag>  : value === 'APPROVED' ?
+        <Tag color="#87d068"> Đã  xác nhận</Tag> :  value === 'COMPLETED' ?  <Tag color="#108ee9"> Đã chơi xong</Tag> :
+          <Tag color="#f50"> Đã  hủy</Tag>
       }
     </>;
   }
@@ -196,9 +208,17 @@ class LichHen extends Component {
   }
   formatActionCell(value) {
     return <>
-        <Tooltip title={'Xem chi tiết'} color="#2db7f5">
+      {
+        value.trangthai === 'PENDING' ? <Tooltip title={'Xem chi tiết'} color="#2db7f5">
+          <Button icon={<EditOutlined/>} size='small' type="danger" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
+        </Tooltip> : ""
+      }
+
+       <Tooltip title={'Xem chi tiết'} color="#2db7f5">
           <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
         </Tooltip>
+
+
 
       <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
                   onConfirm={() => this.handleDelete(value)}
@@ -209,41 +229,6 @@ class LichHen extends Component {
       </Popconfirm>
     </>;
   }
-
-  // showTrangThai(value){
-  //   return <React.Fragment>
-  //   {
-  //     <div>{value.trangthai_id.tentrangthai} </div>
-  //   }
-
-  // </React.Fragment>
-  // }
-
-  // handleRefresh = (newQuery, changeTable) => {
-  //   const { location, history } = this.props;
-  //   const { pathname } = location;
-  //   console.log(pathname,'pathname');
-  //   console.log(location,'location');
-  //   console.log(history,'history');
-  //
-  //   let { page, limit } = this.state;
-  //   let objFilterTable = { page, limit };
-  //   if (changeTable) {
-  //     newQuery = queryString.parse(this.props.location.search);
-  //     delete newQuery.page;
-  //     delete newQuery.limit;
-  //   }
-  //   newQuery = Object.assign(objFilterTable, newQuery);
-  //
-  //   let query  = {idcongan:1111111}
-  //   console.log(newQuery,'NEWQUERY');
-  //   console.log(query,'query');
-  //   console.log(stringify({...query}, { arrayFormat: 'repeat' }),'stringify({query}');
-  //   console.log(stringify({...newQuery}, { arrayFormat: 'repeat' }),'stringify({query}');
-  //   history.push({
-  //     pathname, search: stringify({...query}, { arrayFormat: 'repeat' }),
-  //   });
-  // };
 
   handleRefresh = (newQuery, changeTable) => {
     const { location, history } = this.props;
@@ -256,7 +241,6 @@ class LichHen extends Component {
       delete newQuery.limit;
     }
     newQuery = Object.assign(objFilterTable, newQuery);
-    let query  = {idcongan:1111111}
     history.push({
       pathname, search: stringify({...newQuery}, { arrayFormat: 'repeat' }),
     });
@@ -289,6 +273,10 @@ class LichHen extends Component {
     const { showModal } = this.state;
     this.getAllCaddy()
     await this.setState({ showModal: !showModal, _id: value._id, lichhenCurrent : value  });
+    this.formRef.current.setFieldsValue({
+      caddy_id : value.caddy_id._id,
+      trangthai : value.trangthai
+    });
   };
 
   handleSaveData = async data => {
@@ -305,37 +293,23 @@ class LichHen extends Component {
         });
         await this.setState({ dataRes, showModal: false });
         message.success("Chỉnh sửa dữ liệu thành công")
+        this.addThongBao()
         this.getDataFilter()
 
     }
   }
 
-
-  // showTrangThai(value){
-  //   return <React.Fragment>
-  //   {
-  //     <div>{value.tentrangthai} </div>
-  //   }
-
-  // </React.Fragment>
-  // }
-
   render() {
     const { loading } = this.props;
     const { dataRes, totalDocs, page, limit, dslichhen } = this.state;
-    const dataSearch = [{
-      type: 'text',
-      operation: 'like',
-      name: 'hoten',
-      label: 'Họ tên',
-    },
-    { type: 'select',
-    name: 'trangthai_id',
-    label: 'Trạng thái',
-    options: dslichhen,
-    key: '_id',
-    value: 'tentrangthai'}
+    const dataSearch = [
 
+    { type: 'select',
+    name: 'trangthai',
+    label: 'Trạng thái',
+    options:  TRANG_THAI_LICH_HEN,
+    key: 'value',
+    value: 'label'}
   ];
     return <div>
 
@@ -344,12 +318,6 @@ class LichHen extends Component {
         <UnorderedListOutlined className="icon-card-header"/> &nbsp;Danh sách LichHen
       </span>}
       md="24"
-      bordered extra={
-      <Link to={URL.LICH_HEN_ADD}>
-        {this.props.myInfoResponse.role === CONSTANTS.ADMIN ?   <Button type="primary" className='pull-right' size="small" icon={<PlusOutlined/>}>Thêm</Button> : ''}
-
-      </Link>
-    }
     >
         <Search onFilterChange={this.handleRefresh} dataSearch={dataSearch}/>
         <Table loading={loading} bordered columns={this.columns} dataSource={dataRes}
@@ -403,7 +371,7 @@ class LichHen extends Component {
             <Form.Item
               name="caddy_id"
               label="Danh sách Caddy"
-              rules={[{ required: true, message: 'Caddy là bắt buộc' }]}
+              rules={[{ required: false, message: 'Caddy là bắt buộc' }]}
               validateTrigger={['onBlur', 'onChange']}
             >
               <Select
@@ -441,6 +409,13 @@ class LichHen extends Component {
                     </Select.Option>
                   ))}
               </Select>
+            </Form.Item>
+          </Col>
+          <Col>
+            <Form.Item>
+              <Button icon={<BellOutlined />} size="small" type="primary" onClick={() => this.addThongBao()}>
+                Đẩy thông báo
+              </Button>
             </Form.Item>
           </Col>
         </Form>

@@ -21,12 +21,14 @@ const lichhenSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'KhungGioSanGolf'
   },
-  trangthai : {type : String}, // "DANGCHODUYET" Đang chờ"", đã duyệt, đã hoàn thành
+  trangthai : {type : String}, 
   voucher_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Voucher'
   },
   songuoichoi : {type :Number},
+  hinhthucthanhtoan : {type : String},
+  ghichu : {type : String},
 
   is_deleted: { type: Boolean, default: false, select: false },
 }, {

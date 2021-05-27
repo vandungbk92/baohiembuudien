@@ -40,7 +40,6 @@ export default {
       const dataRtn = await data
         .populate({ path: 'user_id', select: 'full_name' })
         .execPopulate();
-
       // đếm xem đâ tạo bao nhiêu thông báo để cập nhật tin tức.
       if(data.loaithongbao === 'TinTuc'){
         let countThongBao = await ThongBaoChung.count({link_push_id: data.link_push_id});
@@ -50,6 +49,8 @@ export default {
         let countThongBao = await ThongBaoChung.count({link_push_id: data.link_push_id});
         // cập nhật tin tức.
         await HuongDan.findByIdAndUpdate(data.link_push_id, {sothongbao: countThongBao})
+      }else if(data.loaithongbao === 'LichHen'){
+        // cập nhật tin tức.
       }
       pushNotifyMobile(data);
       return res.json(dataRtn);

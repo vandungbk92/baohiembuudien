@@ -2,6 +2,10 @@ import Expo from 'expo-server-sdk';
 import DeviceToken from '../resources/thongtinchung/devicetoken.model';
 // import BenhNhan from '../resources/benhnhan/benhnhan.model';
 import Tintuc from '../resources/tintucsangolf/tintuc/sangolf.model';
+import LichHen from '../resources/lichhen/lichhen.model';
+import { dateFormatter } from './convertDateTime';
+import  {TRANG_THAI_LICH_HEN ,getLabelSTT} from '../constant/constant';
+import User from '../resources/user/user.model'
 // import HuongDan from '../resources/huongdanbenhnhan/huongdan/huongdan.model';
 // loaithongbao = 'TinTuc' thì chạy đến chi tiết tin tức
 // loaithongbao = 'HuongDan' thì chạy đến chi tiết hướng dẫn
@@ -11,6 +15,7 @@ export async function pushNotifyMobile(data) {
   let messages = [];
   // 1 Tin tức, 2 Hướng dẫn
   let dataThongBao = null
+  let dataThongBaoLichHen = null
   let txtTitle = ''
   if(data.loaithongbao === 'TinTuc'){
     txtTitle = 'Tin tức'
@@ -19,32 +24,54 @@ export async function pushNotifyMobile(data) {
     txtTitle = 'Hướng dẫn'
     dataThongBao = await HuongDan.findById(data.link_push_id, 'tieude').lean()
   }
-
-  if(!dataThongBao) return null
+    else if(data.loaithongbao === 'LichHen'){
+    txtTitle = 'Thông báo lịch hẹn'
+    dataThongBaoLichHen = await LichHen.findById(data.link_push_id, 'trangthai ngayhen khachchoi_id').lean()
+  }
+  if(!dataThongBao && !dataThongBaoLichHen) return null
   // lấy danh sách token
-  let pushMobile = await DeviceToken.find({}).lean().distinct('device_token');
+  let pushMobile= []
+  if(dataThongBaoLichHen){
+    let khachchoi = await User.findById(dataThongBaoLichHen.khachchoi_id);
+    if(khachchoi){
+      console.log('Token khách chơi');
+      pushMobile = khachchoi.device_tokens
+    }
+  }else {
+    console.log(" Token all");
+    pushMobile = await DeviceToken.find({}).lean().distinct('device_token');
+  }
   let tokenDel = []
   for (let pushToken of pushMobile) {
     // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
-
     // Check that all your push tokens appear to be valid Expo push tokens
     if (!Expo.isExpoPushToken(pushToken)) {
       //console.error(`Push token ${pushToken} is not a valid Expo push token`);
       tokenDel.push(pushToken)
       continue;
     }
-
-    // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
-    messages.push({
-      to: pushToken,
-      title: txtTitle,
-      body: dataThongBao.tieude,
-      data: {_id: dataThongBao._id, loaithongbao: data.loaithongbao},
-      sound: 'default',
-      channelId: 'notification'
-    })
-  }
-
+    if (dataThongBaoLichHen){
+      let bodyNotify = `Lịch hẹn ngày ${dateFormatter(dataThongBaoLichHen.ngayhen)} của bạn ${getLabelSTT(dataThongBaoLichHen.trangthai)}`
+      messages.push({
+        to: pushToken,
+        title: txtTitle,
+        body: bodyNotify,
+        data: {_id: dataThongBaoLichHen._id, loaithongbao: data.loaithongbao},
+        sound: 'default',
+        channelId: 'notification'
+      })
+    }else {
+      messages.push({
+        to: pushToken,
+        title: txtTitle,
+        body: dataThongBao.tieude,
+        data: {_id: dataThongBao._id, loaithongbao: data.loaithongbao},
+        sound: 'default',
+        channelId: 'notification'
+      })
+    }
+    }
+  // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
   // The Expo push notification service accepts batches of notifications so
 
   // that you don't need to send 1000 requests to send 1000 notifications. We
@@ -61,10 +88,8 @@ export async function pushNotifyMobile(data) {
     for (let chunk of chunks) {
       try {
         let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-
         chunkSend.push(...chunk);
         tickets.push(...ticketChunk);
-
         // NOTE: If a ticket contains an error code in ticket.details.error, you
         // must handle it appropriately. The error codes are listed in the Expo
         // documentation:
@@ -87,7 +112,6 @@ export async function pushNotifyMobile(data) {
     await DeviceToken.deleteMany({device: {$in : tokenDel}})
   }
 }
-
 export async function pushMobileToPatient(data, device_tokens, pushCount, typePush) {
   let expo = new Expo();
   let messages = [];

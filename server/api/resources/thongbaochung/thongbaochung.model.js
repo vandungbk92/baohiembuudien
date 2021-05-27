@@ -16,7 +16,7 @@ const thongbaochungSchema = new Schema({
   loaithongbao: {
     type: String,
     required: true,
-    enum: ['TinTuc', 'HuongDan']
+    enum: ['TinTuc', 'HuongDan','LichHen']
   }, // 1 Tin tức, 2 Hướng dẫn
   is_deleted: {type: Boolean, default: false},
 }, {

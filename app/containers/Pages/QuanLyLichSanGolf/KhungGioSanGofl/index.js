@@ -18,6 +18,7 @@ import queryString from 'query-string';
 import DonViTinhModal from '@containers/Pages/QuanLyLichSanGolf/KhungGioSanGofl/KhungGioModal';
 import { makeGetMyInfo } from '../../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
+import NumberFormat from 'react-number-format';
 
 
 
@@ -34,6 +35,7 @@ class KhungGioSanGolf extends Component {
       title: 'Giá tiền ',
       dataIndex: 'giatien',
       width: 400,
+      render: (value =>  this.showNumberFormat(value))
 
     },
     {
@@ -69,6 +71,9 @@ class KhungGioSanGolf extends Component {
 
   componentDidMount() {
     this.getDataFilter();
+  }
+  showNumberFormat(value){
+    return <NumberFormat value={value} displayType={'text'} thousandSeparator={true} />
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

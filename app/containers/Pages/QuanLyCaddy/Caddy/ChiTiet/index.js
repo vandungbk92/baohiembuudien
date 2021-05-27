@@ -209,7 +209,7 @@ class CaddyChiTiet extends Component {
                       validateTrigger={["onChange", "onBlur"]}
                       rules={[{ required: true, message: "Mật khẩu không được để trống" }]}
                     >
-                      <Input placeholder="Mật khẩu" disabled={loading} />
+                      <Input type={'password'} placeholder="Mật khẩu" disabled={loading} />
                     </Form.Item>
                   </Col>
                   <Col sm={6}>
