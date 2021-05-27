@@ -39,7 +39,6 @@ class Tintuc extends React.Component {
     if (danhmucRes && danhmucRes.docs) {
       this.setState({ danhmucTintuc: danhmucRes.docs, id: this.state._id });
     }
-    console.log(this.state._id,'this.props.match.params');
     if (this.state._id) {
       const tintucRes = await getById(this.state._id);
       if (tintucRes) {

@@ -209,24 +209,18 @@ class LichHen extends Component {
   formatActionCell(value) {
     return <>
       {
-        value.trangthai === 'PENDING' ? <Tooltip title={'Xem chi tiết'} color="#2db7f5">
-          <Button icon={<EditOutlined/>} size='small' type="danger" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
-        </Tooltip> : ""
+        value.trangthai === 'PENDING' || value.trangthai === 'APPROVED'  ? <Tooltip title={'Xét duyệt lịch hẹn'} color="#2db7f5">
+          <Button icon={<EyeOutlined/>} size='small' type="danger" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
+        </Tooltip> : ''
       }
 
-       <Tooltip title={'Xem chi tiết'} color="#2db7f5">
-          <Button icon={<EyeOutlined/>} size='small' type="primary" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
-        </Tooltip>
-
-
-
-      <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
-                  onConfirm={() => this.handleDelete(value)}
-                  cancelText='Huỷ' okText='Xoá' okButtonProps={{ type: 'danger' }}>
-        <Tooltip placement="right" title={'Xóa dữ liệu'} color="#f50">
-          { this.props.myInfoResponse.role === CONSTANTS.ADMIN? <Button icon={<DeleteOutlined/>} type='danger' size='small' className="mr-1"></Button> :''}
-        </Tooltip>
-      </Popconfirm>
+      {/*<Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"*/}
+      {/*            onConfirm={() => this.handleDelete(value)}*/}
+      {/*            cancelText='Huỷ' okText='Xoá' okButtonProps={{ type: 'danger' }}>*/}
+      {/*  <Tooltip placement="right" title={'Xóa dữ liệu'} color="#f50">*/}
+      {/*    { this.props.myInfoResponse.role === CONSTANTS.ADMIN? <Button icon={<DeleteOutlined/>} type='danger' size='small' className="mr-1"></Button> :''}*/}
+      {/*  </Tooltip>*/}
+      {/*</Popconfirm>*/}
     </>;
   }
 
@@ -269,7 +263,6 @@ class LichHen extends Component {
   }
 
   toggleModal = async (value) => {
-    console.log(value,'valuevalue');
     const { showModal } = this.state;
     this.getAllCaddy()
     await this.setState({ showModal: !showModal, _id: value._id, lichhenCurrent : value  });
