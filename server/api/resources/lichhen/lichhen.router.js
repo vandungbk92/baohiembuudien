@@ -10,6 +10,7 @@ lichhenRouter
 
 lichhenRouter.get('/:id/lich-hen-by-caddy',passport.authenticate('jwt', { session: false }), lichsangolfController.getLichHenByCaddy )
 lichhenRouter.get('/:id/lich-hen-by-caddy-onapp',passport.authenticate('jwt', { session: false }), lichsangolfController.getLichHenBYCaddyOnAPP )
+lichhenRouter.get('/:id/danh-gia-by-lich-hen',passport.authenticate('jwt', { session: false }), lichsangolfController.getDanhGiaByLichHen )
 
 lichhenRouter
   .route('/:id')

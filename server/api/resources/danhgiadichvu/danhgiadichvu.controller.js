@@ -30,7 +30,7 @@ export default {
       if(req.query.limit && req.query.limit === '0'){
         options.pagination = false;
       }
-      query.loaidanhgia = 2
+      query.loaidanhgia = 1
       options.populate=[{path: 'manv',select:'tennv'},
         {path: 'mabn',select:'hoten'},
         {path: 'maphong',select:'tenphong'},

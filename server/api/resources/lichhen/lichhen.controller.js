@@ -6,7 +6,7 @@ import Caddy from '../quanlycaddy/caddy/caddy.model';
 import LichLamViecCaddy from '../quanlycaddy/lichlamvieccaddy/lichlamvieccaddy.model'
 import path from 'path';
 import User from '../user/user.model'
-
+import DanhGia from '../danhgia/danhgia.model'
 export default {
   async create(req, res) {
     try {
@@ -123,6 +123,16 @@ export default {
       let data = await LichHen.find({ caddy_id: idcaddy, is_deleted: false }).sort({created_at : -1}).populate('khachchoi_id').populate('khunggio_id')
         .populate({path: 'caddy_id', select: 'hoten'});
       return res.json(data);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+  },
+  async getDanhGiaByLichHen(req, res) {
+    try {
+      let { id } = req.params;
+      let data = await DanhGia.find({ lichhen_id: id, is_deleted: false }).populate('lichhen_id')
+      return res.json(data[0]);
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);

@@ -19,7 +19,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
-  UnorderedListOutlined, CloseOutlined, SaveOutlined, BellOutlined,
+  UnorderedListOutlined, CloseOutlined, SaveOutlined, BellOutlined,StarOutlined
 } from '@ant-design/icons';
 import { PAGINATION_CONFIG, RULE, TRANG_THAI_LICH_HEN } from '@constants';
 import { createStructuredSelector } from 'reselect';
@@ -31,8 +31,9 @@ import queryString from 'query-string';
 import { add as addThongBao, getAll as getAllThongBao } from '@services/thongbaochung/thongbaochungService';
 import { makeGetMyInfo } from '../../Layout/HeaderComponent/HeaderProvider/selectors';
 import { CONSTANTS } from '@constants';
-import {getAll, updateById, delById} from '@services/lichhen/lichhenService'
+import {getAll, updateById, delById, getDanhGiaByLichHen} from '@services/lichhen/lichhenService'
 import {getAll as getAllCaddy, getById as getCaddyByID} from '@services/quanlycaddy/caddyService'
+import ReactStars from "react-rating-stars-component";
 
 import axios from 'axios'
 import { URL } from "../../../constants/URL";
@@ -109,6 +110,7 @@ class LichHen extends Component {
       page: 1,
       limit: 10,
       totalDocs: 0,
+      danhgia:'',
       data: null,
       lichhenCurrent :''
     };
@@ -126,6 +128,14 @@ class LichHen extends Component {
     let dataCaddy = await getAllCaddy(1,0)
     this.setState({
       dsCaddy : dataCaddy.docs
+    })
+  }
+
+  async getDanhGiaByLichHen(idlichhen){
+    let danhgia = await getDanhGiaByLichHen(idlichhen)
+    console.log(danhgia,'    let danhgia = await getDanhGiaByLichHen(idlichhen)\n');
+    this.setState({
+      danhgia : danhgia
     })
   }
 
@@ -209,8 +219,13 @@ class LichHen extends Component {
   formatActionCell(value) {
     return <>
       {
-        value.trangthai === 'PENDING' || value.trangthai === 'APPROVED'  ? <Tooltip title={'Xét duyệt lịch hẹn'} color="#2db7f5">
-          <Button icon={<EyeOutlined/>} size='small' type="danger" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
+      value.trangthai === 'PENDING' || value.trangthai === 'APPROVED'  ? <Tooltip title={'Xét duyệt lịch hẹn'} color="#2db7f5">
+        <Button icon={<EyeOutlined />} size='small' type="primary" className='mr-1' onClick={ () => this.toggleModal(value)}></Button>
+      </Tooltip> : ''
+    }
+      {
+        value.trangthai === 'COMPLETED' ?       <Tooltip title={'Xem đánh giá'} color="#e3b91e">
+          <Button icon={<StarOutlined style={{ fontSize: '16px', color: '#e3b91e' }} />} size='small'  color='yellow' className='mr-1' onClick={ () => this.toggleModalDanhGia(value)}></Button>
         </Tooltip> : ''
       }
 
@@ -272,6 +287,17 @@ class LichHen extends Component {
     });
   };
 
+
+  toggleModalDanhGia = async (value) => {
+    const { showModalDanhGia } = this.state;
+    let danhgia = await getDanhGiaByLichHen(value._id)
+    await this.setState({ showModalDanhGia: !showModalDanhGia, danhgia : danhgia});
+  };
+
+  toggleModalDanhGiaCancel = async (value) => {
+    const { showModalDanhGia } = this.state;
+    await this.setState({ showModalDanhGia: !showModalDanhGia});
+  };
   handleSaveData = async data => {
     const { _id, lichhenCurrent } = this.state;
     lichhenCurrent.caddy_id = data.caddy_id
@@ -294,7 +320,7 @@ class LichHen extends Component {
 
   render() {
     const { loading } = this.props;
-    const { dataRes, totalDocs, page, limit, dslichhen } = this.state;
+    const { dataRes, totalDocs, page, limit, dslichhen, danhgia } = this.state;
     const dataSearch = [
 
     { type: 'select',
@@ -413,6 +439,56 @@ class LichHen extends Component {
           </Col>
         </Form>
       </Modal>
+
+
+
+      <Modal
+        title={' Đánh giá của khách hàng'}
+        visible={this.state.showModalDanhGia}
+        onCancel={loading ? () => null : this.toggleModalDanhGiaCancel}
+        footer={[
+          <Button
+            key={1}
+            size="small"
+            onClick={this.toggleModalDanhGiaCancel}
+            disabled={loading}
+            type="danger"
+            icon={<CloseOutlined />}
+          >
+            Huỷ
+          </Button>,
+        ]}
+      >
+        {danhgia ? <div>
+          Chất lượng dịch vụ:
+          <br/>
+          <ReactStars
+            count={5}
+            value={parseInt(danhgia.diem)}
+            size={24}
+            isHalf={true}
+            emptyIcon={<i className="far fa-star"></i>}
+            halfIcon={<i className="fa fa-star-half-alt"></i>}
+            fullIcon={<i className="fa fa-star"></i>}
+            activeColor="#ffd700"
+          />
+          <br/>
+        Nội dung đánh giá : {danhgia.noidung}
+          </div> : <div>
+          Chưa có đánh giá từ khách hàng
+
+        </div>
+
+
+
+        }
+
+      </Modal>
+
+
+
+
+
     </div>;
   }
 }

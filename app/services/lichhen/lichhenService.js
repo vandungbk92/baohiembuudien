@@ -85,4 +85,19 @@ function getLichHenByCaddy(id) {
       return null
     });
 }
-export {add, getById, getAll, delById, updateById, getLichHenByCaddy}
+
+function getDanhGiaByLichHen(id) {
+  return axios.get(`${API.LICH_HEN_ID.format(id)}/danh-gia-by-lich-hen`).then(res => {
+    if (res.data) {
+      return res.data;
+    }
+    else {
+      return null
+    }
+  })
+    .catch(error => {
+      return null
+    });
+}
+
+export {add, getById, getAll, delById, updateById, getLichHenByCaddy, getDanhGiaByLichHen}
