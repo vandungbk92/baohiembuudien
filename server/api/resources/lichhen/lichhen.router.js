@@ -9,6 +9,7 @@ lichhenRouter
   .post(passport.authenticate('jwt', { session: false }), lichsangolfController.create)
 
 lichhenRouter.get('/:id/lich-hen-by-caddy',passport.authenticate('jwt', { session: false }), lichsangolfController.getLichHenByCaddy )
+lichhenRouter.get('/:id/lich-hen-by-caddy-onapp',passport.authenticate('jwt', { session: false }), lichsangolfController.getLichHenBYCaddyOnAPP )
 
 lichhenRouter
   .route('/:id')

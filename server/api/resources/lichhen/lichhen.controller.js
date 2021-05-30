@@ -5,6 +5,7 @@ import {filterRequest, optionsRequest} from '../../utils/filterRequest'
 import Caddy from '../quanlycaddy/caddy/caddy.model';
 import LichLamViecCaddy from '../quanlycaddy/lichlamvieccaddy/lichlamvieccaddy.model'
 import path from 'path';
+import User from '../user/user.model'
 
 export default {
   async create(req, res) {
@@ -105,6 +106,21 @@ export default {
     try {
       let { id } = req.params;
       let data = await LichHen.find({ caddy_id: id, is_deleted: false }).sort({created_at : -1}).populate('khachchoi_id').populate('khunggio_id')
+        .populate({path: 'caddy_id', select: 'hoten'});
+      return res.json(data);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+  },
+  async getLichHenBYCaddyOnAPP(req, res) {
+    try {
+      let { id } = req.params;
+      let userCaddy = await User.findById(id)
+      let email = userCaddy.email
+      let caddy = await Caddy.find({email:email })
+      let idcaddy = caddy[0]._id
+      let data = await LichHen.find({ caddy_id: idcaddy, is_deleted: false }).sort({created_at : -1}).populate('khachchoi_id').populate('khunggio_id')
         .populate({path: 'caddy_id', select: 'hoten'});
       return res.json(data);
     } catch (err) {
