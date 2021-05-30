@@ -19,7 +19,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
-  UnorderedListOutlined, CloseOutlined, SaveOutlined, BellOutlined,StarOutlined
+  UnorderedListOutlined,SyncOutlined, CloseOutlined,CheckCircleOutlined,CloseCircleOutlined, SaveOutlined, BellOutlined,StarOutlined
 } from '@ant-design/icons';
 import { PAGINATION_CONFIG, RULE, TRANG_THAI_LICH_HEN } from '@constants';
 import { createStructuredSelector } from 'reselect';
@@ -133,7 +133,6 @@ class LichHen extends Component {
 
   async getDanhGiaByLichHen(idlichhen){
     let danhgia = await getDanhGiaByLichHen(idlichhen)
-    console.log(danhgia,'    let danhgia = await getDanhGiaByLichHen(idlichhen)\n');
     this.setState({
       danhgia : danhgia
     })
@@ -149,6 +148,17 @@ class LichHen extends Component {
     const data = {
       loaithongbao: 'LichHen',
       link_push_id: this.state.lichhenCurrent._id,
+    };
+    const apiResponse = await addThongBao(data);
+    if (apiResponse) {
+      message.success('Đẩy thông báo thành công');
+    }
+  };
+
+  addThongBaoConfirm = async (lichhenid) => {
+    const data = {
+      loaithongbao: 'LichHen',
+      link_push_id: lichhenid,
     };
     const apiResponse = await addThongBao(data);
     if (apiResponse) {
@@ -203,9 +213,9 @@ class LichHen extends Component {
   }
   showTrangThai(value){
     return <>
-      {value === 'PENDING' ? <Tag color="#2db7f5"> Đang chờ duyệt</Tag>  : value === 'APPROVED' ?
-        <Tag color="#87d068"> Đã  xác nhận</Tag> :  value === 'COMPLETED' ?  <Tag color="#108ee9"> Đã chơi xong</Tag> :
-          <Tag color="#f50"> Đã  hủy</Tag>
+      {value === 'PENDING' ? <Tag icon={<SyncOutlined spin />} color="processing"> Đang chờ</Tag>  : value === 'APPROVED' ?
+        <Tag color="#87d068"> Đã  xác nhận</Tag> :  value === 'COMPLETED' ?  <Tag icon={<CheckCircleOutlined />} color="success"> Đã chơi xong</Tag> :
+          <Tag icon={<CloseCircleOutlined />} color="error"> Đã  hủy</Tag>
       }
     </>;
   }
@@ -224,10 +234,18 @@ class LichHen extends Component {
       </Tooltip> : ''
     }
       {
-        value.trangthai === 'COMPLETED' ?       <Tooltip title={'Xem đánh giá'} color="#e3b91e">
+        value.trangthai === 'COMPLETED' ? <Tooltip title={'Xem đánh giá'} color="#e3b91e">
           <Button icon={<StarOutlined style={{ fontSize: '16px', color: '#e3b91e' }} />} size='small'  color='yellow' className='mr-1' onClick={ () => this.toggleModalDanhGia(value)}></Button>
         </Tooltip> : ''
       }
+
+      <Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"
+                  onConfirm={() => this.addThongBaoConfirm(value._id)}
+                  cancelText='Huỷ' okText='Đẩy thông báo trạng thái lịch hẹn' okButtonProps={{ type: 'danger' }}>
+        <Tooltip placement="right" title={'Đẩy thông báo'} color="#f50">
+          { this.props.myInfoResponse.role === CONSTANTS.ADMIN? <Button icon={<BellOutlined/>} type='default' size='small' className="mr-1"></Button> :''}
+        </Tooltip>
+      </Popconfirm>
 
       {/*<Popconfirm key={value._id} title="Bạn chắc chắn muốn xoá?"*/}
       {/*            onConfirm={() => this.handleDelete(value)}*/}
@@ -312,7 +330,7 @@ class LichHen extends Component {
         });
         await this.setState({ dataRes, showModal: false });
         message.success("Chỉnh sửa dữ liệu thành công")
-        this.addThongBao()
+        // this.addThongBao()
         this.getDataFilter()
 
     }
