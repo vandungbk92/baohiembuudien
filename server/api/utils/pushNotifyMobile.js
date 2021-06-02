@@ -6,11 +6,12 @@ import LichHen from '../resources/lichhen/lichhen.model';
 import { dateFormatter } from './convertDateTime';
 import  {TRANG_THAI_LICH_HEN ,getLabelSTT} from '../constant/constant';
 import User from '../resources/user/user.model'
-// import HuongDan from '../resources/huongdanbenhnhan/huongdan/huongdan.model';
+import HuongDan from '../resources/huongdan/huongdan/huongdan.model';
 // loaithongbao = 'TinTuc' thì chạy đến chi tiết tin tức
 // loaithongbao = 'HuongDan' thì chạy đến chi tiết hướng dẫn
 // else  thì chạy đến lịch sử khám bệnh (như hiện tại)
 export async function pushNotifyMobile(data) {
+  console.log(data,'datadata');
   let expo = new Expo();
   let messages = [];
   // 1 Tin tức, 2 Hướng dẫn
@@ -22,7 +23,7 @@ export async function pushNotifyMobile(data) {
     dataThongBao = await Tintuc.findById(data.link_push_id, 'tieude').lean()
   }else if(data.loaithongbao === 'HuongDan'){
     txtTitle = 'Hướng dẫn'
-    dataThongBao = await HuongDan.findById(data.link_push_id, 'tieude').lean()
+    dataThongBao = await HuongDan.findById(data.link_push_id,'tieude').lean()
   }
     else if(data.loaithongbao === 'LichHen'){
     txtTitle = 'Thông báo lịch hẹn'

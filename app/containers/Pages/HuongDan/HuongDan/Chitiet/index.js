@@ -42,6 +42,20 @@ class HuongDan extends React.Component {
     }
   }
 
+  addThongBao = async (value) => {
+    const data = {
+      loaithongbao: 'HuongDan',
+      link_push_id: value,
+    };
+    const apiResponse = await addThongBao(data);
+    if (apiResponse) {
+      message.success('Đẩy thông báo thành công');
+      this.setState({
+        dataRef: [apiResponse, ...this.state.dataRef],
+      });
+    }
+  };
+
   toggleModal = async (value) => {
     const { showModal } = this.state;
     if (showModal) {
@@ -137,7 +151,7 @@ class HuongDan extends React.Component {
             <Col xs={24} sm={12} md={12} lg={6} xl={6}>
                   <Form.Item
                     label=" ">
-                    <Button icon={<BellOutlined />} size="small" type="primary" onClick={() => this.toggleModal(id)}>
+                    <Button icon={<BellOutlined />} size="small" type="primary" onClick={() => this.toggleModal(_id)}>
                       Kiểm tra thông báo
                   </Button>
                   </Form.Item>

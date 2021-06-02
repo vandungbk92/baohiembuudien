@@ -26,12 +26,13 @@ class HuongDan extends React.Component {
     },
     {
       title: "Tiêu đề",
+      width: 200,
       dataIndex: "tieude"
     },
     {
       title: "Danh mục",
       dataIndex: ["danhmuc_id", "ten"],
-      width: 130,
+      width: 200,
     },
     {
       title: "Mô tả",
